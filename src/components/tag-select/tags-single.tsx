@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from 'react';
 import { Tag } from 'antd';
 import { isEmpty, isBoolean, isNumber, isString } from 'lodash';
 import { useUpdateEffect } from 'ahooks';
-import { ArrayUtil, DataUtil } from 'common-toolkits';
+import { ArrayUtil } from 'common-toolkits';
 import GeneralSelect from './general-select-type';
 
 /**
@@ -53,9 +53,7 @@ const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
    *  defaultId effect
    */
   // todo allIds值不变，绑定到唯一dom
-  const allIds = useMemo(() => {
-    return ArrayUtil.mapByKey(list);
-  }, [list]);
+  const allIds = useMemo(() => ArrayUtil.mapByKey(list), [list]);
 
   useUpdateEffect(() => {
     if (isNumber(activeId) && allIds.includes(activeId)) {
@@ -84,18 +82,3 @@ const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
 };
 
 export default TagsSingle;
-
-export const TagsSingleFrom: FC<GeneralSelect.Customer> = ({
-  list,
-  onChange,
-  value,
-}) => {
-  const id: number | string = DataUtil.unknown.parseValue(value);
-  return (
-    <TagsSingle
-      list={list || []}
-      defaultId={id}
-      onChange={(item) => onChange && onChange(item?.id)}
-    />
-  );
-};

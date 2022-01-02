@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import 'antd/dist/antd.css';
+import React from 'react';
 import { DescriptionsPlus } from 'aem-ui';
 
 const list = [

@@ -13,18 +13,41 @@ export { default as RangePickerFormat } from './components/date-picker/range-pic
 // descriptions
 export { default as DescriptionsPlus } from './components/descriptions/descriptions-plus';
 
-export { default as View } from './components/view/view';
-export { default as TextAreaJson } from './components/textarea-json/textarea-json';
+// input
+export { default as InputAddonBefore } from './components/input/input-addon-before';
+export { default as InputForm } from './components/input/input-form';
+export { default as InputStringNumber } from './components/input/input-string-number';
+export { default as InputRange } from './components/input/input-range';
+export { default as InputRenderForm } from './components/input/input-render-form';
+
+// label
+export { default as DescriptionsLabel } from './components/label/descriptions-label';
+export { default as OmitTipLabel } from './components/label/omit-tip-label';
+export { default as StarLabel } from './components/label/star-label';
+
+// modal
+export { default as MaskCloseModal } from './components/modal/mask-close-modal';
+
+// select
 export { default as SelectSingle } from './components/select/select-single';
 export { default as SelectMultiple } from './components/select/select-multiple';
-export { default as StarLabel } from './components/label/star-label';
-export { default as DescriptionsLabel } from './components/label/descriptions-label';
 
-export { default as OmitTipLabel } from './components/label/omit-tip-label';
-export { default as InputRange } from './components/input/input-range';
+// tabs
+export { default as BaseTabs, tabsFormat } from './components/tabs/base-tabs';
 
-export { default as MaskCloseModal } from './components/modal/mask-close-modal';
-// export { default as CodeEditor } from '@/components/aem-ui/CodeEditor/CodeEditor';
+// tag-select
+export { default as TagsSingleFrom } from './components/tag-select/tags-single-form';
+export type { default as GeneralSelect } from './components/tag-select/general-select-type';
+
+// tree-select
+export { default as TreeSelectSingle } from './components/tree-select/tree-select-single';
+export { default as TreeSelectSingleAjax } from './components/tree-select/tree-select-single-ajax';
+
+// textarea-json
+export { default as TextAreaJson } from './components/textarea-json/textarea-json';
+
+// view
+export { default as View } from './components/view/view';
 
 import {
   createBaseButtons,
@@ -34,11 +57,6 @@ import {
   createStart,
   CreateStartProps,
 } from './components/util/create-ant';
-
-export { default as AjaxTabs } from './components/tabs/ajax-tabs';
-export { default as BaseTabs } from './components/tabs/base-tabs';
-export { default as InputForm } from './components/input/InputForm';
-export { default as InputAddonBefore } from './components/input/input-addon-before';
 
 export { createBaseButtons, createBaseTabs, createStart };
 export type { CreateButtonsProps, CreateBaseTabsProps, CreateStartProps };

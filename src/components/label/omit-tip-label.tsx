@@ -17,7 +17,7 @@ const OmitTipLabel: FC<{ title: string; limit?: number }> = ({
 };
 
 OmitTipLabel.defaultProps = {
-  limit: 10,
+  limit: 30,
 };
 
 export default OmitTipLabel;

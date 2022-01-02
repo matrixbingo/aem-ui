@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import 'antd/dist/antd.css';
+import React from 'react';
 import { DatePickerFormat, RangePickerFormat } from 'aem-ui';
 
 const Demo: React.FC = () => {

@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { TabsProps } from 'antd';
-import { ArrayUtil } from 'common-toolkits';
-import { ObjectType } from 'common-toolkits';
 import React, { useState } from 'react';
+import { TabsProps } from 'antd';
+import { ArrayUtil, ObjectType } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { createBaseTabs, TabSingle } from '../util/create-ant';
 
@@ -12,7 +11,10 @@ export interface TabsAjaxProps {
   dataList: TabSingle[];
 }
 
-export const tabsFormat = (arr: ObjectType[], key: string): TabSingle[] =>
+export const tabsFormat = (
+  arr: ObjectType[],
+  key: string = 'tabPaneProps',
+): TabSingle[] =>
   arr.reduce(
     (rs, i) =>
       ArrayUtil.push<TabSingle>(

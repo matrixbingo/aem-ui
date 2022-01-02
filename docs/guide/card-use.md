@@ -1,11 +1,9 @@
 ---
-title: 默认配置 - card
+title: card
 nav:
   title: 指南
   order: 3
 ---
-
-# 示例
 
 ## 默认配置
 

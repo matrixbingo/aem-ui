@@ -1,5 +1,3 @@
-import { ChangeEventHandler } from 'react';
-
 /**
  * Radio，select，tag 可通用
  */

@@ -1,61 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Input, InputProps } from 'antd';
-import { useMount } from 'ahooks';
 
-export interface InputFormProps extends Omit<InputProps, 'value' | 'onChange'> {
+export interface InputRenderFormProps<T extends string | number>
+  extends Omit<InputProps, 'value' | 'onChange' | 'render'> {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: T) => void;
+  input: (value: string) => string;
+  render: (value: string) => T;
 }
 
 /**
- * 默认清空Form对应数据
+ * 自定义返回值
  */
-const InputRenderForm = (props: InputFormProps) => {
+const InputRenderForm = <T extends number | string>(
+  props: InputRenderFormProps<T>,
+) => {
   const {
     value: inputValue,
     onChange: inputOnChange,
-    disabled,
+    input,
+    render,
     ...restProps
   } = props;
-  const [value, setValue] = useState(inputValue);
-
-  const upData = () => {
-    setValue('');
-    inputOnChange('');
-  };
-
-  useEffect(() => {
-    disabled && upData();
-  }, [disabled]);
-
-  useEffect(() => {
-    if (inputValue !== value) {
-      setValue(inputValue);
-      inputOnChange(inputValue);
-    }
-  }, [inputValue]);
 
   const onChange = (e) => {
     const { value: _value } = e.target;
-    setValue(_value);
-    inputOnChange(_value);
+    inputOnChange(render(_value));
   };
 
-  return (
-    <Input
-      value={value}
-      onChange={onChange}
-      disabled={disabled}
-      {...restProps}
-    />
-  );
+  return <Input value={input(inputValue)} onChange={onChange} {...restProps} />;
 };
 
 InputRenderForm.defaultProps = {
   value: '',
-  onChange: (v) =>
-    window.console.error('InputRenderForm.onChange : ', String(v)),
+  onChange: (v) => {},
+  input: (v) => v,
+  render: (v) => v,
 };
 
 export default InputRenderForm;

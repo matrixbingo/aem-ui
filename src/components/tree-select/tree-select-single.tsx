@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { TreeNodeProps, TreeSelect } from 'antd';
+import { TreeNodeProps, TreeSelectProps, TreeSelect } from 'antd';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { TreeSelectProps } from 'antd/lib/tree-select';
+import { isEmpty } from 'lodash';
 
 // type TreeSelectProps = React.ComponentProps<typeof TreeSelect>;
 
 export interface leaf {
+  id?: string;
   level: number;
   value: string;
   title: string;
@@ -26,16 +27,28 @@ export interface TreeSelectSingleProps
   createTreeNode?: (treeData: tree) => TreeNodeProps[];
 }
 
+export const isValueInTree = (treeData: tree, value: string): boolean => {
+  if (isEmpty(value) || !value) return false;
+  return treeData.some((branch) =>
+    branch.children.some((stem) =>
+      stem.children.some((leaf) => leaf.value === value),
+    ),
+  );
+};
+
 /**
  * 获取默认选中值
  * @param treeData
  */
-export const getDefaultValue = (treeData: tree): string => {
+export const getDefaultValue = (treeData: tree, value: string): string => {
   if (!treeData || treeData.length === 0) {
     return '';
   }
+  if (value && isValueInTree(treeData, value)) return value;
   return treeData[0]?.children[0]?.children[0]?.value;
 };
+
+const defaultSelectedValue = '--请选择--';
 
 /**
  * 三级目录, 一二级不可选，第三极可选
@@ -49,20 +62,24 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
     ...restProps
   } = props;
   const { TreeNode } = TreeSelect;
-  const [value, setValue] = useState<string>(selectedValue || '--请选择--');
-  const [list, setlist] = useState<tree>(treeData);
+  const [value, setValue] = useState<string>(
+    selectedValue || defaultSelectedValue,
+  );
+  const [list, setList] = useState<tree>(treeData);
 
   useDeepCompareEffect(() => {
-    setlist(treeData);
-    const defaultValue = getDefaultValue(treeData);
-    setValue(defaultValue);
-    onChange(defaultValue);
+    const defaultValue = getDefaultValue(
+      treeData,
+      value === defaultSelectedValue ? '' : value,
+    );
+    defaultValue !== value && onChange(defaultValue);
+    setList(treeData);
   }, [list, treeData]);
 
   useEffect(() => {
     if (value !== selectedValue) {
       if (!selectedValue) {
-        setValue('--请选择--');
+        setValue(defaultSelectedValue);
         onChange('');
       } else {
         setValue(selectedValue);
@@ -71,12 +88,12 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
     }
   }, [selectedValue]);
 
-  const createTreeNode = (treelist: tree) => {
+  const createTreeNode = (treeList: tree) => {
     if (defaultCreateTreeNode) {
-      return defaultCreateTreeNode(treelist);
+      return defaultCreateTreeNode(treeList);
     }
     const treeNodes: any[] = [];
-    treelist.forEach((v) => {
+    treeList.forEach((v) => {
       treeNodes.push(
         <TreeNode
           key={`${v.value}_${v.title}`}
@@ -121,8 +138,10 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
 
 TreeSelectSingle.defaultProps = {
   value: '',
-  onChange: (v) => {},
   treeData: [],
+  treeNodeFilterProp: 'title',
+  onChange: (v) => {},
+  style: { width: '100%' },
 };
 
 export default TreeSelectSingle;

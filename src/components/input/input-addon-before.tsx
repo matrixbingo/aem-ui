@@ -4,9 +4,9 @@ import { Input, InputProps } from 'antd';
 import { split, startsWith, isEmpty } from 'lodash';
 
 export interface InputAddonBeforeProps
-  extends Omit<InputProps, 'value' | 'addonBeforeValue' | 'onChange'> {
+  extends Omit<InputProps, 'value' | 'addonBefore' | 'onChange'> {
   value: string;
-  addonBeforeValue: string;
+  addonBefore: string;
   onChange: (value: string) => void;
 }
 
@@ -23,7 +23,7 @@ const toValue = (value, addonBeforeValue) => {
 const InputAddonBefore = (props: InputAddonBeforeProps) => {
   const {
     value: _inputValue,
-    addonBeforeValue: inputAddonBeforeValue,
+    addonBefore: inputAddonBeforeValue,
     onChange: inputOnChange,
     ...restProps
   } = props;
@@ -57,7 +57,7 @@ const InputAddonBefore = (props: InputAddonBeforeProps) => {
 
 InputAddonBefore.defaultProps = {
   value: '',
-  addonBeforeValue: '',
+  addonBefore: '',
   onChange: (v) => {},
 };
 

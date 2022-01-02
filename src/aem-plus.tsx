@@ -13,16 +13,16 @@ import DatePickerFormat, {
 import RangePickerFormat, {
   RangePickerFormatProps,
 } from './components/date-picker/range-picker-format';
-import InputForm, { InputFormProps } from './components/input/InputForm';
+import InputForm, { InputFormProps } from './components/input/input-form';
 import InputStringNumber, {
   InputStringNumberProps,
-} from './components/input/input-number';
+} from './components/input/input-string-number';
 import InputRange, { InputRangeProps } from './components/input/input-range';
 import InputAddonBefore, {
   InputAddonBeforeProps,
 } from './components/input/input-addon-before';
 import GeneralSelect from './components/tag-select/general-select-type';
-import { TagsSingleFrom } from './components/tag-select/tags-single';
+import TagsSingleFrom from './components/tag-select/tags-single-form';
 import SelectMultiple from './components/select/select-multiple';
 
 declare module 'aem-ui-forms/lib/YForm/ItemsType' {
