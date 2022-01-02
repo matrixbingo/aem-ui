@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from 'react';
 import { Tag } from 'antd';
 import { isEmpty, isBoolean, isNumber, isString } from 'lodash';
 import { useUpdateEffect } from 'ahooks';
-import DataUtils from 'common-toolkits/data-util';
+import { ArrayUtil, DataUtil } from 'common-toolkits';
 import GeneralSelect from './general-select-type';
 
 /**
@@ -12,9 +12,12 @@ import GeneralSelect from './general-select-type';
  */
 const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
   const { defaultId, list, onChange, isPick } = props;
-  const activeId: number | string = isNumber(defaultId) || isString(defaultId) ? defaultId : list[0].id;
+  const activeId: number | string =
+    isNumber(defaultId) || isString(defaultId) ? defaultId : list[0].id;
   const _isPick = isBoolean(isPick) ? isPick : false;
-  const [selectedIds, setSelectedIds] = useState<(number | string)[]>([activeId]);
+  const [selectedIds, setSelectedIds] = useState<(number | string)[]>([
+    activeId,
+  ]);
 
   const isExist = (ids, item): boolean => {
     if (isEmpty(ids)) {
@@ -24,13 +27,21 @@ const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
   };
 
   const singleOnChange = (tag, checked) => {
-    if (checked) {  // 增
-      if (selectedIds.length !== 1 || (selectedIds.length === 1 && selectedIds[0] !== tag.id)) {
+    if (checked) {
+      // 增
+      if (
+        selectedIds.length !== 1 ||
+        (selectedIds.length === 1 && selectedIds[0] !== tag.id)
+      ) {
         setSelectedIds(() => [tag.id]);
         onChange && onChange(tag, checked);
       }
-    } else if (_isPick) {  //  删
-      isExist(selectedIds, tag) && setSelectedIds(() => []) && onChange && onChange(tag, checked);
+    } else if (_isPick) {
+      //  删
+      isExist(selectedIds, tag) &&
+        setSelectedIds(() => []) &&
+        onChange &&
+        onChange(tag, checked);
     }
   };
 
@@ -43,7 +54,7 @@ const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
    */
   // todo allIds值不变，绑定到唯一dom
   const allIds = useMemo(() => {
-    return DataUtils.array.mapByKey(list);
+    return ArrayUtil.mapByKey(list);
   }, [list]);
 
   useUpdateEffect(() => {
@@ -56,24 +67,35 @@ const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
 
   return (
     <>
-      {!isEmpty(list) && list.map((tag) => {
-        return (
-          <Tag.CheckableTag
-            key={tag.id}
-            checked={selectedIds.some((id) => id === tag.id)}
-            onChange={(checked) => onChangeCallBack(tag, checked)}
-          >
-            {tag.name}
-          </Tag.CheckableTag>
-        );
-      })}
+      {!isEmpty(list) &&
+        list.map((tag) => {
+          return (
+            <Tag.CheckableTag
+              key={tag.id}
+              checked={selectedIds.some((id) => id === tag.id)}
+              onChange={(checked) => onChangeCallBack(tag, checked)}
+            >
+              {tag.name}
+            </Tag.CheckableTag>
+          );
+        })}
     </>
   );
 };
 
 export default TagsSingle;
 
-export const TagsSingleFrom: FC<GeneralSelect.Customer> = ({ list, onChange, value }) => {
-  const id: number | string = DataUtils.unknown.parseValue(value);
-  return <TagsSingle list={list || []} defaultId={id} onChange={(item) => onChange && onChange(item?.id)} />;
+export const TagsSingleFrom: FC<GeneralSelect.Customer> = ({
+  list,
+  onChange,
+  value,
+}) => {
+  const id: number | string = DataUtil.unknown.parseValue(value);
+  return (
+    <TagsSingle
+      list={list || []}
+      defaultId={id}
+      onChange={(item) => onChange && onChange(item?.id)}
+    />
+  );
 };

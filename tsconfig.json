@@ -1,29 +1,87 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "outDir": "build/dist",
     "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "jsx": "react",
-    "esModuleInterop": true,
+    "target": "esnext",
+    "lib": ["es6", "esnext", "dom"],
     "sourceMap": true,
-    "baseUrl": "./",
+    "allowJs": true,
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
     "strict": true,
+
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"]
-    },
-    "allowSyntheticDefaultImports": true
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/.umi/*"]
+    }
   },
+  "include": [
+    "mock/**/*",
+    "src/**/*",
+    "tests/**/*",
+    "test/**/*",
+    "__test__/**/*",
+    "typings/**/*",
+    "config/**/*",
+    ".eslintrc.js",
+    ".stylelintrc.js",
+    ".prettierrc.js",
+    "jest.config.js",
+    "mock/*"
+  ],
   "exclude": [
     "node_modules",
-    "lib",
-    "es",
+    "build",
     "dist",
-    "typings",
-    "**/__test__",
-    "test",
-    "tests",
-    "docs"
+    "scripts",
+    "src/.umi/*",
+    "webpack",
+    "jest"
   ]
 }
+
+// {
+//   "compilerOptions": {
+//     "target": "esnext",
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "importHelpers": true,
+//     "jsx": "react",
+//     "esModuleInterop": true,
+//     "sourceMap": true,
+//     "baseUrl": "./",
+//     "strict": true,
+//     "paths": {
+//       "@/*": ["src/*"],
+//       "@@/*": ["src/.umi/*"]
+//     },
+//     "allowSyntheticDefaultImports": true
+//   },
+//   "exclude": [
+//     "node_modules",
+//     "lib",
+//     "es",
+//     "dist",
+//     "typings",
+//     "**/__test__",
+//     "test",
+//     "tests",
+//     "docs"
+//   ]
+// }

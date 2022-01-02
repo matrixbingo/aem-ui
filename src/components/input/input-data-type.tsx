@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input, InputNumber, InputNumberProps, InputProps } from 'antd';
 import { useMount } from 'ahooks';
-import { DataUtil } from 'common-toolkits';
+import { DataUtil } from '@/utils';
 import { isNumber } from 'lodash';
 
 export type dataType = 'string' | 'number';
@@ -13,17 +13,19 @@ type InputNumberPropsInt = Omit<InputNumberProps, 'value' | 'onChange'>;
 
 type InputNumberPropsALL = InputPropsInt | InputNumberPropsInt;
 
-export interface InputDataTypeProps<P = InputNumberPropsALL>{
-    value: string;
-    onChange: (value: string) => void;
-    dataType: dataType;
-    restProps?: P;
+export interface InputDataTypeProps<P = InputNumberPropsALL> {
+  value: string;
+  onChange: (value: string) => void;
+  dataType: dataType;
+  restProps?: P;
 }
 
 /**
  * 入参是string
  */
-const InputTypeString = (props: Omit<InputDataTypeProps<InputPropsInt>, 'dataType'>) => {
+const InputTypeString = (
+  props: Omit<InputDataTypeProps<InputPropsInt>, 'dataType'>,
+) => {
   const { value: inputValue, onChange: inputOnChange, ...rest } = props;
   const [value, setValue] = useState(inputValue);
 
@@ -46,7 +48,9 @@ const InputTypeString = (props: Omit<InputDataTypeProps<InputPropsInt>, 'dataTyp
 /**
  * 入参是数字string，例如‘3’
  */
-const InputTypeNumber = (props: Omit<InputDataTypeProps<InputNumberPropsInt>, 'dataType'>) => {
+const InputTypeNumber = (
+  props: Omit<InputDataTypeProps<InputNumberPropsInt>, 'dataType'>,
+) => {
   const { value: inputValue, onChange: inputOnChange, ...rest } = props;
   const initValue = DataUtil.unknown.parseValue(inputValue);
   const [value, setValue] = useState<number>(1);
@@ -75,9 +79,24 @@ const InputTypeNumber = (props: Omit<InputDataTypeProps<InputNumberPropsInt>, 'd
   return <InputNumber value={value} onChange={onChange} {...rest} />;
 };
 
-const InputDataType = <T extends InputNumberPropsALL>(props: InputDataTypeProps<T>) => {
+const InputDataType = <T extends InputNumberPropsALL>(
+  props: InputDataTypeProps<T>,
+) => {
   const { dataType, restProps, ...rest } = props;
-  return dataType === 'string' ? <InputTypeString {...restProps as Omit<InputDataTypeProps<InputPropsInt>, 'dataType'>} {...rest} /> : <InputTypeNumber {...restProps as Omit<InputDataTypeProps<InputNumberPropsInt>, 'dataType'>} {...rest} />;
+  return dataType === 'string' ? (
+    <InputTypeString
+      {...(restProps as Omit<InputDataTypeProps<InputPropsInt>, 'dataType'>)}
+      {...rest}
+    />
+  ) : (
+    <InputTypeNumber
+      {...(restProps as Omit<
+        InputDataTypeProps<InputNumberPropsInt>,
+        'dataType'
+      >)}
+      {...rest}
+    />
+  );
 };
 
 InputDataType.defaultProps = {

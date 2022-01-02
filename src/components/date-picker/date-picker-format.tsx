@@ -5,7 +5,8 @@ import moment, { Moment } from 'moment';
 
 import React, { useEffect, useState } from 'react';
 
-export interface DatePickerFormatProps extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
+export interface DatePickerFormatProps
+  extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
   format: string;
   value: string[];
   onChange: (dateString: string[]) => void;
@@ -13,7 +14,9 @@ export interface DatePickerFormatProps extends Omit<DatePickerProps, 'value' | '
 
 const DatePickerFormat = (props: DatePickerFormatProps) => {
   const { value, onChange, format, ...restProps } = props;
-  const [time, setTime] = useState<Moment>(value ? moment(value, format) : moment());
+  const [time, setTime] = useState<Moment>(
+    value ? moment(value, format) : moment(),
+  );
 
   useMount(() => {
     if (!value || value.length !== 1) {
@@ -31,13 +34,18 @@ const DatePickerFormat = (props: DatePickerFormatProps) => {
   };
 
   return (
-    <DatePicker value={time} onChange={onChangeFormat} format={format} {...restProps} />
+    <DatePicker
+      value={time}
+      onChange={onChangeFormat}
+      format={format}
+      {...restProps}
+    />
   );
 };
 
 DatePickerFormat.defaultProps = {
   value: '',
-  onChange: (v) => window.console.error('DatePickerFormat.onChange : ', v),
+  onChange: (v) => {},
   format: 'YYYY-MM-DD',
 };
 

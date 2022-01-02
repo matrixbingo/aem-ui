@@ -2,7 +2,7 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Button, Tooltip } from 'antd';
-import './CodeEditor.less';
+import './code-editor.less';
 import 'brace/mode/sql';
 import 'brace/mode/java';
 import 'brace/mode/json';
@@ -10,9 +10,11 @@ import 'brace/theme/monokai';
 import 'brace/ext/language_tools';
 
 import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-monokai';
-import { isEmpty, isString } from 'lodash';
+import { isEmpty } from 'lodash';
 import { CopyOutlined } from '@ant-design/icons';
+import { FormatUtil } from 'common-toolkits';
 
 interface CustomFormProps {
   value: string;
@@ -34,7 +36,7 @@ class CodeEditor extends React.Component<Props, State> {
   static defaultProps = {
     valueLink: '',
     value: '',
-    mode: 'java',
+    mode: 'json',
     theme: 'monokai',
     contStyle: { height: '1000px', width: '100%' },
     style: { width: '100%', height: '300px' },
@@ -45,8 +47,7 @@ class CodeEditor extends React.Component<Props, State> {
       showLineNumbers: true,
       tabSize: 2,
     },
-    onChangeCallback() {
-    },
+    onChangeCallback() {},
   };
 
   constructor(props: Props) {
@@ -69,7 +70,7 @@ class CodeEditor extends React.Component<Props, State> {
 
   creacteValue = (mode, value) => {
     if (mode === 'json') {
-      return (isString(value) && !isEmpty(value) ? JSON.stringify(JSON.parse(value), null, 2) : JSON.stringify(value, null, 2));
+      return FormatUtil.json(value);
     }
     return value;
   };
@@ -94,15 +95,17 @@ class CodeEditor extends React.Component<Props, State> {
     return (
       <div className="codeEditor" style={contStyle}>
         <Tooltip placement="top" title="点击复制">
-          <CopyToClipboard className="copyToClipboard" text={vs}>
-            <Button type="primary" size="large" icon={<CopyOutlined />} />
-          </CopyToClipboard>
+          <div className="copyToClipboard">
+            <CopyToClipboard text={vs}>
+              <Button type="primary" size="large" icon={<CopyOutlined />} />
+            </CopyToClipboard>
+          </div>
         </Tooltip>
         <AceEditor
           className="aceEditorstyle"
           mode={mode}
           theme={theme}
-          name="aceEditor"
+          name="code-editor"
           style={style}
           fontSize={12}
           showPrintMargin

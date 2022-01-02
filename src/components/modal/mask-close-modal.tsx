@@ -6,12 +6,13 @@ export interface MaskCloseModalProps {
   [K: string]: any;
 }
 
+/**
+ * 常用Modal设置
+ * @param param0
+ * @returns
+ */
 const MaskCloseModal: FC<MaskCloseModalProps> = ({ children, ...rest }) => {
-  return (
-    <Modal {...rest}>
-      {children}
-    </Modal>
-  );
+  return <Modal {...rest}>{children}</Modal>;
 };
 
 MaskCloseModal.defaultProps = {

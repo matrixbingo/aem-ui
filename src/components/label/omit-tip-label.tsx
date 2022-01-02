@@ -5,10 +5,13 @@ import React, { FC } from 'react';
 /**
  * 表格列表等缩略显示
  */
-const OmitTipLabel: FC<{ title: string; limit?: number }> = ({ title, limit }) => {
+const OmitTipLabel: FC<{ title: string; limit?: number }> = ({
+  title,
+  limit,
+}) => {
   return (
     <Tooltip placement="top" title={title}>
-      {StringUtil.omit(title, limit)}
+      {StringUtil.truncate(title, limit)}
     </Tooltip>
   );
 };

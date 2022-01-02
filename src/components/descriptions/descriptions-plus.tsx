@@ -4,21 +4,28 @@ import { isArray, isEmpty } from 'lodash';
 import React, { FC } from 'react';
 
 export interface DescriptionsPlusProps {
-    props?: DescriptionsProps;
-    list: {label: string; content: any; item?: DescriptionsItemProps}[];
+  props?: DescriptionsProps;
+  list: { label: string; content: any; item?: DescriptionsItemProps }[];
 }
 
+/**
+ *
+ * @param param0
+ * @returns
+ */
 const DescriptionsPlus: FC<DescriptionsPlusProps> = ({ props, list }) => {
   if (!isArray(list) || isEmpty(list)) {
     return null;
   }
   return (
     <Descriptions {...props}>
-      {
-          list.map((v, i) => {
-            return <Descriptions.Item key={String(i)} label={v.label} {...v?.item}>{v.content}</Descriptions.Item>;
-          })
-    }
+      {list.map((v, i) => {
+        return (
+          <Descriptions.Item key={String(i)} label={v.label} {...v?.item}>
+            {v.content}
+          </Descriptions.Item>
+        );
+      })}
     </Descriptions>
   );
 };

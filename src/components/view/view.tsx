@@ -1,22 +1,28 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, PropsWithChildren } from 'react';
 import { extend } from 'lodash';
 import { Space } from 'antd';
 
 export interface ViewProps {
-    visible?: boolean;
-    destroy?: boolean;
-    space?: boolean;
-    [K: string]: any;
-  }
+  visible?: boolean;
+  destroy?: boolean;
+  space?: boolean;
+  [K: string]: any;
+}
 
-const View: FC<PropsWithChildren<ViewProps>> = ({ children, visible, space, destroy, ...rest }) => {
+const View: FC<PropsWithChildren<ViewProps>> = (props) => {
+  const { children, visible, space, destroy, ...rest } = props;
+
   if (destroy) {
     return null;
   }
+
   if (space) {
     return (
       <Space {...rest}>
-        <div style={extend({ display: visible ? 'block' : 'none' }, rest?.style)}>
+        <div
+          style={extend({ display: visible ? 'block' : 'none' }, rest?.style)}
+        >
           {children}
         </div>
       </Space>
