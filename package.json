@@ -20,8 +20,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/matrixbingo/aem-ui",
-    "branch": "main"
+    "url": "https://github.com/matrixbingo/aem-ui.git",
+    "branch": "master",
+    "platform": "github"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
