@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, InputProps } from 'antd';
 import { split, startsWith, isEmpty } from 'lodash';
 
-export interface InputAddonBeforeProps
-  extends Omit<InputProps, 'value' | 'addonBefore' | 'onChange'> {
+export interface InputAddonBeforeProps extends Omit<InputProps, 'value' | 'addonBefore' | 'onChange'> {
   value: string;
   addonBefore: string;
   onChange: (value: string) => void;
@@ -21,15 +20,8 @@ const toValue = (value, addonBeforeValue) => {
  * value[0] 为 addonBefore 只读，value[1] 可用
  */
 const InputAddonBefore = (props: InputAddonBeforeProps) => {
-  const {
-    value: _inputValue,
-    addonBefore: inputAddonBeforeValue,
-    onChange: inputOnChange,
-    ...restProps
-  } = props;
-  const [addonBeforeValue, setAddonBeforeValue] = useState(
-    inputAddonBeforeValue,
-  );
+  const { value: _inputValue, addonBefore: inputAddonBeforeValue, onChange: inputOnChange, ...restProps } = props;
+  const [addonBeforeValue, setAddonBeforeValue] = useState(inputAddonBeforeValue);
   const inputValue = toValue(_inputValue, addonBeforeValue);
   const [value, setValue] = useState(inputValue);
 

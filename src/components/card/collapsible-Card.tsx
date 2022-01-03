@@ -2,11 +2,7 @@
 import React, { FC } from 'react';
 import ProCard, { ProCardProps } from '@ant-design/pro-card';
 
-export interface CollapsibleCardProps
-  extends Omit<
-    ProCardProps,
-    'collapsible' | 'headerBordered' | 'defaultCollapsed' | 'style'
-  > {
+export interface CollapsibleCardProps extends Omit<ProCardProps, 'collapsible' | 'headerBordered' | 'defaultCollapsed' | 'style'> {
   [K: string]: any;
 }
 /**

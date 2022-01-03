@@ -9,8 +9,7 @@ interface State {
 
 const PopoverCode: FC<State> = ({ value, title }) => {
   return (
-    <Popover
-      content={
+    <Popover content={
         <CodeEditor
           value={value}
           style={{ width: 600, height: 300 }}

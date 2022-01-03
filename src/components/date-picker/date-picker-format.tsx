@@ -5,8 +5,7 @@ import moment, { Moment } from 'moment';
 
 import React, { useEffect, useState } from 'react';
 
-export interface DatePickerFormatProps
-  extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
+export interface DatePickerFormatProps extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
   format: string;
   value: string[];
   onChange: (dateString: string[]) => void;

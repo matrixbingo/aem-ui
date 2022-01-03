@@ -15,17 +15,13 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/matrixbingo/aem-ui.git",
-    "branch": "master",
-    "platform": "github"
+    "branch": "master"
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
+    "*.{css,js,jsx,less,md,json}": [
       "prettier --write"
     ],
     "*.ts?(x)": [
