@@ -36,13 +36,7 @@ const checkValue = (v: string | any[]) => {
  * 入参是数字string, 或数字，例如'2'或2
  */
 const InputRange = (props: InputRangeProps) => {
-  const {
-    value: inputValue,
-    onChange,
-    dataType,
-    defaultValue,
-    ...rest
-  } = props;
+  const { value: inputValue, onChange, dataType, defaultValue, ...rest } = props;
   const [value, setValue] = useState<number[]>(
     toNumberValue(inputValue, defaultValue),
   );

@@ -12,12 +12,7 @@ export interface InputFormProps extends Omit<InputProps, 'value' | 'onChange'> {
  * 默认清空Form对应数据
  */
 const InputForm = (props: InputFormProps) => {
-  const {
-    value: inputValue,
-    onChange: inputOnChange,
-    disabled,
-    ...restProps
-  } = props;
+  const { value: inputValue, onChange: inputOnChange, disabled, ...restProps } = props;
   const [value, setValue] = useState(inputValue);
 
   const upData = () => {

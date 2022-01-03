@@ -16,13 +16,7 @@ export interface InputRenderFormProps<T extends string | number>
 const InputRenderForm = <T extends number | string>(
   props: InputRenderFormProps<T>,
 ) => {
-  const {
-    value: inputValue,
-    onChange: inputOnChange,
-    input,
-    render,
-    ...restProps
-  } = props;
+  const { value: inputValue, onChange: inputOnChange, input, render, ...restProps } = props;
 
   const onChange = (e) => {
     const { value: _value } = e.target;
