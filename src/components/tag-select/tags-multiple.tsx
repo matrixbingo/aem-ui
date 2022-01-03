@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useState } from 'react';
 import { Tag } from 'antd';
 import { isEmpty, intersection, isEqual } from 'lodash';
-import { ArrayUtil, DataUtil } from 'common-toolkits';
+import { ArrayUtil } from 'common-toolkits';
 import { useUpdateEffect } from 'ahooks';
 import GeneralSelect from './general-select-type';
 
@@ -10,7 +10,7 @@ const TagsMultipleBase: FC<GeneralSelect.TagMultipleProps> = (props) => {
   const activeIds: (number | string)[] =
     isEmpty(defaultIds) || defaultIds === undefined
       ? []
-      : DataUtil.array.uniqueSort(defaultIds);
+      : ArrayUtil.uniqueSort(defaultIds);
   const [selectedIds, setSelectedIds] =
     useState<(number | string)[]>(activeIds);
 

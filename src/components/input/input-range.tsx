@@ -32,9 +32,8 @@ const toNumberValue = (
 };
 
 const toArrByDataType = (type: dataType, arr: number[] | string[]) => {
-  if (type === 'string') {
+  if (type === 'string')
     return TransformUtil.numberArrToStringArr(arr as number[]);
-  }
   return TransformUtil.stringArrToMumberArr(arr as string[]);
 };
 
