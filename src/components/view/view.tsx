@@ -18,11 +18,8 @@ const View: FC<PropsWithChildren<ViewProps>> = (props) => {
   }
 
   if (space) {
-    return (
-      <Space {...rest}>
-        <div
-          style={extend({ display: visible ? 'block' : 'none' }, rest?.style)}
-        >
+    return (<Space {...rest}>
+        <div style={extend({ display: visible ? 'block' : 'none' }, rest?.style)}>
           {children}
         </div>
       </Space>

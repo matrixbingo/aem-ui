@@ -95,25 +95,11 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
     const treeNodes: any[] = [];
     treeList.forEach((v) => {
       treeNodes.push(
-        <TreeNode
-          key={`${v.value}_${v.title}`}
-          value={v.value}
-          title={v.title}
-          disabled
-        >
+        <TreeNode key={`${v.value}_${v.title}`} value={v.value} title={v.title} disabled>
           {v.children.map((c) => (
-            <TreeNode
-              key={`${c.value}_${c.title}`}
-              value={c.value}
-              title={c.title}
-              disabled
-            >
+            <TreeNode key={`${c.value}_${c.title}`} value={c.value} title={c.title} disabled>
               {c.children.map((g) => (
-                <TreeNode
-                  key={`${g.value}_${g.title}`}
-                  value={g.value}
-                  title={g.title}
-                />
+                <TreeNode key={`${g.value}_${g.title}`} value={g.value} title={g.title} />
               ))}
             </TreeNode>
           ))}

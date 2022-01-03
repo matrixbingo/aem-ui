@@ -2,10 +2,7 @@
 import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import TreeSelectSingle, {
-  tree,
-  TreeSelectSingleProps,
-} from './tree-select-single';
+import TreeSelectSingle, { tree, TreeSelectSingleProps } from './tree-select-single';
 
 export interface TreeSelectSingleAjaxProps extends TreeSelectSingleProps {
   promise: Promise<any>;

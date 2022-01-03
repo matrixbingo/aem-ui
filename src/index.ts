@@ -47,14 +47,7 @@ export { default as TextAreaJson } from './components/textarea-json/textarea-jso
 // view
 export { default as View } from './components/view/view';
 
-import {
-  createBaseButtons,
-  CreateButtonsProps,
-  createBaseTabs,
-  CreateBaseTabsProps,
-  createStart,
-  CreateStartProps,
-} from './components/util/create-ant';
+import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsProps, createStart, CreateStartProps } from './components/util/create-ant';
 
 export { createBaseButtons, createBaseTabs, createStart };
 export type { CreateButtonsProps, CreateBaseTabsProps, CreateStartProps };

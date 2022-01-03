@@ -1,17 +1,8 @@
 import React, { ReactNode } from 'react';
-import {
-  Button,
-  ButtonProps,
-  Rate,
-  RateProps,
-  TabPaneProps,
-  Tabs,
-  TabsProps,
-} from 'antd';
+import { Button, ButtonProps, Rate, RateProps, TabPaneProps, Tabs, TabsProps } from 'antd';
 import { ObjectType } from 'common-toolkits';
 
-export interface CreateButtonsProps
-  extends Omit<ButtonProps, 'children' | 'onClick'> {
+export interface CreateButtonsProps extends Omit<ButtonProps, 'children' | 'onClick'> {
   children: string | ReactNode;
   onClick: (v: any, ev: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
@@ -20,9 +11,7 @@ export interface CreateButtonsProps
  * 按钮数组
  * @returns Button[]
  */
-export const createBaseButtons = (
-  buttons: CreateButtonsProps[],
-): ReactNode[] => {
+export const createBaseButtons = (buttons: CreateButtonsProps[]): ReactNode[] => {
   return buttons.map((prop) => {
     const { children, onClick, ...rest } = prop;
     return (
@@ -52,11 +41,7 @@ export const createBaseTabs = (tabs: CreateBaseTabsProps) => {
   return (
     <Tabs {...tabsProps}>
       {tabList.map((_tab) =>
-        _tab.children ? (
-          <Tabs.TabPane {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane>
-        ) : (
-          <Tabs.TabPane {..._tab.tabPaneProps} />
-        ),
+        _tab.children ? ( <Tabs.TabPane {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane> ) : ( <Tabs.TabPane {..._tab.tabPaneProps} />)
       )}
     </Tabs>
   );

@@ -6,11 +6,7 @@ import { FormatUtil } from 'common-toolkits';
 /**
  * Form
  */
-const TextAreaJson: FC<{ value?: any; onChange?: any }> = ({
-  value,
-  onChange,
-  ...rest
-}) => {
+const TextAreaJson: FC<{ value?: any; onChange?: any }> = ({ value, onChange, ...rest }) => {
   try {
     if (!isEmpty(value)) {
       value = FormatUtil.json(value);
