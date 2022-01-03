@@ -1,5 +1,3 @@
-import './aem-plus';
-
 // card
 export { default as CollapsibleCard } from './components/card/collapsible-Card';
 // code-editor

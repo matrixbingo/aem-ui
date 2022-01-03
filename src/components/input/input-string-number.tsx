@@ -6,39 +6,26 @@ import { isNumber } from 'lodash';
 
 export type dataType = 'string' | 'number';
 
-export interface InputStringNumberProps
-  extends Omit<InputNumberProps, 'value' | 'onChange'> {
+export interface InputStringNumberProps extends Omit<InputNumberProps, 'value' | 'onChange'> {
   value: dataType;
   onChange: (value: string | number) => void;
   dataType: dataType; // 输出类型
 }
 
-const toNumberValue = (
-  inputValue: string | number,
-  defaultValue: number,
-): number => {
+const toNumberValue = (inputValue: string | number, defaultValue: number): number => {
   const initValue = DataUtil.unknown.parseValue(inputValue);
   return initValue && isNumber(initValue) ? initValue : Number(defaultValue);
 };
 
-const toValueByDataType = (type: dataType, v: number) => {
-  return type === 'number' ? v : String(v);
-};
+const toValueByDataType = (type: dataType, v: number) => type === 'number' ? v : String(v);
 
 /**
  * 入参是数字string 例如'2'
  */
 const InputStringNumber = (props: InputStringNumberProps) => {
-  const {
-    value: inputValue,
-    onChange: inputOnChange,
-    dataType,
-    ...rest
-  } = props;
+  const { value: inputValue, onChange: inputOnChange, dataType, ...rest } = props;
   const { defaultValue } = rest;
-  const [value, setValue] = useState<number>(
-    toNumberValue(inputValue, Number(defaultValue)),
-  );
+  const [value, setValue] = useState<number>(toNumberValue(inputValue, Number(defaultValue)));
 
   const update = (v: number) => {
     const val = toValueByDataType(dataType, v);

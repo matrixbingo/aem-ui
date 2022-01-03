@@ -40,9 +40,7 @@ const SelectSingle = <T extends number|string>(props: SelectSingleProps<T>) => {
       onChange={onChangeCallBack}
       {...restProps}
     >
-      {defaultOption
-        ? <Select.Option value={defaultOption?.id}>{defaultOption?.name}</Select.Option>
-        : null}
+      {defaultOption ? <Select.Option value={defaultOption?.id}>{defaultOption?.name}</Select.Option> : null}
       {options?.map((option) => (
         <Select.Option key={option.id} value={option.id} title={String(option.id)}>
           {option.name}

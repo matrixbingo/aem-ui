@@ -2,8 +2,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { Modal, ModalProps } from 'antd';
 
-export interface MaskCloseModalProps
-  extends Omit<ModalProps, 'width' | 'maskClosable' | 'bodyStyle'> {
+export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClosable' | 'bodyStyle'> {
   [K: string]: any;
 }
 
@@ -12,10 +11,7 @@ export interface MaskCloseModalProps
  * @param param0
  * @returns
  */
-const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({
-  children,
-  ...rest
-}) => {
+const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, ...rest }) => {
   return <Modal {...rest}>{children}</Modal>;
 };
 

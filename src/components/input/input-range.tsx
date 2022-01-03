@@ -9,26 +9,17 @@ import { dequal as deepEqual } from 'dequal';
 
 export type dataType = 'string' | 'number';
 
-export interface InputRangeProps
-  extends Omit<
-    InputNumberProps,
-    'value' | 'onChange' | 'dataType' | 'defaultValue'
-  > {
+export interface InputRangeProps extends Omit<InputNumberProps, 'value' | 'onChange' | 'dataType' | 'defaultValue'> {
   value: number[] | string[];
   onChange: (value: number[] | string[]) => void;
   dataType: dataType;
   defaultValue: number[];
 }
 
-const toNumberValue = (
-  inputValue: string[] | number[],
-  defaultValue: number[],
-): number[] => {
+const toNumberValue = ( inputValue: string[] | number[], defaultValue: number[] ): number[] => {
   const initValue0 = DataUtil.unknown.parseValue(inputValue[0]);
   const initValue1 = DataUtil.unknown.parseValue(inputValue[1]);
-  return isNumber(initValue0)
-    ? ([initValue0, initValue1] as number[])
-    : defaultValue;
+  return isNumber(initValue0) ? ([initValue0, initValue1] as number[]) : defaultValue;
 };
 
 const toArrByDataType = (type: dataType, arr: number[] | string[]) => {

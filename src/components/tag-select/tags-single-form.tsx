@@ -9,14 +9,8 @@ import TagsSingle from './tags-single';
  * @param props
  * @constructor
  */
-const TagsSingleFrom: FC<GeneralSelect.Customer> = ({
-  list,
-  onChange,
-  value,
-}) => {
-  const id: number | string = !isEmpty(value)
-    ? DataUtil.unknown.parseValue(value)
-    : (list?.[0].id as number | string);
+const TagsSingleFrom: FC<GeneralSelect.Customer> = ({ list, onChange, value }) => {
+  const id: number | string = !isEmpty(value) ? DataUtil.unknown.parseValue(value) : (list?.[0].id as number | string);
   return (
     <TagsSingle
       list={list || []}

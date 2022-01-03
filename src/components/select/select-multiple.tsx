@@ -6,8 +6,7 @@ import { TransformUtil } from 'common-toolkits';
 
 type SelectProps = React.ComponentProps<typeof Select>;
 
-export interface SelectMultipleProps<T extends string | number>
-  extends Omit<SelectProps, 'value' | 'onChange' | 'options'> {
+export interface SelectMultipleProps<T extends string | number> extends Omit<SelectProps, 'value' | 'onChange' | 'options'> {
   value?: T[];
   onChange?: (value: T[]) => void;
   defaultOption?: { id: T; name: string } | undefined;
@@ -17,18 +16,8 @@ export interface SelectMultipleProps<T extends string | number>
 /**
  * 多选，可搜索
  */
-const SelectMultiple = <T extends number | string>(
-  props: SelectMultipleProps<T>,
-) => {
-  const {
-    value: initValue,
-    onChange,
-    defaultOption,
-    options,
-    style,
-    placeholder,
-    ...restProps
-  } = props;
+const SelectMultiple = <T extends number | string>(props: SelectMultipleProps<T>) => {
+  const { value: initValue, onChange, defaultOption, options, style, placeholder, ...restPros} = props;
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState<any>(initValue || []);
 
@@ -72,16 +61,8 @@ const SelectMultiple = <T extends number | string>(
       value={value}
       placeholder={placeholder}
       optionFilterProp="children"
-      filterOption={(input, option) =>
-        option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      }
-      filterSort={(optionA, optionB) =>
-        optionA.children
-          .toLowerCase()
-          .localeCompare(optionB.children.toLowerCase())
-      }
       onChange={onChangeCallBack}
-      {...restProps}
+      {...restPros}
       dropdownRender={(allSelectValue) => (
         <div>
           <div style={{ padding: '4px 8px 8px 8px', cursor: 'pointer' }}>

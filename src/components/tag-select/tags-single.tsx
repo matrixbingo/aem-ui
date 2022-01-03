@@ -12,12 +12,9 @@ import GeneralSelect from './general-select-type';
  */
 const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
   const { defaultId, list, onChange, isPick } = props;
-  const activeId: number | string =
-    isNumber(defaultId) || isString(defaultId) ? defaultId : list[0].id;
+  const activeId: number | string = isNumber(defaultId) || isString(defaultId) ? defaultId : list[0].id;
   const _isPick = isBoolean(isPick) ? isPick : false;
-  const [selectedIds, setSelectedIds] = useState<(number | string)[]>([
-    activeId,
-  ]);
+  const [selectedIds, setSelectedIds] = useState<(number | string)[]>([ activeId ]);
 
   const isExist = (ids, item): boolean => {
     if (isEmpty(ids)) {

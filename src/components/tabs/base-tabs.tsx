@@ -11,10 +11,7 @@ export interface TabsAjaxProps {
   dataList: TabSingle[];
 }
 
-export const tabsFormat = (
-  arr: ObjectType[],
-  key: string = 'tabPaneProps',
-): TabSingle[] =>
+export const tabsFormat = ( arr: ObjectType[], key: string = 'tabPaneProps' ): TabSingle[] =>
   arr.reduce(
     (rs, i) =>
       ArrayUtil.push<TabSingle>(
