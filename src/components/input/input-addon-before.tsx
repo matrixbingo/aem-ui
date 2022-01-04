@@ -11,26 +11,30 @@ export interface InputAddonBeforeProps extends Omit<InputProps, 'value' | 'addon
 
 const toValue = (value, addonBeforeValue) => {
   if (isEmpty(addonBeforeValue)) return value;
-  if (startsWith(value, addonBeforeValue))
-    return split(value, addonBeforeValue)[1];
+  if (startsWith(value, addonBeforeValue)) return split(value, addonBeforeValue)[1];
   return value;
 };
 
 /**
- * value[0] 为 addonBefore 只读，value[1] 可用
+ * value[0] 为 addonBefore 只读，value[1] 可用, fullValue为完整字段
  */
 const InputAddonBefore = (props: InputAddonBeforeProps) => {
   const { value: _inputValue, addonBefore: inputAddonBeforeValue, onChange: inputOnChange, ...restProps } = props;
   const [addonBeforeValue, setAddonBeforeValue] = useState(inputAddonBeforeValue);
   const inputValue = toValue(_inputValue, addonBeforeValue);
+  const [fullValue, setFullValue] = useState(_inputValue);
   const [value, setValue] = useState(inputValue);
 
   useEffect(() => {
-    if (value !== inputValue) setValue(inputValue);
-    if (addonBeforeValue !== inputAddonBeforeValue)
-      setAddonBeforeValue(inputAddonBeforeValue);
-  }, [value, inputValue, addonBeforeValue, inputAddonBeforeValue]);
+    if (_inputValue !== fullValue) setFullValue(_inputValue);
+  }, [_inputValue]);
 
+  useEffect(() => {
+    if (value !== inputValue) setValue(inputValue);
+    if (addonBeforeValue !== inputAddonBeforeValue) setAddonBeforeValue(inputAddonBeforeValue);
+    if (fullValue !== addonBeforeValue + value) inputOnChange(addonBeforeValue + value);
+  }, [value, inputValue, addonBeforeValue, inputAddonBeforeValue]);
+  
   const onChange = (e) => {
     const { value: _value } = e.target;
     setValue(_value);
