@@ -17,6 +17,7 @@ export { default as InputForm } from './components/input/input-form';
 export { default as InputStringNumber } from './components/input/input-string-number';
 export { default as InputRange } from './components/input/input-range';
 export { default as InputRenderForm } from './components/input/input-render-form';
+export { default as InputSelectValue } from './components/input/input-select-value';
 
 // label
 export { default as DescriptionsLabel } from './components/label/descriptions-label';
