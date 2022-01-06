@@ -47,6 +47,7 @@ export { default as TextAreaJson } from './components/textarea-json/textarea-jso
 
 // view
 export { default as View } from './components/view/view';
+export { default as ViewContainer } from './components/view/view-container';
 
 import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsProps, createStart, CreateStartProps } from './components/util/create-ant';
 
