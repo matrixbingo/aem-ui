@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Input, InputProps, Select } from 'antd';
+import { Input, InputProps } from 'antd';
 import { DataUtil } from 'common-toolkits';
 import  SelectSingle  from '../select/select-single';
 type InputSelectValueValue = string | undefined | null;
@@ -46,7 +46,7 @@ const InputSelectValue = (props: InputSelectValueProps) => {
       value={value}
       disabled={type === 0}
       onChange={onChange}
-      addonBefore={<SelectSingle<number> options={options} value={type} onSelect={(v) => setType(Number(v))} style={{ width: 70 }} />}
+      addonBefore={<SelectSingle<number> options={options} value={type} onSelect={(v) => setType(Number(v)) } style={{ width: 70 }} showSearch={false} />}
     />
   );
 };

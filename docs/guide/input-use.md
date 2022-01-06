@@ -44,4 +44,4 @@ nav:
 
 #### 有值和无值
 
-<code src="../examples/input/input-select-value-form.tsx" />
+<code src="../examples/input/input-select-value.tsx" />
