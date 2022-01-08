@@ -15,11 +15,11 @@ nav:
 
 <code src="../examples/input/input-addon-before-use.tsx" />
 
-## InputForm
+## InputDefaultClear
 
 #### 简化 Input，返回 value, 如果 disabled 为 ture，则清空 Form 对应数据
 
-<code src="../examples/input/input-form-use.tsx" />
+<code src="../examples/input/input-default-clear-use.tsx" />
 
 ## InputStringNumber
 

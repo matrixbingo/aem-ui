@@ -13,7 +13,7 @@ export { default as DescriptionsPlus } from './components/descriptions/descripti
 
 // input
 export { default as InputAddonBefore } from './components/input/input-addon-before';
-export { default as InputForm } from './components/input/input-form';
+export { default as InputDefaultClear } from './components/input/input-default-clear';
 export { default as InputStringNumber } from './components/input/input-string-number';
 export { default as InputRange } from './components/input/input-range';
 export { default as InputRenderCustomer } from './components/input/input-render-customer';

@@ -3,7 +3,6 @@ import { InputRenderForm } from 'aem-ui';
 
 const Demo: React.FC = () => {
   const [value, setValue] = useState('11111');
-  const [disabled, setDisabled] = useState(false);
 
   const onChange = (v) => {
     window.console.log('v---------------->', v);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputForm } from 'aem-ui';
+import { InputDefaultClear } from 'aem-ui';
 import { Button } from 'antd';
 
 const Demo: React.FC = () => {
@@ -16,7 +16,7 @@ const Demo: React.FC = () => {
       <Button onClick={() => setDisabled(!disabled)}>
         {'disabled : ' + disabled}
       </Button>
-      <InputForm value={value} onChange={onChange} disabled={disabled} />
+      <InputDefaultClear value={value} onChange={onChange} disabled={disabled} />
     </>
   );
 };
