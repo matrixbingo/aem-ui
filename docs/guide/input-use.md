@@ -33,11 +33,11 @@ nav:
 
 <code src="../examples/input/input-range-use.tsx" />
 
-## InputRenderForm
+## InputRenderCustomer
 
 #### 自定义输入和返回值
 
-<code src="../examples/input/input-render-form-use.tsx" />
+<code src="../examples/input/input-render-customer-use.tsx" />
 
 
 ## InputSelectValueForm

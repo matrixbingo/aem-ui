@@ -13,7 +13,7 @@ export interface InputRenderFormProps<T extends string | number>
 /**
  * 自定义返回值
  */
-const InputRenderForm = <T extends number | string>(
+const InputRenderCustomer = <T extends number | string>(
   props: InputRenderFormProps<T>,
 ) => {
   const { value: inputValue, onChange: inputOnChange, input, render, ...restProps } = props;
@@ -26,11 +26,11 @@ const InputRenderForm = <T extends number | string>(
   return <Input value={input(inputValue)} onChange={onChange} {...restProps} />;
 };
 
-InputRenderForm.defaultProps = {
+InputRenderCustomer.defaultProps = {
   value: '',
   onChange: (v) => {},
   input: (v) => v,
   render: (v) => v,
 };
 
-export default InputRenderForm;
+export default InputRenderCustomer;

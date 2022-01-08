@@ -16,7 +16,7 @@ export { default as InputAddonBefore } from './components/input/input-addon-befo
 export { default as InputForm } from './components/input/input-form';
 export { default as InputStringNumber } from './components/input/input-string-number';
 export { default as InputRange } from './components/input/input-range';
-export { default as InputRenderForm } from './components/input/input-render-form';
+export { default as InputRenderCustomer } from './components/input/input-render-customer';
 export { default as InputSelectValue } from './components/input/input-select-value';
 
 // label
