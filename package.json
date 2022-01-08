@@ -1,6 +1,6 @@
 {
   "name": "aem-ui",
-  "version": "0.00.6",
+  "version": "0.00.7",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
