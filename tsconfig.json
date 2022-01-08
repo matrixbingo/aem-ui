@@ -51,6 +51,8 @@
     "dist",
     "scripts",
     "src/.umi/*",
+    "typings",
+    "**/__test__",
     "webpack",
     "jest"
   ]
