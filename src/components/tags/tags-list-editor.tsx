@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { TagProps } from 'antd';
-import { assign, cloneDeep, isEmpty } from 'lodash';
-import { DataUtil, TransformUtil } from 'common-toolkits';
+import {  isEmpty } from 'lodash';
+import { ArrayUtil, DataUtil, TransformUtil } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { CreateBaseTagProps, createBaseTags } from '../util/create-ant';
 
@@ -14,14 +14,10 @@ export interface TagsListEditorProps<T = TagsListEditorType> extends Omit<TagPro
   transform?: (data: T[]) => CreateBaseTagProps[];
 }
 
-const add = <T, S>(arr: T[], item: S): T[] => {
-  return arr.map((i) => assign(cloneDeep(item), i));
-};
-
 export const toTagList = <S extends TagsListEditorType>(list: S[]): CreateBaseTagProps[] => {
   if (isEmpty(list)) return [] as CreateBaseTagProps[];
   const tagList = TransformUtil.mapKeys<any>(list, { name: 'children' });
-  return add(tagList, { color: 'processing' }); // closable: 'closable'
+  return ArrayUtil.add(tagList, { color: 'processing' }); // closable: 'closable'
 };
 
 /**
