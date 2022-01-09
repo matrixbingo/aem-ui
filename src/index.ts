@@ -38,6 +38,9 @@ export { default as BaseTabs, tabsFormat } from './components/tabs/base-tabs';
 export { default as TagsSingleFrom } from './components/tag-select/tags-single-form';
 export type { default as GeneralSelect } from './components/tag-select/general-select-type';
 
+// tag-list
+export { default as TagsListEditor } from './components/tags/tags-list-editor';
+
 // tree-select
 export { default as TreeSelectSingle } from './components/tree-select/tree-select-single';
 export { default as TreeSelectSingleAjax } from './components/tree-select/tree-select-single-ajax';

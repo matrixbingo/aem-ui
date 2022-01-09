@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputForm, InputAddonBefore } from 'aem-ui';
+import { InputDefaultClear, InputAddonBefore } from 'aem-ui';
 
 const Demo: React.FC = () => {
   const [value, setValue] = useState('abc_name_code');
@@ -12,7 +12,7 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <InputForm value={addonBefore} onChange={setAddonBefore} />
+      <InputDefaultClear value={addonBefore} onChange={setAddonBefore} />
       <InputAddonBefore
         value={value}
         addonBefore={addonBefore}

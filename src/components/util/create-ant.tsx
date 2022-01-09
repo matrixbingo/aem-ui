@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import { Button, ButtonProps, Rate, RateProps, TabPaneProps, Tabs, TabsProps } from 'antd';
+import { Button, ButtonProps, Rate, RateProps, TabPaneProps, Tabs, TabsProps, TagProps } from 'antd';
 import { ObjectType } from 'common-toolkits';
+import TagSingle from '../tags/tag-single';
 
 export interface CreateButtonsProps extends Omit<ButtonProps, 'children' | 'onClick'> {
   children: string | ReactNode;
@@ -51,4 +52,32 @@ export type CreateStartProps = Omit<RateProps, 'count'>;
 
 export const createStart = (start: CreateStartProps) => {
   return <Rate count={1} {...start} />;
+};
+
+export interface CreateBaseTagProps extends Omit<TagProps, 'id' | 'onClose'> {
+  id: string | number;
+  children: string | ReactNode | undefined;
+}
+
+export interface CreateBaseTagsProps {
+  tagList: CreateBaseTagProps[];
+  onClose?: (e) => void;
+}
+
+/**
+ * @param CreateBaseTagsProps
+ * @returns Tags
+ */
+export const createBaseTags = (tags: CreateBaseTagsProps) => {
+  const { tagList, ...resp } = tags;
+  return (
+    <>
+      {
+        tagList.map((tag) => {
+          const { children, ...rest } = tag;
+          return children ? (<TagSingle {...resp} {...rest}>{children}</TagSingle>) : (<TagSingle {...resp} {...rest} />);
+        })
+      }
+    </>
+  );
 };

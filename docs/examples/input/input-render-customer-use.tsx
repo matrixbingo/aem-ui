@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputRenderForm } from 'aem-ui';
+import { InputRenderCustomer } from 'aem-ui';
 
 const Demo: React.FC = () => {
   const [value, setValue] = useState('11111');
@@ -15,7 +15,7 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <InputRenderForm
+      <InputRenderCustomer
         value={value}
         onChange={onChange}
         input={input}

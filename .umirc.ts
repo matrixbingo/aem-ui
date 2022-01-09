@@ -11,6 +11,9 @@ export default defineConfig({
   mode: 'site',
   hash: true,
   // Because of using GitHub Pages
+  exportStatic: {
+    dynamicRoot: true,
+  },
   base: `/${repo}/docs/`,
   publicPath: `/${repo}/docs/`,
   menus: {
