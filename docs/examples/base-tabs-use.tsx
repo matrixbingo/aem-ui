@@ -24,9 +24,19 @@ const dataList2 = [
     children: <div>asasas</div>,
   },
   {
+    key: 'bbb',
+    tab: 'bbb',
+    children: 'bbbb',
+  },
+  {
     key: 'ccc',
     tab: 'ccc',
     children: <Button>ccccc</Button>,
+  },
+  {
+    key: 'ddd',
+    tab: 'ddd',
+    children: 2324,
   },
 ];
 

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useState } from 'react';
+import React, { isValidElement, useCallback, useState } from 'react';
 import { TabsProps } from 'antd';
 import { ArrayUtil, ObjectType } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { createBaseTabs, TabSingle } from '../util/create-ant';
-import { cloneDeep } from 'lodash';
+import lodash from 'lodash';
 
 export interface TabsAjaxProps {
   tabsProps: TabsProps;
@@ -21,7 +21,14 @@ export const tabsFormat = (arr: ObjectType[], key = 'tabPaneProps'): TabSingle[]
 ) as TabSingle[];
 
 const omit = (list) : TabSingle[] => {
-  return ArrayUtil.omit(cloneDeep(list), ['children']);
+  return list.reduce((rs, next) => {
+    if(isValidElement(next.children)){
+      rs.push(lodash.omit(next, ['children']));
+    } else {
+      rs.push(next);
+    }
+    return rs;
+  }, [])
 }
 
 /**
