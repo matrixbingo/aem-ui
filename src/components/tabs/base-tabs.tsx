@@ -11,15 +11,13 @@ export interface TabsAjaxProps {
   dataList: TabSingle[];
 }
 
-export const tabsFormat = ( arr: ObjectType[], key: string = 'tabPaneProps' ): TabSingle[] =>
-  arr.reduce(
-    (rs, i) =>
-      ArrayUtil.push<TabSingle>(
-        rs as TabSingle[],
-        { [key]: { key: String(i.key), tab: String(i.tab) } } as TabSingle,
-      ),
-    [],
-  ) as TabSingle[];
+export const tabsFormat = (arr: ObjectType[], key = 'tabPaneProps'): TabSingle[] => arr.reduce(
+  (rs, i) => ArrayUtil.push<TabSingle>(
+      rs as TabSingle[],
+      { [key]: { key: String(i.key), tab: String(i.tab) }, children: i?.children } as TabSingle,
+  ),
+  [],
+) as TabSingle[];
 
 /**
  * tabs
