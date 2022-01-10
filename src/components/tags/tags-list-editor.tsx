@@ -40,7 +40,7 @@ const TagsListEditor: FC<TagsListEditorProps> = (props) => {
 
   return (
     <div key={DataUtil.uuid()}>
-      {createBaseTags({ tagList: add(tagList, rest), onClose })}
+      {createBaseTags({ tagList: ArrayUtil.add(tagList, rest), onClose })}
     </div>
   );
 };
