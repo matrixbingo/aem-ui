@@ -13,12 +13,12 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <ModalEditor button={{ children:"编辑1" }}  title="ModalEditor" onSubmit={onSubmit}>
+      <ModalEditor button={{ children:"编辑1" }}  title="ModalEditor" onSubmit={onSubmit} onClick={(v) => window.console.log('onClick')} onCancel={() => window.console.log('onCancel')}>
         do something...
       </ModalEditor>
 
       <br />
-      <ModalEditor button={{ children:"编辑1" }}  title="ModalEditor" onOk={()=>{}}>
+      <ModalEditor button={{ children:"编辑2" }}  title="ModalEditor" onOk={()=>{}}>
         do something...
       </ModalEditor>
     </>
