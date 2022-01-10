@@ -4,9 +4,10 @@ import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import MaskCloseModal, { MaskCloseModalProps } from './mask-close-modal';
 
 export interface ModalEditorProps extends MaskCloseModalProps{
-  button?: ButtonProps;
+  button?: Omit<ButtonProps, 'onClick'>;
   title: any;
   visible?: boolean;
+  onClick?: () => void;
   onCancel?: () => void;
   onOk?: () => void;
   onSubmit?: (setVisible: React.Dispatch<React.SetStateAction<boolean>>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
@@ -35,7 +36,7 @@ const createMaskCloseModal = ({ show, loading, onCancel, onOk, rest, children })
  * @param param0
  * @returns
  */
-const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button = { children: '' }, visible = false, onCancel: inputOnCancel, onOk: inputOnOk, onSubmit: inputOnSubmit, ...rest }) => {
+const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button = { children: '' }, visible = false, onCancel: inputOnCancel, onOk: inputOnOk, onSubmit: inputOnSubmit, onClick: inputOnClick, ...rest }) => {
   const { children: buttonChildren, ...buttonProps } = button;
   const [show, setVisible] = useState(visible);
   const [loading, setLoading] = useState(visible);
@@ -70,10 +71,15 @@ const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button
     }
   };
 
+  const onClick = () => {
+    inputOnClick?.();
+    setVisible((prev) => !prev);
+  };
+
   if (!buttonChildren) {
     return (
       <>
-        <Button {...buttonProps} onClick={() => setVisible((pev) => !pev)} />
+        <Button {...buttonProps} onClick={onClick} />
         {createMaskCloseModal({ show, loading, onCancel, onOk, rest, children })}
       </>
     );
@@ -81,7 +87,7 @@ const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button
 
   return (
     <>
-      <Button onClick={() => setVisible((pev) => !pev)}>{buttonChildren}</Button>
+      <Button {...buttonProps} onClick={onClick}>{buttonChildren}</Button>
       {createMaskCloseModal({ show, loading, onCancel, onOk, rest, children })}
     </>
   );
