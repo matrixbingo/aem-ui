@@ -1,5 +1,6 @@
 import React from 'react';
-import { BaseTabs, tabsFormat } from 'aem-ui';
+import { BaseTabs, tabsFormat, tabsFormatWithChildren } from 'aem-ui';
+import { Button } from 'antd';
 
 const dataList = [
   {
@@ -16,6 +17,20 @@ const dataList = [
   },
 ];
 
+const dataList2 = [
+  {
+    key: 'abc',
+    tab: 'abc',
+    children: <div>asasas</div>,
+  },
+  {
+    key: 'ccc',
+    tab: 'ccc',
+    children: <Button>ccccc</Button>,
+  },
+];
+
+
 const Demo: React.FC = () => {
   const onChange = (v) => {
     window.console.log('v---------------->', v);
@@ -23,7 +38,8 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <BaseTabs tabsProps={{ onChange }} dataList={tabsFormat(dataList)} />
+      {/* <BaseTabs tabsProps={{ onChange }} dataList={tabsFormat(dataList)} /> */}
+      <BaseTabs tabsProps={{ onChange }} dataList={tabsFormatWithChildren(dataList2)} />
     </>
   );
 };
