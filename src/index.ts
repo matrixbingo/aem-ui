@@ -26,6 +26,7 @@ export { default as StarLabel } from './components/label/star-label';
 
 // modal
 export { default as MaskCloseModal } from './components/modal/mask-close-modal';
+export { default as ModalEditor } from './components/modal/modal-editor';
 
 // select
 export { default as SelectSingle } from './components/select/select-single';
