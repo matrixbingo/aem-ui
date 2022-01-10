@@ -4,8 +4,8 @@ import React, { isValidElement, useCallback, useState } from 'react';
 import { TabsProps } from 'antd';
 import { ArrayUtil, ObjectType } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { createBaseTabs, TabSingle } from '../util/create-ant';
 import lodash from 'lodash';
+import { createBaseTabs, TabSingle } from '../util/create-ant';
 
 export interface TabsAjaxProps {
   tabsProps: TabsProps;
@@ -20,16 +20,16 @@ export const tabsFormat = (arr: ObjectType[], key = 'tabPaneProps'): TabSingle[]
   [],
 ) as TabSingle[];
 
-const omit = (list) : TabSingle[] => {
+const omit = (list): TabSingle[] => {
   return list.reduce((rs, next) => {
-    if(isValidElement(next.children)){
+    if (isValidElement(next.children)) {
       rs.push(lodash.omit(next, ['children']));
     } else {
       rs.push(next);
     }
     return rs;
-  }, [])
-}
+  }, []);
+};
 
 /**
  * tabs
@@ -46,7 +46,7 @@ const BaseTabs = (props: TabsAjaxProps) => {
   const createTabs = useCallback(
     () => createBaseTabs({ tabsProps, tabList: dataList }),
     [tabList],
-  )
+  );
 
   return <>{createTabs()}</>;
 };
