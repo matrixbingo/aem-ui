@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { TabsProps } from 'antd';
 import { ArrayUtil, ObjectType } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { createBaseTabs, TabSingle } from '../util/create-ant';
+import { cloneDeep } from 'lodash';
 
 export interface TabsAjaxProps {
   tabsProps: TabsProps;
@@ -19,18 +20,28 @@ export const tabsFormat = (arr: ObjectType[], key = 'tabPaneProps'): TabSingle[]
   [],
 ) as TabSingle[];
 
+const omit = (list) : TabSingle[] => {
+  return ArrayUtil.omit(cloneDeep(list), ['children']);
+}
+
 /**
  * tabs
  */
 const BaseTabs = (props: TabsAjaxProps) => {
   const { tabsProps, dataList } = props;
-  const [tabList, setList] = useState<TabSingle[]>(dataList);
+  const _dataList = omit(dataList);
+  const [tabList, setList] = useState<TabSingle[]>(_dataList);
 
   useDeepCompareEffect(() => {
-    setList(dataList);
-  }, [tabList, dataList]);
+    setList(_dataList);
+  }, [_dataList, tabList]);
 
-  return <>{createBaseTabs({ tabsProps, tabList })}</>;
+  const createTabs = useCallback(
+    () => createBaseTabs({ tabsProps, tabList: dataList }),
+    [tabList],
+  )
+
+  return <>{createTabs()}</>;
 };
 
 BaseTabs.defaultProps = {

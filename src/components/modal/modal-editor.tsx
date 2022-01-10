@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { Button, ButtonProps, Spin } from 'antd';
+import { Button, ButtonProps } from 'antd';
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import MaskCloseModal, { MaskCloseModalProps } from './mask-close-modal';
 

@@ -38,7 +38,7 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <BaseTabs tabsProps={{ onChange }} dataList={tabsFormat(dataList)} />
+      {/* <BaseTabs tabsProps={{ onChange }} dataList={tabsFormat(dataList)} /> */}
       <BaseTabs tabsProps={{ onChange }} dataList={tabsFormat(dataList2)} />
     </>
   );
