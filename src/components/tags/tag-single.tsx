@@ -22,7 +22,6 @@ const TagSingle: FC<TagSingleProps> = (props) => {
 
   useEffect(() => {
     setSpinning(false);
-    return setSpinning(false);
   }, []);
 
   const onClick = (e) => {
