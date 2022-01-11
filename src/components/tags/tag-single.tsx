@@ -10,7 +10,6 @@ export interface TagSingleProps extends Omit<TagProps, 'id' | 'onClose'> {
 
 const style = { padding: '4px 15px 4px 10px' };
 const tagStyle = { margin: '0px 5px 5px 0px' };
-
 /**
  * tag list
  * @param props
@@ -25,9 +24,9 @@ const TagSingle: FC<TagSingleProps> = (props) => {
   }, []);
 
   const onClick = (e) => {
-    e?.preventDefault;
-    onClose({ id, children });
     setSpinning(true);
+    onClose({ id, children });
+    e?.preventDefault;
   };
 
   if (children) {
