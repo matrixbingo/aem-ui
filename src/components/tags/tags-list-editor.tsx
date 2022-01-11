@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, useCallback, useState } from 'react';
 import { TagProps } from 'antd';
-import {  isEmpty } from 'lodash';
-import { ArrayUtil, DataUtil, TransformUtil } from 'common-toolkits';
+import { assign, cloneDeep, isEmpty } from 'lodash';
+import { TransformUtil } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { CreateBaseTagProps, createBaseTags } from '../util/create-ant';
 
@@ -14,10 +15,14 @@ export interface TagsListEditorProps<T = TagsListEditorType> extends Omit<TagPro
   transform?: (data: T[]) => CreateBaseTagProps[];
 }
 
+const add = <T, S>(arr: T[], item: S): T[] => {
+  return arr.map((i) => assign(cloneDeep(item), i));
+};
+
 export const toTagList = <S extends TagsListEditorType>(list: S[]): CreateBaseTagProps[] => {
   if (isEmpty(list)) return [] as CreateBaseTagProps[];
   const tagList = TransformUtil.mapKeys<any>(list, { name: 'children' });
-  return ArrayUtil.add(tagList, { color: 'processing' }); // closable: 'closable'
+  return add(tagList, { color: 'processing' }); // closable: 'closable'
 };
 
 /**
@@ -38,9 +43,14 @@ const TagsListEditor: FC<TagsListEditorProps> = (props) => {
     onChange?.(item);
   };
 
+  const createTags = useCallback(
+    () => createBaseTags({ tagList: add(tagList, rest), onClose }),
+    [tagList],
+  );
+
   return (
-    <div key={DataUtil.uuid()}>
-      {createBaseTags({ tagList: ArrayUtil.add(tagList, rest), onClose })}
+    <div>
+      {createTags()}
     </div>
   );
 };
