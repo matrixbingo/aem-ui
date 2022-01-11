@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { useBoolean, useUnmount } from 'ahooks';
 import { Button, ButtonProps } from 'antd';
 import { delay } from 'lodash';
