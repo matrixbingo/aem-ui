@@ -16,7 +16,7 @@ export const createBaseButtons = (buttons: CreateButtonsProps[]): ReactNode[] =>
   return buttons.map((prop) => {
     const { children, onClick, ...rest } = prop;
     return (
-      <Button onClick={(ev) => onClick(prop, ev)} {...rest}>
+      <Button key={String(children)} onClick={(ev) => onClick(prop, ev)} {...rest}>
         {children}
       </Button>
     );
@@ -42,7 +42,7 @@ export const createBaseTabs = (tabs: CreateBaseTabsProps) => {
   return (
     <Tabs {...tabsProps}>
       {tabList.map((_tab) =>
-        _tab.children ? ( <Tabs.TabPane {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane> ) : ( <Tabs.TabPane {..._tab.tabPaneProps} />)
+        _tab.children ? ( <Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane> ) : ( <Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps} />)
       )}
     </Tabs>
   );
@@ -75,7 +75,7 @@ export const createBaseTags = (tags: CreateBaseTagsProps) => {
       {
         tagList.map((tag) => {
           const { children, ...rest } = tag;
-          return children ? (<TagSingle {...resp} {...rest}>{children}</TagSingle>) : (<TagSingle {...resp} {...rest} />);
+          return children ? (<TagSingle key={String(rest.id)} {...resp} {...rest}>{children}</TagSingle>) : (<TagSingle key={String(rest.id)} {...resp} {...rest} />);
         })
       }
     </>

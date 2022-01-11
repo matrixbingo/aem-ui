@@ -10,6 +10,11 @@ const dataList = [
   { id: 'music', name: '音乐' },
   { id: 'movie', name: '电影' },
   { id: 'OTHERS', name: '其他' },
+  { id: 'OTHERS1', name: '其他1' },
+  { id: 'OTHERS2', name: '其他2' },
+  { id: 'OTHERS3', name: '其他3' },
+  { id: 'OTHERS4', name: '其他4' },
+  { id: 'OTHERS5', name: '其他5' },
 ];
 
 const Demo: React.FC = () => {
