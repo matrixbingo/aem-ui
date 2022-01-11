@@ -1,92 +1,59 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, ButtonProps } from 'antd';
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
-import MaskCloseModal, { MaskCloseModalProps } from './mask-close-modal';
+import React, { isValidElement, useCallback, useState } from 'react';
+import { TabsProps } from 'antd';
+import { ArrayUtil, ObjectType } from 'common-toolkits';
+import useDeepCompareEffect from 'use-deep-compare-effect';
+import lodash from 'lodash';
+import { createBaseTabs, TabSingle } from '../util/create-ant';
 
-export interface ModalEditorProps extends MaskCloseModalProps{
-  button?: Omit<ButtonProps, 'onClick'>;
-  title: any;
-  visible?: boolean;
-  onClick?: () => void;
-  onCancel?: () => void;
-  onOk?: () => void;
-  onSubmit?: (setVisible: React.Dispatch<React.SetStateAction<boolean>>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
-  showSubmit?: boolean;
+export interface TabsAjaxProps {
+  tabsProps: TabsProps;
+  dataList: TabSingle[];
 }
 
-const createMaskCloseModal = ({ show, loading, onCancel, onOk, rest, showSubmit, children }) => {
-  const footer = showSubmit ? [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>, <Button key="submit" type="primary" loading={loading} onClick={onOk}>确定</Button>] : [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>];
-  return (
-    <MaskCloseModal
-      visible={show}
-      onCancel={onCancel}
-      footer={footer}
-      {...rest}
-    >{children}
-    </MaskCloseModal>
-  );
+export const tabsFormat = (arr: ObjectType[], key = 'tabPaneProps'): TabSingle[] => arr.reduce(
+  (rs, i) => ArrayUtil.push<TabSingle>(
+      rs as TabSingle[],
+      { [key]: { key: String(i.key), tab: String(i.tab) }, children: i?.children } as TabSingle,
+  ),
+  [],
+) as TabSingle[];
+
+const omit = (list): TabSingle[] => {
+  return list.reduce((rs, next) => {
+    if (isValidElement(next.children)) {
+      rs.push(lodash.omit(next, ['children']));
+    } else {
+      rs.push(next);
+    }
+    return rs;
+  }, []);
 };
 
 /**
- * 常用Modal设置
- * @param param0
- * @returns
+ * tabs
  */
-const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button = { children: '' }, visible = false, onCancel: inputOnCancel, onOk: inputOnOk, onSubmit: inputOnSubmit, onClick: inputOnClick, showSubmit = true, ...rest }) => {
-  const { children: buttonChildren, ...buttonProps } = button;
-  const [show, setVisible] = useState(visible);
-  const [loading, setLoading] = useState(visible);
+const BaseTabs = (props: TabsAjaxProps) => {
+  const { tabsProps, dataList } = props;
+  const _dataList = omit(dataList);
+  const [tabList, setList] = useState<TabSingle[]>(_dataList);
 
-  const close = () => {
-    setLoading(false);
-  };
+  useDeepCompareEffect(() => {
+    setList(_dataList);
+  }, [_dataList, tabList]);
 
-  useEffect(() => {
-    if (visible !== show) {
-      setVisible(visible);
-    }
-    return close();
-  }, [visible]);
-
-  const onCancel = () => {
-    inputOnCancel?.();
-    setVisible(false);
-  };
-
-  const onOk = () => {
-    if (inputOnSubmit) {
-      setLoading(true);
-      inputOnSubmit?.(setVisible, setLoading);
-      return;
-    }
-
-    if (inputOnOk) {
-      inputOnOk?.();
-      setVisible(false);
-      setLoading(false);
-    }
-  };
-
-  const onClick = () => {
-    inputOnClick?.();
-    setVisible((prev) => !prev);
-  };
-
-  if (!buttonChildren) {
-    return (
-      <>
-        <Button {...buttonProps} onClick={onClick} />
-        {createMaskCloseModal({ show, loading, onCancel, onOk, rest, showSubmit, children })}
-      </>
-    );
-  }
-
-  return (
-    <>
-      <Button {...buttonProps} onClick={onClick}>{buttonChildren}</Button>
-      {createMaskCloseModal({ show, loading, onCancel, onOk, rest, showSubmit, children })}
-    </>
+  const createTabs = useCallback(
+    () => createBaseTabs({ tabsProps, tabList: dataList }),
+    [tabList],
   );
+
+  return <>{createTabs()}</>;
 };
 
-export default ModalEditor;
+BaseTabs.defaultProps = {
+  value: '',
+  dataList: [],
+};
+
+export default BaseTabs;
