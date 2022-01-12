@@ -41,9 +41,7 @@ export const createBaseTabs = (tabs: CreateBaseTabsProps) => {
   const { tabsProps, tabList } = tabs;
   return (
     <Tabs {...tabsProps}>
-      {tabList.map((_tab) =>
-        _tab.children ? ( <Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane> ) : ( <Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps} />)
-      )}
+      {tabList.map((_tab) => (_tab.children ? (<Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane>) : (<Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps} />)))}
     </Tabs>
   );
 };
