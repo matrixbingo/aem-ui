@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { isValidElement, useCallback, useState } from 'react';
+import React, { isValidElement, useState } from 'react';
 import { TabsProps } from 'antd';
 import { ArrayUtil, ObjectType } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
@@ -43,12 +43,7 @@ const BaseTabs = (props: TabsAjaxProps) => {
     setList(_dataList);
   }, [_dataList, tabList]);
 
-  const createTabs = useCallback(
-    () => createBaseTabs({ tabsProps, tabList: dataList }),
-    [tabList],
-  );
-
-  return <>{createTabs()}</>;
+  return <>{createBaseTabs({ tabsProps, tabList: dataList })}</>;
 };
 
 BaseTabs.defaultProps = {
