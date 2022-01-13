@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Input, InputProps } from 'antd';
-import { DataUtil } from 'common-toolkits';
-import  SelectSingle  from '../select/select-single';
+import SelectSingle from '../Select/SelectSingle';
+
 type InputSelectValueValue = string | undefined | null;
 
 export interface InputSelectValueProps extends Omit<InputProps, 'value' | 'onChange'> {
@@ -21,9 +21,9 @@ const options = [
  */
 const InputSelectValue = (props: InputSelectValueProps) => {
   const { value: inputValue, onChange: inputOnChange, void: voidValue, ...restProps } = props;
-  const _type = DataUtil.unknown.isVoid(inputValue) ? 0 : 1;
+  const _type = undefined === inputValue || inputValue === null || voidValue === inputValue ? 0 : 1;
   const [type, setType] = useState<number>(_type);
-  const [value, setValue] = useState<string>(inputValue);
+  const [value, setValue] = useState<string>(voidValue === inputValue ? '' : inputValue);
 
   useEffect(() => {
     if (type === 0) {
@@ -46,7 +46,7 @@ const InputSelectValue = (props: InputSelectValueProps) => {
       value={value}
       disabled={type === 0}
       onChange={onChange}
-      addonBefore={<SelectSingle<number> options={options} value={type} onSelect={(v) => setType(Number(v)) } style={{ width: 70 }} showSearch={false} />}
+      addonBefore={<SelectSingle<number> options={options} value={type} onSelect={(v) => setType(Number(v))} style={{ width: 70 }} />}
     />
   );
 };
