@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
-    "module": "es6",
-    "target": "es6",
-    "lib": ["es6", "esnext", "dom"],
+    "target": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
     "sourceMap": true,
-    "allowJs": true,
-    "baseUrl": ".",
+    "declaration": true,
     "jsx": "preserve",
-    "rootDir": ".",
+    "lib": ["dom", "esnext"],
+    "baseUrl": "./packages",
+    "paths": {
+      "aem-ui": ["aem-ui/src"],
+      "aem-ui/lib/*": ["aem-ui/src/*"],
+      "aem-ui/es/*": ["aem-ui/src/*"]
+    },
+
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -25,11 +29,6 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "noEmit": true,
-
-    "paths": {
-      "@/*": ["./src/*"],
-      "@@/*": ["./src/.umi/*"]
-    }
   },
   "include": [
     "mock/**/*",
@@ -44,12 +43,18 @@
     ".stylelintrc.js",
     ".prettierrc.js",
     "jest.config.js",
-    "mock/*"
+    "mock/*",
+    "./typings.d.ts", "packages/**/*.tsx", "packages/**/*.ts",
+    "packages/aem-ui/webpack.config.js"
   ],
+  "typings": "./typings.d.ts",
   "exclude": [
     "node_modules",
-    "build",
+    "lib",
+    "es",
     "dist",
+    "typings",
+    "build",
     "scripts",
     "src/.umi/*",
     "**/__test__",
@@ -59,33 +64,3 @@
     "docs"
   ]
 }
-
-// {
-//   "compilerOptions": {
-//     "target": "esnext",
-//     "module": "esnext",
-//     "moduleResolution": "node",
-//     "importHelpers": true,
-//     "jsx": "react",
-//     "esModuleInterop": true,
-//     "sourceMap": true,
-//     "baseUrl": "./",
-//     "strict": true,
-//     "paths": {
-//       "@/*": ["src/*"],
-//       "@@/*": ["src/.umi/*"]
-//     },
-//     "allowSyntheticDefaultImports": true
-//   },
-//   "exclude": [
-//     "node_modules",
-//     "lib",
-//     "es",
-//     "dist",
-//     "typings",
-//     "**/__test__",
-//     "test",
-//     "tests",
-//     "docs"
-//   ]
-// }
