@@ -27,6 +27,7 @@ const value = {
 const Demo: React.FC = () => {
   return (
     <>
+    {/* <Index /> */}
       <PopoverCode value={value} title="title" />
       <br />
       <CodeEditor

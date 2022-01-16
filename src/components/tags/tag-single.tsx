@@ -2,7 +2,6 @@ import React, { FC, ReactNode, useEffect } from 'react';
 import { CloseOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Spin, Tag, TagProps, Tooltip } from 'antd';
 import { useSafeState, useUnmount } from 'ahooks';
-import { DataUtil } from 'common-toolkits';
 
 export interface TagSingleProps extends Omit<TagProps, 'id' | 'onClose'> {
   id?: any;

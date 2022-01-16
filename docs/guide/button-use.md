@@ -5,12 +5,22 @@ nav:
   order: 3
 ---
 
-# 示例
+# Button
 
-## 默认配置
+## button-loading
 
 ```jsx | pure
-
+<ButtonLoading type="link">
+  ButtonLoading
+</ButtonLoading>
 ```
 
 <code src="../examples/button/button-loading-use.tsx" />
+
+## button-copy
+
+```jsx | pure
+<ButtonCopy value={value} />
+```
+
+<code src="../examples/button/button-copy-use.tsx" />

@@ -2,12 +2,12 @@ import { Button, Popover } from 'antd';
 import React, { FC } from 'react';
 import CodeEditor from '../code-editor';
 
-interface State {
+export interface PopoverCodeProps {
   value: string;
   title: string;
 }
 
-const PopoverCode: FC<State> = ({ value, title }) => {
+const PopoverCode: FC<PopoverCodeProps> = ({ value, title }) => {
   return (
     <Popover content={
         <CodeEditor

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Input, InputProps } from 'antd';
 
-export interface InputRenderFormProps<T extends string | number>
+export interface InputRenderCustomerProps<T extends string | number>
   extends Omit<InputProps, 'value' | 'onChange' | 'render'> {
   value: string;
   onChange: (value: T) => void;
@@ -14,7 +14,7 @@ export interface InputRenderFormProps<T extends string | number>
  * 自定义返回值
  */
 const InputRenderCustomer = <T extends number | string>(
-  props: InputRenderFormProps<T>,
+  props: InputRenderCustomerProps<T>,
 ) => {
   const { value: inputValue, onChange: inputOnChange, input, render, ...restProps } = props;
 

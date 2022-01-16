@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "build/dist",
-    "module": "esnext",
-    "target": "esnext",
+    "module": "es6",
+    "target": "es6",
     "lib": ["es6", "esnext", "dom"],
     "sourceMap": true,
     "allowJs": true,
@@ -38,6 +38,7 @@
     "test/**/*",
     "__test__/**/*",
     "typings/**/*",
+    "typings",
     "config/**/*",
     ".eslintrc.js",
     ".stylelintrc.js",
@@ -51,10 +52,11 @@
     "dist",
     "scripts",
     "src/.umi/*",
-    "typings",
     "**/__test__",
     "webpack",
-    "jest"
+    "jest",
+    "tests",
+    "docs"
   ]
 }
 

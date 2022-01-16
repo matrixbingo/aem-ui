@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, InputProps } from 'antd';
 import { useMount } from 'ahooks';
 
-export interface InputFormProps extends Omit<InputProps, 'value' | 'onChange'> {
+export interface InputDefaultClearProps extends Omit<InputProps, 'value' | 'onChange'> {
   value: string;
   onChange: (value: string) => void;
 }
@@ -11,7 +11,7 @@ export interface InputFormProps extends Omit<InputProps, 'value' | 'onChange'> {
 /**
  * 默认清空Form对应数据
  */
-const InputDefaultClear = (props: InputFormProps) => {
+const InputDefaultClear = (props: InputDefaultClearProps) => {
   const { value: inputValue, onChange: inputOnChange, disabled, ...restProps } = props;
   const [value, setValue] = useState(inputValue);
 

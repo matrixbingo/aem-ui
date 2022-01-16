@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Input, InputProps } from 'antd';
-import SelectSingle from '../Select/SelectSingle';
+import SelectSingle from '../select/select-single';
 
 type InputSelectValueValue = string | undefined | null;
 

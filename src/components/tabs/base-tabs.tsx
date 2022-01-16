@@ -7,7 +7,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import lodash from 'lodash';
 import { createBaseTabs, TabSingle } from '../util/create-ant';
 
-export interface TabsAjaxProps {
+export interface BaseTabsProps {
   tabsProps: TabsProps;
   dataList: TabSingle[];
 }
@@ -34,7 +34,7 @@ const omit = (list): TabSingle[] => {
 /**
  * tabs
  */
-const BaseTabs = (props: TabsAjaxProps) => {
+const BaseTabs = (props: BaseTabsProps) => {
   const { tabsProps, dataList } = props;
   const _dataList = omit(dataList);
   const [tabList, setList] = useState<TabSingle[]>(_dataList);

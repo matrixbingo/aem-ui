@@ -2,11 +2,14 @@ import React, { FC } from 'react';
 import { isEmpty } from 'lodash';
 import { Input } from 'antd';
 import { FormatUtil } from 'common-toolkits';
+import { TextAreaProps } from 'antd/lib/input';
 
-/**
- * Form
- */
-const TextAreaJson: FC<{ value?: any; onChange?: any }> = ({ value, onChange, ...rest }) => {
+export interface TextAreaJsonProps extends Omit<TextAreaProps, 'value' | 'onChange'> {
+  value?: any; 
+  onChange?: (v: string) => void; 
+}
+
+const TextAreaJson: FC<TextAreaJsonProps> = ({ value, onChange, ...rest }) => {
   try {
     if (!isEmpty(value)) {
       value = FormatUtil.json(value);
@@ -16,7 +19,7 @@ const TextAreaJson: FC<{ value?: any; onChange?: any }> = ({ value, onChange, ..
   }
 
   const onChangeCallback = ({ target: { value: v } }) => {
-    onChange(v);
+    onChange?.(v);
   };
 
   return (
