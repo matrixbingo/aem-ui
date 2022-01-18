@@ -1,25 +1,24 @@
+import { StringUtil } from '@/utils';
+import { Tooltip } from 'antd';
 import React, { FC } from 'react';
-import { StringUtil } from 'common-toolkits';
-import { Tooltip, TooltipProps } from 'antd';
-
-export interface OmitTipLabelProps extends Omit<TooltipProps, 'title' | 'limit'> {
-  title: string; 
-  limit?: number
-}
 
 /**
  * 表格列表等缩略显示
  */
-const OmitTipLabel: FC<OmitTipLabelProps> = ({ title, limit, ...rest }) => {
+const OmitTipLabel: FC<{ title: string; limit: number }> = ({ title = '', limit = 10 }) => {
+  if (title?.length < limit) {
+    return <>{title}</>;
+  }
   return (
-    <Tooltip placement="top" title={title} {...rest}>
-      {StringUtil.truncate(title, limit)}
+    <Tooltip placement="top" title={title}>
+      {StringUtil.omit(title, limit)}
     </Tooltip>
   );
 };
 
 OmitTipLabel.defaultProps = {
-  limit: 30,
+  title: '',
+  limit: 10,
 };
 
 export default OmitTipLabel;
