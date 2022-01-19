@@ -1,32 +1,23 @@
-/* eslint-disable import/order */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, ButtonProps } from 'antd';
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import React, { FC, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import MaskCloseModal, { MaskCloseModalProps } from './mask-close-modal';
 
-export interface ModalEditorProps extends MaskCloseModalProps{
+export interface ModalEditorProps extends Omit<MaskCloseModalProps, 'onSubmit'> {
   button?: Omit<ButtonProps, 'onClick'>;
   title: any;
   visible?: boolean;
   onClick?: () => void;
+  loading?: boolean;
   onCancel?: () => void;
-  onOk?: () => void;
   onSubmit?: (setVisible: React.Dispatch<React.SetStateAction<boolean>>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
 }
 
-const createMaskCloseModal = ({ show, loading, onCancel, onOk, rest, children }) => {
+const createMaskCloseModal = ({ visible, loading, onCancel, onSubmit, showSubmit, rest, children }) => {
+  // const footer = showSubmit ? [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>, <Button key="submit" type="primary" loading={loading} onClick={onSubmit}>确定</Button>] : [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>];
   return (
-    <MaskCloseModal
-      visible={show}
-      onCancel={onCancel}
-      footer={[
-        <Button key="onCancel" loading={loading} onClick={onCancel}>
-          取消
-        </Button>,
-        <Button key="submit" type="primary" loading={loading} onClick={onOk}>
-          确定
-        </Button>]}
-      {...rest}
-    >{children}
+    <MaskCloseModal visible={visible} onCancel={onCancel} onSubmit={onSubmit} loading={loading} {...rest}>
+      {children}
     </MaskCloseModal>
   );
 };
@@ -36,52 +27,48 @@ const createMaskCloseModal = ({ show, loading, onCancel, onOk, rest, children })
  * @param param0
  * @returns
  */
-const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button = { children: '' }, visible = false, onCancel: inputOnCancel, onOk: inputOnOk, onSubmit: inputOnSubmit, onClick: inputOnClick, ...rest }) => {
+const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button = { children: '' }, visible: inputVisible = false, loading: inputLoading = false, onCancel: inputOnCancel, onOk: inputOnOk, onSubmit: inputOnSubmit, onClick: inputOnClick, ...rest }) => {
   const { children: buttonChildren, ...buttonProps } = button;
-  const [show, setVisible] = useState(visible);
-  const [loading, setLoading] = useState(visible);
+  const [visible, setVisible] = useState(inputVisible);
+  const [loading, setLoading] = useState(inputLoading);
+  const showSubmit = !!inputOnSubmit;
 
   const close = () => {
     setLoading(false);
   };
 
   useEffect(() => {
-    if (visible !== show) {
-      setVisible(visible);
+    if (inputVisible !== visible) {
+      setVisible(inputVisible);
     }
-    return close();
-  }, [visible]);
+    if (!inputVisible) {
+      close();
+    }
+  }, [inputVisible]);
 
-  const onCancel = () => {
+  const onCancel = useCallback(() => {
     inputOnCancel?.();
     setVisible(false);
-  };
+  }, [inputOnCancel]);
 
-  const onOk = () => {
+  const onSubmit = useCallback(() => {
     if (inputOnSubmit) {
       setLoading(true);
       inputOnSubmit?.(setVisible, setLoading);
-      return;
     }
+  }, [inputOnSubmit]);
 
-    if (inputOnOk) {
-      inputOnOk?.();
-      setVisible(false);
-      setLoading(false);
-    }
-  };
-
-  const onClick = (e) => {
-    e?.stopPropagation();
+  const onClick = useCallback(() => {
     inputOnClick?.();
     setVisible((prev) => !prev);
-  };
+  },
+  [inputOnClick]);
 
   if (!buttonChildren) {
     return (
       <>
         <Button {...buttonProps} onClick={onClick} />
-        {createMaskCloseModal({ show, loading, onCancel, onOk, rest, children })}
+        {createMaskCloseModal({ visible, loading, onCancel, onSubmit: inputOnSubmit ? onSubmit : undefined, showSubmit, rest, children })}
       </>
     );
   }
@@ -89,7 +76,7 @@ const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button
   return (
     <>
       <Button {...buttonProps} onClick={onClick}>{buttonChildren}</Button>
-      {createMaskCloseModal({ show, loading, onCancel, onOk, rest, children })}
+      {createMaskCloseModal({ visible, loading, onCancel, onSubmit: inputOnSubmit ? onSubmit : undefined, showSubmit, rest, children })}
     </>
   );
 };
