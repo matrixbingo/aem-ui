@@ -9,10 +9,10 @@ const { Search } = Input;
 export type InputSearchProps = SearchProps;
 
 /**
- * 入参是数字string, 或数字，例如'2'或2
+ * 默认搜索
  */
 const InputSearch = (props: InputSearchProps) => {
-const { onChange: inputOnChange, ...rest} = props;
+  const { onChange: inputOnChange, ...rest } = props;
 
   const onChange = (e) => {
     const { value: _value } = e.target;
