@@ -1,5 +1,5 @@
-import { StringUtil } from '@/utils';
 import { Tooltip } from 'antd';
+import { StringUtil } from 'common-toolkits';
 import React, { FC } from 'react';
 
 /**
@@ -11,7 +11,7 @@ const OmitTipLabel: FC<{ title: string; limit: number }> = ({ title = '', limit 
   }
   return (
     <Tooltip placement="top" title={title}>
-      {StringUtil.omit(title, limit)}
+      {StringUtil.truncate(title, limit)}
     </Tooltip>
   );
 };
