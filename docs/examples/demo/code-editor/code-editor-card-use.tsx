@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeEditor } from 'aem-ui';
+import { CodeEditorCard } from 'aem-ui';
 
 const value = {
   xField: 'year',
@@ -26,12 +26,7 @@ const value = {
 
 const Demo: React.FC = () => {
   return (
-  <div style={{ width: 800, height: 400 }}>
-      <CodeEditor
-        value={value}
-        onChange={console.log}
-      />
-    </div>
+      <CodeEditorCard defaultValue={value} onChange={console.log} />
   );
 };
 

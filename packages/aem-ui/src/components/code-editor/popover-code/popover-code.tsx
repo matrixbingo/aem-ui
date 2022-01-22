@@ -22,7 +22,6 @@ const PopoverCode: FC<PopoverCodeProps> = ({ value, title , codeEditorProps }) =
 PopoverCode.defaultProps = {
   codeEditorProps: {
     style: { width: 600, height: 300 },
-    contStyle:{ width: 600, height: 300 },
   }
 };
 

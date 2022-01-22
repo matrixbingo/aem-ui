@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
+import React, { FC, PropsWithChildren, useState } from 'react';
 import { Button, Modal, ModalProps, Spin } from 'antd';
 import { useUpdateEffect } from 'ahooks';
 
@@ -49,17 +49,17 @@ const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, 
     }
   }, [visible]);
 
-  const onCancel = useCallback((e) => {
+  const onCancel = (e) => {
     e?.stopPropagation();
     inputOnCancel?.();
     close();
-  }, [inputOnCancel]);
+  };
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = () => {
     if (inputOnSubmit) {
       inputOnSubmit?.(setLoading);
     }
-  }, [inputOnSubmit]);
+  };
 
   return (
     <Modal width={width} visible={visible} onCancel={onCancel} footer={createButton(!!inputOnSubmit, loading, onCancel, onSubmit)} {...rest}>

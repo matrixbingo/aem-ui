@@ -13,6 +13,9 @@ import type { CollapsibleCardProps } from './components/card/collapsible-Card';
 export { default as CodeEditor } from './components/code-editor/code-editor';
 import type { CodeEditorProps } from './components/code-editor/code-editor';
 
+export { default as CodeEditorCard } from './components/code-editor/code-editor-card';
+import type { CodeEditorCardProps } from './components/code-editor/code-editor-card';
+
 export { default as PopoverCode } from './components/code-editor/popover-code/popover-code';
 import type { PopoverCodeProps } from './components/code-editor/popover-code/popover-code';
 
@@ -104,4 +107,4 @@ import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsPr
 
 export { createBaseButtons, createBaseTabs, createStart };
 export type { CreateButtonsProps, CreateBaseTabsProps, CreateStartProps };
-export type { InputSearchProps, ButtonCopyProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, TagsListEditorProps, GeneralSelect, BaseTabsProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, DescriptionsTableProps, RangePickerFormatProps, DatePickerFormatProps, ButtonLoadingProps, InputAddonBeforeProps, InputDefaultClearProps, InputStringNumberProps, InputRangeProps, InputRenderCustomerProps, InputSelectValueProps, CollapsibleCardProps, CodeEditorProps,PopoverCodeProps};
+export type { CodeEditorCardProps, InputSearchProps, ButtonCopyProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, TagsListEditorProps, GeneralSelect, BaseTabsProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, DescriptionsTableProps, RangePickerFormatProps, DatePickerFormatProps, ButtonLoadingProps, InputAddonBeforeProps, InputDefaultClearProps, InputStringNumberProps, InputRangeProps, InputRenderCustomerProps, InputSelectValueProps, CollapsibleCardProps, CodeEditorProps,PopoverCodeProps};
