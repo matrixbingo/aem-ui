@@ -11,7 +11,7 @@ import GeneralSelect from './general-select-type';
  * @constructor
  */
 const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
-  const { defaultId, list, onChange, isPick } = props;
+  const { defaultId = 0, list, onChange, isPick } = props;
   const activeId: number | string = isNumber(defaultId) || isString(defaultId) ? defaultId : list[0].id;
   const _isPick = isBoolean(isPick) ? isPick : false;
   const [selectedIds, setSelectedIds] = useState<(number | string)[]>([ activeId ]);

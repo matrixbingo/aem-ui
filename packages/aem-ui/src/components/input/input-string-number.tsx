@@ -1,35 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { InputNumber, InputNumberProps } from 'antd';
-import { DataUtil } from 'common-toolkits';
 import { isNumber } from 'lodash';
 
 export type dataType = 'string' | 'number';
 
+type Raw = string | number;
+
 export interface InputStringNumberProps extends Omit<InputNumberProps, 'value' | 'onChange'> {
-  value: dataType;
-  onChange: (value: string | number) => void;
-  dataType: dataType; // 输出类型
+  value?: Raw;
+  onChange?: (value: Raw) => void;
+  dataType?: dataType; // 输出类型
+  defaultValue?: number;
 }
 
-const toNumberValue = (inputValue: string | number, defaultValue: number): number => {
-  const initValue = DataUtil.unknown.parseValue(inputValue);
-  return initValue && isNumber(initValue) ? initValue : Number(defaultValue);
+const toNumberValue = (defaultValue: number, inputValue?: Raw): number => {
+  inputValue = inputValue ?? defaultValue;
+  return isNumber(inputValue) ? inputValue as number : Number(defaultValue);
 };
 
 const toValueByDataType = (type: dataType, v: number) => type === 'number' ? v : String(v);
 
 /**
- * 入参是数字string 例如'2'
+ * 入参和返回同一类型，string 或 number
  */
 const InputStringNumber = (props: InputStringNumberProps) => {
-  const { value: inputValue, onChange: inputOnChange, dataType, ...rest } = props;
-  const { defaultValue } = rest;
-  const [value, setValue] = useState<number>(toNumberValue(inputValue, Number(defaultValue)));
+  const { value: inputValue, onChange: inputOnChange, defaultValue = 0, dataType = 'number', ...rest } = props;
+  const [value, setValue] = useState<number>(toNumberValue(defaultValue, inputValue));
 
   const update = (v: number) => {
-    const val = toValueByDataType(dataType, v);
-    inputOnChange(val);
+    inputOnChange?.(toValueByDataType(dataType, v));
     setValue(v);
   };
 
@@ -39,7 +39,7 @@ const InputStringNumber = (props: InputStringNumberProps) => {
 
   useEffect(() => {
     if (String(inputValue) !== String(value)) {
-      update(toNumberValue(inputValue, Number(defaultValue)));
+      update(toNumberValue(defaultValue, inputValue));
     }
   }, [inputValue]);
 
@@ -47,10 +47,9 @@ const InputStringNumber = (props: InputStringNumberProps) => {
 };
 
 InputStringNumber.defaultProps = {
-  value: '1',
   onChange: (v) => {},
   dataType: 'number',
-  defaultValue: '1',
+  defaultValue: 1,
 };
 
 export default InputStringNumber;

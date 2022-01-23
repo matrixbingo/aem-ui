@@ -8,7 +8,7 @@ import { CopyOutlined } from '@ant-design/icons';
 
 export interface CodeEditorCardProps extends Omit<CodeEditorProps, 'defaultValue' | 'onChange' | 'toValue'> {
   defaultValue?: string | ObjectType;
-  onChange: (value: string, event?: any) => void;
+  onChange?: (value: string, event?: any) => void;
   contStyle?: React.CSSProperties;
   cardProps?: CardProps;
   selectProps?: SelectProps;
