@@ -27,7 +27,7 @@ const CodeEditorCard: FC<PropsWithChildren<CodeEditorCardProps>> = ({defaultValu
     setValue(value);
   };
 
-  return <Card title={<Select {...selectProps} onSelect={setMode} defaultValue='json' style={{ width: 200 }} />} extra={<Tooltip placement="top" title="点击复制">
+  return <Card title={<Select {...selectProps} onSelect={setMode} defaultValue={mode} style={{ width: 200 }} />} extra={<Tooltip placement="top" title="点击复制">
       <CopyToClipboard text={value}>
         <Button icon={<CopyOutlined />} type='dashed'/>
       </CopyToClipboard>
