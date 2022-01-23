@@ -16,10 +16,7 @@ nav:
 ## CodeEditorCard
 
 ```jsx | pure
-<CodeEditor
-    style={{ width: 800, height: 400 }}
-    value={value}
-  />
+ <CodeEditorCard defaultValue={value} onChange={console.log} />
 ```
 
 <code src="./demo/code-editor/code-editor-card-use.tsx" />
