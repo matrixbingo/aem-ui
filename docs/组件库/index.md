@@ -2,8 +2,9 @@
 
 ## ✨ 依赖
 
-- "@ant-design/pro-card": "^1.20.16"
-
+- "@ant-design/pro-card": "^1.20.16",
+- "@ant-design/pro-table": "^2.78.3",
+- "ahooks": "^3.7.0",
 
 ## 📦 安装
 

@@ -1,6 +1,6 @@
 ---
 hero:
-  title: 通用组件
+  title: 通用公共组件
   desc: 高效、稳定、便捷
   actions:
     - text: 快速上手
@@ -13,7 +13,7 @@ features:
     title: 'aem-ui-pro'
     desc: 业务沉淀通用组件，基于ProComponents，无业务逻辑
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/d1ee0c6f-5aed-4a45-a507-339a4bfe076c/k7bjsocq_w144_h144.png
-    title: 'hooks'
-    desc: 通用hooks，无业务逻辑
+    title: 'code-editor'
+    desc: 代码编辑，预览，查看等
 footer: Open-source MIT Licensed | Copyright © 2021<br />Powered by Liang.Wang
 ---
