@@ -14,9 +14,7 @@
     "build:u": "lerna run build --scope=aem-ui-pro",
     "pub": "lerna publish"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "license": "MIT",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
