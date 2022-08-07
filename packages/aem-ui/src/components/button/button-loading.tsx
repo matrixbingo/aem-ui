@@ -4,7 +4,7 @@ import { Button, ButtonProps } from 'antd';
 import { delay } from 'lodash';
 
 export interface ButtonLoadingProps extends Omit<ButtonProps, 'timeout' | 'onClick'> {
-  timeout: number;
+  timeout?: number;
   onClick?: (event: React.MouseEventHandler<HTMLElement> | undefined) => void;
   [K: string]: any;
 };

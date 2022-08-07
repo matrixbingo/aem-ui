@@ -35,10 +35,10 @@ const TagsSingle: FC<GeneralSelect.TagSingleProps> = (props) => {
       }
     } else if (_isPick) {
       //  删
-      isExist(selectedIds, tag) &&
-        setSelectedIds(() => []) &&
-        onChange &&
+      if(isExist(selectedIds, tag) && onChange){
+        setSelectedIds(() => []);
         onChange(tag, checked);
+      }
     }
   };
 

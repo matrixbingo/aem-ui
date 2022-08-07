@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { Input } from 'antd';
-import './input-range.css';
 import { SearchProps } from 'antd/lib/input';
 
 const { Search } = Input;

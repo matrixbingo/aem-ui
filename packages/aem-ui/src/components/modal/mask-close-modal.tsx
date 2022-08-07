@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import React, { FC, PropsWithChildren, useState } from 'react';
+import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { Button, Modal, ModalProps, Spin } from 'antd';
 import { useUpdateEffect } from 'ahooks';
 
@@ -10,6 +10,7 @@ export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClo
   loading?: boolean;  // 如果未设置则内部维护
   onCancel?: () => void;
   onSubmit?: (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
+  customerButton?: (any, loading) => any;
   [K: string]: any;
 }
 
@@ -22,8 +23,9 @@ const getWidth = (size: sizeType) => {
   }
 };
 
-const createButton = (showSubmit, loading, onCancel, onSubmit) => {
-  return showSubmit ? [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>, <Button key="submit" type="primary" loading={loading} onClick={onSubmit}>确定</Button>] : [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>];
+const createButton = (showSubmit, loading, onCancel, onSubmit, customerButton = (any, _loading) => any) => {
+  const buttons = showSubmit ? [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>, <Button key="submit" type="primary" loading={loading} onClick={onSubmit}>确定</Button>] : [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>];
+  return customerButton(buttons, loading);
 };
 
 /**
@@ -31,7 +33,7 @@ const createButton = (showSubmit, loading, onCancel, onSubmit) => {
  * @param param0
  * @returns
  */
-const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, visible, loading: inputLoading = false, onCancel: inputOnCancel, onSubmit: inputOnSubmit, size, ...rest }) => {
+const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, visible, loading: inputLoading = false, onCancel: inputOnCancel, onSubmit: inputOnSubmit, size, customerButton, ...rest }) => {
   const [loading, setLoading] = useState<boolean>(inputLoading);
   const width = getWidth(size ?? 'large');
 
@@ -49,20 +51,20 @@ const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, 
     }
   }, [visible]);
 
-  const onCancel = (e) => {
+  const onCancel = useCallback((e) => {
     e?.stopPropagation();
     inputOnCancel?.();
     close();
-  };
+  }, [inputOnCancel]);
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     if (inputOnSubmit) {
       inputOnSubmit?.(setLoading);
     }
-  };
+  }, [inputOnSubmit]);
 
   return (
-    <Modal width={width} visible={visible} onCancel={onCancel} footer={createButton(!!inputOnSubmit, loading, onCancel, onSubmit)} {...rest}>
+    <Modal width={width} visible={visible} onCancel={onCancel} footer={createButton(!!inputOnSubmit, loading, onCancel, onSubmit, customerButton)} {...rest}>
       <Spin spinning={inputLoading}>
         {children}
       </Spin>

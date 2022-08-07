@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { Button, ButtonProps, Rate, RateProps, TabPaneProps, Tabs, TabsProps, TagProps } from 'antd';
 import { ObjectType } from 'common-toolkits';
 import TagSingle from '../components/tags/tag-single';
+import ButtonConfirm, { ButtonConfirmProps } from '../components/confirm/button-confirm';
 
 export interface CreateButtonsProps extends Omit<ButtonProps, 'children' | 'onClick'> {
   children: string | ReactNode;
@@ -17,9 +18,19 @@ export const createBaseButtons = (buttons: CreateButtonsProps[]): ReactNode[] =>
     const { children, onClick, ...rest } = prop;
     return (
       <Button key={String(children)} onClick={(ev) => onClick(prop, ev)} {...rest}>
-        {children}
+        {children as any}
       </Button>
     );
+  });
+};
+
+/**
+ * 确认按钮数组
+ * @returns ButtonConfirmProps[]
+ */
+export const createButtonConfirms = (buttons: ButtonConfirmProps[]): ReactNode[] => {
+  return buttons.map((prop, index) => {
+    return (<ButtonConfirm {...prop} key={String(index)} />);
   });
 };
 
@@ -41,7 +52,7 @@ export const createBaseTabs = (tabs: CreateBaseTabsProps) => {
   const { tabsProps, tabList } = tabs;
   return (
     <Tabs {...tabsProps}>
-      {tabList.map((_tab) => (_tab.children ? (<Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps}>{_tab.children}</Tabs.TabPane>) : (<Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps} />)))}
+      {tabList.map((_tab) => (_tab.children ? (<Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps}>{_tab.children as any}</Tabs.TabPane>) : (<Tabs.TabPane key={String(_tab.tabPaneProps.tab)} {..._tab.tabPaneProps} />)))}
     </Tabs>
   );
 };
@@ -52,7 +63,7 @@ export const createStart = (start: CreateStartProps) => {
   return <Rate count={1} {...start} />;
 };
 
-export interface CreateBaseTagProps extends Omit<TagProps, 'id' | 'onClose'> {
+export interface CreateBaseTagProps extends Omit<TagProps, 'id' | 'onClose' | 'children'> {
   id: string | number;
   children: string | ReactNode | undefined;
 }

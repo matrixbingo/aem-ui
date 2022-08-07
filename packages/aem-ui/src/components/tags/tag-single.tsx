@@ -3,7 +3,7 @@ import { CloseOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Spin, Tag, TagProps, Tooltip } from 'antd';
 import { useSafeState, useUnmount } from 'ahooks';
 
-export interface TagSingleProps extends Omit<TagProps, 'id' | 'onClose'> {
+export interface TagSingleProps extends Omit<TagProps, 'id' | 'onClose' |'children'> {
   id?: any;
   onClose?: (e: any) => void;
   children?: string | ReactNode | undefined;

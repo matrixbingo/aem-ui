@@ -1,8 +1,8 @@
+import React, { FC } from 'react';
 import { Popconfirm, PopconfirmProps, Switch, SwitchProps } from 'antd';
-import React, { FC, ReactNode } from 'react';
 
 export interface EditableStatusProps {
-  title: ReactNode | (() => ReactNode);
+  title: PopconfirmProps['title'];
   checked?: boolean;
   onConfirm?: (e?: React.MouseEvent<HTMLElement>) => void;
   switchProps?: Omit<SwitchProps, 'checked'>;

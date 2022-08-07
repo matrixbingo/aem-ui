@@ -4,7 +4,7 @@ hero:
   desc: 高效、稳定、便捷
   actions:
     - text: 快速上手
-      link: /examples/button-use
+      link: /%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6
 features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/881dc458-f20b-407b-947a-95104b5ec82b/k79dm8ih_w144_h144.png
     title: 'aem-ui'

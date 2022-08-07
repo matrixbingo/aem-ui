@@ -1,12 +1,14 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "command": {
-    "version": {
-      "exact": true
-    }
-  },
   "npmClient": "yarn",
-  "version": "independent"
+  "packages": ["packages/*"],
+  "version": "independent",
+  "command": {
+    "publish": {
+      "verifyAccess": false,
+      "ignoreChanges": [".gitignore", "*.md", "*.log"],
+      "version": {
+        "exact": true
+      }
+    }
+  }
 }

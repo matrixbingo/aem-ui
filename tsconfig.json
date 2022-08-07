@@ -1,66 +1,28 @@
 {
   "compilerOptions": {
     "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "sourceMap": true,
-    "declaration": true,
-    "jsx": "preserve",
-    "lib": ["dom", "esnext"],
-    "baseUrl": "./packages",
-    "paths": {
-      "aem-ui": ["aem-ui/src"],
-      "aem-ui/lib/*": ["aem-ui/src/*"],
-      "aem-ui/es/*": ["aem-ui/src/*"]
-    },
-
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-
-    "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "strict": true,
-
-    "noImplicitAny": false,
+    "jsx": "react",
     "esModuleInterop": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"]
+    },
+    "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "mock/**/*",
-    "src/**/*",
-    "tests/**/*",
-    "test/**/*",
-    "__test__/**/*",
-    "typings/**/*",
-    "typings",
-    "config/**/*",
-    ".eslintrc.js",
-    ".stylelintrc.js",
-    ".prettierrc.js",
-    "jest.config.js",
-    "mock/*",
-    "./typings.d.ts", "packages/**/*.tsx", "packages/**/*.ts",
-    "packages/aem-ui/webpack.config.js"
-  ],
-  "typings": "./typings.d.ts",
+  "include": ["packages/*/src"],
   "exclude": [
     "node_modules",
     "lib",
     "es",
     "dist",
     "typings",
-    "build",
-    "scripts",
-    "src/.umi/*",
     "**/__test__",
-    "webpack",
-    "jest",
-    "tests",
-    "docs"
+    "test"
   ]
 }

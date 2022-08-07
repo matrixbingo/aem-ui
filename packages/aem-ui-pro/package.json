@@ -1,0 +1,51 @@
+{
+  "name": "aem-ui-pro",
+  "version": "0.0.01",
+  "description": "组件库",
+  "author": "matrixbing",
+  "homepage": "https://github.com/matrixbingo/aem-ui#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "sideEffects": [
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matrixbingo/aem-ui.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "father-build"
+  },
+  "bugs": {
+    "url": "https://github.com/matrixbingo/aem-ui/issues"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.14.0"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/react": "^16.14.2",
+    "@types/react-dom": "^16.9.9",
+    "father-build": "^1.19.1"
+  },
+  "peerDependencies": {
+    "@ant-design/pro-card": "^1.20.16",
+    "@ant-design/pro-table": "^2.78.3",
+    "ahooks": "^3.7.0",
+    "antd": "^4.22.3"
+  }
+}
