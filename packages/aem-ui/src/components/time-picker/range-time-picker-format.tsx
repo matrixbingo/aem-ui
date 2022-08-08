@@ -9,9 +9,9 @@ import { isArray, isEmpty } from 'lodash';
 
 const defaultFormat = 'HH:mm:ss';
 
-export interface RangePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
+export interface RangeTimePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
   format: string;
-  value: string[];
+  value?: string[];
   onChange: (dateString: string[]) => void;
   mixDays: number;  // 最大天数，0为任意
 }
@@ -34,9 +34,14 @@ const checkValue = (v) => {
   return !v || !Array.isArray(v) || v.length !== 2 || v[0].length !== 8 || v[1].length !== 8;
 };
 
-const RangeTimePickerForm = (props: RangePickerFormatProps) => {
+const RangeTimePickerFormat = (props: RangeTimePickerFormatProps) => {
   const { value, onChange, format, mixDays, ...restProps } = props;
   const [time, setTime] = useState<RangeValue<Moment>>(toMomentValue(value, format));
+
+  const update = (dateStrings: string[]) => {
+    onChange(dateStrings);
+    setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
+  }
 
   const resSet = () => {
     setTime([moment(), moment()]);
@@ -64,7 +69,7 @@ const RangeTimePickerForm = (props: RangePickerFormatProps) => {
   }, [value?.[0], value?.[1]]);
 
   const onChangeFormat = (_, dateStrings: string[]) => {
-    onChange(dateStrings);
+    update(dateStrings);
   };
 
   return (
@@ -72,10 +77,10 @@ const RangeTimePickerForm = (props: RangePickerFormatProps) => {
   );
 };
 
-RangeTimePickerForm.defaultProps = {
+RangeTimePickerFormat.defaultProps = {
   format: defaultFormat,
   onChange: (v) => window.console.error('DatePickerFormat.onChange : ', v),
   mixDays: 0,
 };
 
-export default RangeTimePickerForm;
+export default RangeTimePickerFormat;

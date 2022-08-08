@@ -10,12 +10,13 @@ import { DateUtil } from 'common-toolkits';
 
 const defaultFormat = 'YYYY-MM-DD';
 
-export interface RangePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
+export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
   format: string;
-  value: string[];
+  value?: string[];
   onChange: (dateString: string[]) => void;
   mixDays?: number;  // 最大天数，0为任意
 }
+
 const toMomentValue = (inputValue: string[], format: string): RangeValue<Moment> => {
   if (isArray(inputValue) && inputValue.length === 2 && DateUtil.dateIsValid(inputValue[0], format) && DateUtil.dateIsValid(inputValue[1], format)) {
     return [moment(inputValue[0], format), moment(inputValue[1], format)];
@@ -34,10 +35,15 @@ const getTime = (time: RangeValue<Moment>, index, format) => {
   return moment().format(format);
 };
 
-const RangeDatePickerFormat = (props: RangePickerFormatProps) => {
+const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   const { RangePicker } = DatePicker;
   const { value, onChange, format, mixDays, ...restProps } = props;
   const [time, setTime] = useState<RangeValue<Moment>>(toMomentValue(value, format));
+
+  const update = (dateStrings: string[]) => {
+    onChange(dateStrings);
+    setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
+  }
 
   const resSet = () => {
     setTime([moment(), moment()]);
@@ -65,8 +71,7 @@ const RangeDatePickerFormat = (props: RangePickerFormatProps) => {
   }, [value?.[0], value?.[1]]);
 
   const onChangeFormat = (_, dateStrings: string[]) => {
-    onChange(dateStrings);
-    setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
+    update(dateStrings);
   };
 
   return (

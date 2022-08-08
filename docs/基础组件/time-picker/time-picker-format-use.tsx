@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DatePickerFormat } from 'aem-ui';
+import { TimePickerFormat } from 'aem-ui';
 import { Typography } from 'antd';
 const { Title } = Typography;
 
@@ -13,11 +13,11 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <DatePickerFormat onChange={onChange} value={time} />
+      <TimePickerFormat onChange={onChange} value={time} />
 
       <Title level={5} style={{margin: '20px 0px 5px 0px'}}>不使用value</Title>
 
-      <DatePickerFormat onChange={(v) => window.console.log('DatePickerFormat ---------------->', v)} />
+      <TimePickerFormat onChange={(v) => window.console.log('TimePickerFormat ---------------->', v)} />
     </>
   );
 };

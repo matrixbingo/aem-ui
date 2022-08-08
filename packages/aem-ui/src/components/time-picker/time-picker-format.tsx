@@ -3,13 +3,13 @@ import { useMount } from 'ahooks';
 import { DatePicker } from 'antd';
 import { DateUtil } from 'common-toolkits';
 import moment, { Moment } from 'moment';
-import type { DatePickerProps } from 'antd';
+import type { TimePickerProps } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { isEmpty } from 'lodash';
 
-const defaultFormat = 'YYYY-MM-DD';
+const defaultFormat = 'HH:mm:ss';
 
-export interface DatePickerFormatProps extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
+export interface TimePickerFormatProps extends Omit<TimePickerProps, 'value' | 'onChange' | 'format'> {
   format?: string;
   value?: string;
   onChange: (dateString: string) => void;
@@ -26,7 +26,7 @@ const toMomentValue = (inputValue: string, format: string) => {
   return moment(moment(), format);
 };
 
-const DatePickerFormat = (props: DatePickerFormatProps) => {
+const TimePickerFormat = (props: TimePickerFormatProps) => {
   const { value, onChange, format, ...restProps } = props;
   const [time, setTime] = useState<Moment>(toMomentValue(value, format));
 
@@ -56,6 +56,7 @@ const DatePickerFormat = (props: DatePickerFormatProps) => {
     }
   }, [time, value]);
 
+
   const onChangeFormat = (_, dateString) => {
     update(dateString);
   };
@@ -65,9 +66,9 @@ const DatePickerFormat = (props: DatePickerFormatProps) => {
   );
 };
 
-DatePickerFormat.defaultProps = {
+TimePickerFormat.defaultProps = {
   onChange: (v) => {},
   format: defaultFormat,
 };
 
-export default DatePickerFormat;
+export default TimePickerFormat;
