@@ -40,6 +40,7 @@
     "antd": "^4.22.3",
     "babel-plugin-import": "^1.13.3",
     "common-toolkits": "^2.0.2",
+    "common-toolkits-hooks": "^0.0.2",
     "dequal": "^2.0.3",
     "dumi": "^1.1.47",
     "father-build": "^1.17.2",
