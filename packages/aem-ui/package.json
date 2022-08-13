@@ -1,7 +1,7 @@
 {
   "name": "aem-ui",
-  "version": "2.0.02",
-  "description": "组件库",
+  "version": "2.0.04",
+  "description": "基础  组件",
   "author": "Matrix",
   "homepage": "https://github.com/matrixbingo/aem-ui#readme",
   "license": "MIT",
@@ -36,15 +36,20 @@
   "devDependencies": {
     "@types/classnames": "^2.2.11",
     "@types/react": "^16.14.2",
-    "@types/react-dom": "^16.9.9"
+    "@types/react-dom": "^16.9.9",
+    "father-build": "^1.22.3"
   },
   "peerDependencies": {
     "ahooks": "^3.7.0",
     "antd": "^4.22.3",
     "common-toolkits": "^2.0.2",
+    "common-toolkits-hooks": "^0.0.2",
     "dequal": "^2.0.3",
     "lodash": "^4.17.21",
     "react-copy-to-clipboard": "^5.1.0",
     "use-deep-compare-effect": "^1.8.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.18.9"
   }
 }

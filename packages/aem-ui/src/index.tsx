@@ -16,6 +16,9 @@ import type { DatePickerFormatProps } from './components/date-picker/date-picker
 export { default as RangeDatePickerFormat } from './components/date-picker/range-date-picker-format';
 import type { RangeDatePickerFormatProps } from './components/date-picker/range-date-picker-format';
 
+export { default as RangeDayRadioFormat } from './components/date-picker/range-day-radio-format';
+import type { RangeDayRadioFormatProps } from './components/date-picker/range-day-radio-format';
+
 // descriptions
 export { default as DescriptionsTable } from './components/descriptions/descriptions-table';
 import type { DescriptionsTableProps } from './components/descriptions/descriptions-table';
@@ -85,6 +88,10 @@ import type { InputStringSingleArrayFormProps } from './components/single-array/
 export { default as TimeSingleArrayForm } from './components/single-array/time-single-array-form';
 import type { TimeSingleArrayFormProps } from './components/single-array/time-single-array-form';
 
+// steps
+export { default as CommonSteps } from './components/steps/common-steps';
+import type { CommonStepsProps } from './components/steps/common-steps';
+
 // tabs
 export { default as BaseTabs, tabsFormat } from './components/tabs/base-tabs';
 import type { BaseTabsProps } from './components/tabs/base-tabs';
@@ -120,7 +127,7 @@ import type { ViewProps } from './components/view/view';
 export { default as ViewContainer } from './components/view/view-container';
 import type { ViewContainerProps } from './components/view/view-container';
 
-export type {TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
+export type {CommonStepsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
 
 
 import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsProps, createStart, CreateStartProps } from './util/create-ant';
