@@ -36,8 +36,7 @@
   "devDependencies": {
     "@types/classnames": "^2.2.11",
     "@types/react": "^16.14.2",
-    "@types/react-dom": "^16.9.9",
-    "father-build": "^1.22.3"
+    "@types/react-dom": "^16.9.9"
   },
   "peerDependencies": {
     "ahooks": "^3.7.0",
