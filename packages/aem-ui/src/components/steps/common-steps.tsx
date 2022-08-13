@@ -59,4 +59,8 @@ const CommonSteps: FC<PropsWithChildren<CommonStepsProps>> = ({ step, steps, onS
   );
 };
 
+CommonSteps.defaultProps = {
+  colProps: { span: 24, offset: 0 }
+}
+
 export default CommonSteps;

@@ -4,7 +4,8 @@ import RangeDatePickerFormat from './range-date-picker-format';
 import { Radio, Space } from 'antd';
 import { DateUtil, FormatDate, Period } from 'common-toolkits';
 import { useResetState } from 'common-toolkits-hooks';
-import { isBoolean, isNumber } from 'lodash';
+import { isBoolean } from 'lodash';
+import { assertError } from '../../util/util';
 
 export interface RangeDayRadioFormatProps {
   onChange?: (value: string[]) => void;
@@ -18,15 +19,6 @@ const initDate = (defaultDay: number) => DateUtil.range(Period.day, { format: Fo
 
 const createRadioButton = (range: number[]) => {
   return range.map((i) => <Radio.Button key={i} value={i}>近{i}天</Radio.Button>);
-};
-
-const assertError = (props: any, keys: string[]) => {
-  keys.forEach((key) => {
-    const value = props[key];
-    if (!isNumber(value) && !isBoolean(value) && !value) {
-      throw new Error(`${key} is not existed!`);
-    }
-  });
 };
 
 function assertstion(props: RangeDayRadioFormatProps): asserts props is RangeDayRadioFormatProps & Required<Omit<RangeDayRadioFormatProps, 'onChange'>> {

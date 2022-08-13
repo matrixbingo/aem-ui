@@ -134,3 +134,6 @@ import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsPr
 
 export { createBaseButtons, createBaseTabs, createStart };
 export type { CreateButtonsProps, CreateBaseTabsProps, CreateStartProps };
+
+import { assertError } from './util/util';
+export { assertError };
