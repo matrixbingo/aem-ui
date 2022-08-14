@@ -4,7 +4,7 @@
 
   - "ahooks": "^3.7.0",
   - "antd": "^4.22.3",
-  - "common-toolkits": "^2.0.2",
+  - "common-toolkits": "^2.x",
   - "dequal": "^2.0.3",
   - "lodash": "^4.17.21",
   - "react-copy-to-clipboard": "^5.1.0",

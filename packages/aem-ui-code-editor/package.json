@@ -41,7 +41,7 @@
   "peerDependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.22.3",
-    "common-toolkits": "^2.0.1",
+    "common-toolkits": "^2.0.6",
     "immutable": "^4.1.0",
     "react-ace": "^10.1.0",
     "react-copy-to-clipboard": "^5.1.0"

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Input, InputNumber, InputNumberProps } from 'antd';
-import { DataUtil, TransformUtil } from 'common-toolkits';
+import { TypeUtil, TransformUtil } from 'common-toolkits';
 import { isArray, isNumber } from 'lodash';
 import { useMount } from 'ahooks';
 import './input-range.css';
@@ -18,8 +18,8 @@ export interface InputRangeProps extends Omit<InputNumberProps, 'value' | 'onCha
 
 const toNumberValue = (inputValue: string[]|number[], defaultValue: number[]): number[] => {
   if (isArray(inputValue) && inputValue.length === 2) {
-    const initValue0 = DataUtil.unknown.parseValue(inputValue[0]);
-    const initValue1 = DataUtil.unknown.parseValue(inputValue[1]);
+    const initValue0 = TypeUtil.parseValue(inputValue[0]);
+    const initValue1 = TypeUtil.parseValue(inputValue[1]);
     return isNumber(initValue0) ? [initValue0, initValue1] as number[] : defaultValue;
   }
   return defaultValue;

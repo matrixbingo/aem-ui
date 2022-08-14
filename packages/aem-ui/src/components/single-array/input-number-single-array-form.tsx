@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { InputNumber, InputNumberProps } from 'antd';
-import { DataUtil } from 'common-toolkits';
+import { TypeUtil } from 'common-toolkits';
 import { isNumber } from 'lodash';
 import { useMount, useUpdateEffect } from 'ahooks';
 
@@ -14,7 +14,7 @@ export interface InputNumberSingleArrayFormProps extends Omit<InputNumberProps, 
 }
 
 const toNumberValue = (inputValue: string | number, defaultValue: number): number => {
-  const initValue = DataUtil.unknown.parseValue(inputValue || '');
+  const initValue = TypeUtil.parseValue(inputValue || '');
   return !!initValue && isNumber(initValue) ? initValue as number: Number(defaultValue);
 };
 
