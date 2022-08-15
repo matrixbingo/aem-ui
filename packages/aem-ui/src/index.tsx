@@ -68,6 +68,10 @@ import type { MaskCloseModalProps } from './components/modal/mask-close-modal';
 export { default as ModalEditor } from './components/modal/modal-editor';
 import type { ModalEditorProps } from './components/modal/modal-editor';
 
+// radio
+export { default as RadioButtons } from './components/radio/radio-buttons';
+import type { RadioButtonsProps } from './components/radio/radio-buttons';
+
 // select
 export { default as SelectSingle } from './components/select/select-single';
 import type { SelectSingleProps } from './components/select/select-single';

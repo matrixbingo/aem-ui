@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@stdlib/assert-is-json@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@stdlib/assert-is-json/-/assert-is-json-0.0.7.tgz#d221b4f48e380b2def8c1e2353e9d6c2727c8950"
-  integrity sha512-tCTQOQ+qyQNa+qJLET+OuggNCYvyBaZgCpnRn2sssivNUJXC/7xY/WkvrtZ0DMh9IxtvwgVXP+WEBW4DkDl/5Q==
-
 "@types/classnames@^2.2.11":
   version "2.3.1"
   resolved "https://registry.npmjs.org/@types/classnames/-/classnames-2.3.1.tgz#3c2467aa0f1a93f1f021e3b9bcf938bd5dfdc0dd"
@@ -45,26 +40,7 @@ classnames@*:
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
-common-toolkits@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.npmjs.org/common-toolkits/-/common-toolkits-2.0.6.tgz#04d03225cf0131c4826a2057d08db618f07b1e84"
-  integrity sha512-kx35x1mHK9nP94B8sYAXpmZ0PHQ1LISbmg0pA2Bb3CnKrovFly7qTV4SbYKhVn5DGhR2ZFmDxP4kOy09z/ThTg==
-  dependencies:
-    "@stdlib/assert-is-json" "^0.0.7"
-    isjsonobj "^1.0.0"
-    numeral "^2.0.6"
-
 csstype@^3.0.2:
   version "3.1.0"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
-
-isjsonobj@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/isjsonobj/-/isjsonobj-1.0.0.tgz#1d7be93cbf66ab3fe01765cead44eaf7b50a2f13"
-  integrity sha512-R4GGhKJcSXpzLTQNvVll1XO2sNlmABK+JuKJDJL6xYCOQZbQXbv78JuQZgMgR2Yz7ZW/4lgcrlH59eAxNpI/lQ==
-
-numeral@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.npmjs.org/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
-  integrity sha512-qaKRmtYPZ5qdw4jWJD6bxEf1FJEqllJrwxCLIm0sQU/A7v2/czigzOb+C2uSiFsa9lBUzeH7M1oK+Q+OLxL3kA==

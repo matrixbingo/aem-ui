@@ -15,9 +15,10 @@ export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'valu
   value?: string[];
   onChange: (dateString: string[]) => void;
   mixDays?: number;  // 最大天数，0为任意
+  updateMount?: boolean; // 首次刷新
 }
 
-const toMomentValue = (inputValue: string[], format: string): RangeValue<Moment> => {
+const toMomentValue = (inputValue: string[] | undefined, format: string): RangeValue<Moment> => {
   if (isArray(inputValue) && inputValue.length === 2 && DateUtil.dateIsValid(inputValue[0], format) && DateUtil.dateIsValid(inputValue[1], format)) {
     return [moment(inputValue[0], format), moment(inputValue[1], format)];
   }
@@ -37,22 +38,24 @@ const getTime = (time: RangeValue<Moment>, index, format) => {
 
 const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   const { RangePicker } = DatePicker;
-  const { value, onChange, format, mixDays, ...restProps } = props;
+  const { value, onChange, format, mixDays, updateMount, ...restProps } = props;
   const [time, setTime] = useState<RangeValue<Moment>>(toMomentValue(value, format));
 
   const update = (dateStrings: string[]) => {
     onChange(dateStrings);
     setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
-  }
+  };
 
-  const resSet = () => {
-    setTime([moment(), moment()]);
-    onChange([moment().format(format), moment().format(format)]);
+  const resSet = (onChangeRun = true) => {
+    if(onChangeRun){
+      setTime([moment(), moment()]);
+      onChange([moment().format(format), moment().format(format)]);
+    }
   };
 
   useMount(() => {
     if (checkValue(value, format)) {
-      resSet();
+      resSet(updateMount);
     }
   });
 
@@ -65,7 +68,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
       if (checkValue(value, format)) {
         resSet();
       } else {
-        setTime([moment(value[0], format), moment(value[1], format)]);
+        setTime([moment(value?.[0], format), moment(value?.[1], format)]);
       }
     }
   }, [value?.[0], value?.[1]]);
@@ -83,6 +86,7 @@ RangeDatePickerFormat.defaultProps = {
   format: defaultFormat,
   onChange: (v) => window.console.error('DatePickerFormat.onChange : ', v),
   mixDays: 0,
+  updateMount: true,
 };
 
 export default RangeDatePickerFormat;
