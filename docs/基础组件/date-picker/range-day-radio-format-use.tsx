@@ -6,8 +6,8 @@ const { Title } = Typography;
 const Demo: React.FC = () => {
   const [time, setTIme] = useState<string>('');
 
-  const onChange = (v) => {
-    window.console.log('onChange ---------------->', v);
+  const onChange = (v, c) => {
+    window.console.log('onChange ---------------->', v, c);
     setTIme(v);
   };
 

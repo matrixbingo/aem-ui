@@ -73,7 +73,7 @@ const RangeTimePickerFormat = (props: RangeTimePickerFormatProps) => {
   };
 
   return (
-    <TimePicker.RangePicker value={time} onChange={onChangeFormat} {...restProps} />
+    <TimePicker.RangePicker value={time as any} onChange={onChangeFormat} {...restProps} />
   );
 };
 

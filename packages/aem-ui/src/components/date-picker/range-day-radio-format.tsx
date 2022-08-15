@@ -8,7 +8,7 @@ import { isBoolean } from 'lodash';
 import { assertError } from '../../util/util';
 
 export interface RangeDayRadioFormatProps {
-  onChange?: (value: string[]) => void;
+  onChange?: (value: string[], checked: any) => void;
   range?: number[];
   radioBefore?: boolean;
   mixDays?: number;
@@ -35,7 +35,7 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
   useEffect(() => {
     if (isBoolean(show)) {
       if (show) {
-        onChange?.(value);
+        onChange?.(value, period);
       } else {
         resetValue();
         resetState();
@@ -48,13 +48,13 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
     setPeriod(checkedValue);
     const rangeValue = initDate(checkedValue);
     setValue(rangeValue);
-    onChange?.(rangeValue);
+    onChange?.(rangeValue, checkedValue);
   };
 
   const onChangeRange = (rangeDate) => {
     setValue(rangeDate);
     setPeriod(undefined);
-    onChange?.(rangeDate);
+    onChange?.(rangeDate, period);
   };
 
   if (radioBefore) {
