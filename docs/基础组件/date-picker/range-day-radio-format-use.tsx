@@ -18,6 +18,10 @@ const Demo: React.FC = () => {
       <Title level={5} style={{margin: '20px 0px 5px 0px'}}>按钮置后</Title>
 
       <RangeDayRadioFormat onChange={onChange} radioBefore={false} />
+
+      <Title level={5} style={{margin: '20px 0px 5px 0px'}}>默认不选择</Title>
+
+      <RangeDayRadioFormat onChange={onChange} radioBefore={false} defaultChecked={false} />
     </>
   );
 };
