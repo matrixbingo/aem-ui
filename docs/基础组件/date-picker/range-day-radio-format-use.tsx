@@ -21,7 +21,7 @@ const Demo: React.FC = () => {
 
       <Title level={5} style={{margin: '20px 0px 5px 0px'}}>默认不选择</Title>
 
-      <RangeDayRadioFormat onChange={onChange} radioBefore={false} defaultChecked={false} />
+      <RangeDayRadioFormat radioBefore={false} defaultChecked={false}  onChange={(v, c) => window.console.log('RangeDayRadioFormat 默认不选 ------>', v, c)} />
     </>
   );
 };

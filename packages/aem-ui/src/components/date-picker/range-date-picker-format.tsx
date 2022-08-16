@@ -13,19 +13,19 @@ const defaultFormat = 'YYYY-MM-DD';
 export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
   format: string;
   value?: string[];
-  onChange: (dateString: string[]) => void;
+  onChange: (dateString: string[] | undefined) => void;
   mixDays?: number;       // 最大天数，0为任意
-  updateMount?: boolean;  // 首次刷新
+  defaultChecked?: boolean;  //默认选 首次刷新
 }
 
-const toMomentValue = (inputValue: string[] | undefined, format: string, updateMount = true): RangeValue<Moment> | RangeValue<undefined> => {
-  if (updateMount) {
+const toMomentValue = (inputValue: string[] | undefined, format: string, defaultChecked = true): RangeValue<Moment> | undefined => {
+  if (defaultChecked) {
     if (isArray(inputValue) && inputValue.length === 2 && DateUtil.dateIsValid(inputValue[0], format) && DateUtil.dateIsValid(inputValue[1], format)) {
       return [moment(inputValue[0], format), moment(inputValue[1], format)];
     }
     return [moment(), moment()];
   }
-  return [undefined, undefined];
+  return undefined;
 };
 
 const checkValue = (v, format) => {
@@ -41,12 +41,16 @@ const getTime = (time: RangeValue<Moment>, index, format) => {
 
 const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   const { RangePicker } = DatePicker;
-  const { value, onChange, format, mixDays, updateMount, ...restProps } = props;
-  const [time, setTime] = useState<RangeValue<Moment> | RangeValue<undefined>>(toMomentValue(value, format, updateMount));
+  const { value, onChange, format, mixDays, defaultChecked, allowClear = false, ...restProps } = props;
+  const [time, setTime] = useState<RangeValue<Moment> | RangeValue<undefined>>(toMomentValue(value, format, defaultChecked));
 
   const update = (dateStrings: string[]) => {
+    if(!!dateStrings){
+      setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
+    } else {
+      setTime(undefined);
+    }
     onChange(dateStrings);
-    setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
   };
 
   const resSet = (onChangeRun = true) => {
@@ -58,7 +62,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
 
   useMount(() => {
     if (checkValue(value, format)) {
-      resSet(updateMount);
+      resSet(defaultChecked);
     }
   });
 
@@ -77,11 +81,15 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   }, [value?.[0], value?.[1]]);
 
   const onChangeFormat = (_, dateStrings: string[]) => {
-    update(dateStrings);
+    if(!!_){
+      update(dateStrings);
+    } else {
+      update(undefined);
+    }
   };
 
   return (
-    <RangePicker value={time} onChange={onChangeFormat} {...restProps as any} />
+    <RangePicker value={time} onChange={onChangeFormat} allowClear={defaultChecked ? allowClear : true} {...restProps as any} />
   );
 };
 
@@ -89,7 +97,7 @@ RangeDatePickerFormat.defaultProps = {
   format: defaultFormat,
   onChange: (v) => window.console.error('DatePickerFormat.onChange : ', v),
   mixDays: 0,
-  updateMount: true,
+  defaultChecked: true,
 };
 
 export default RangeDatePickerFormat;
