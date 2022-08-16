@@ -14,15 +14,18 @@ export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'valu
   format: string;
   value?: string[];
   onChange: (dateString: string[]) => void;
-  mixDays?: number;  // 最大天数，0为任意
-  updateMount?: boolean; // 首次刷新
+  mixDays?: number;       // 最大天数，0为任意
+  updateMount?: boolean;  // 首次刷新
 }
 
-const toMomentValue = (inputValue: string[] | undefined, format: string): RangeValue<Moment> => {
-  if (isArray(inputValue) && inputValue.length === 2 && DateUtil.dateIsValid(inputValue[0], format) && DateUtil.dateIsValid(inputValue[1], format)) {
-    return [moment(inputValue[0], format), moment(inputValue[1], format)];
+const toMomentValue = (inputValue: string[] | undefined, format: string, updateMount = true): RangeValue<Moment> | RangeValue<undefined> => {
+  if (updateMount) {
+    if (isArray(inputValue) && inputValue.length === 2 && DateUtil.dateIsValid(inputValue[0], format) && DateUtil.dateIsValid(inputValue[1], format)) {
+      return [moment(inputValue[0], format), moment(inputValue[1], format)];
+    }
+    return [moment(), moment()];
   }
-  return [moment(), moment()];
+  return [undefined, undefined];
 };
 
 const checkValue = (v, format) => {
@@ -39,7 +42,7 @@ const getTime = (time: RangeValue<Moment>, index, format) => {
 const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   const { RangePicker } = DatePicker;
   const { value, onChange, format, mixDays, updateMount, ...restProps } = props;
-  const [time, setTime] = useState<RangeValue<Moment>>(toMomentValue(value, format));
+  const [time, setTime] = useState<RangeValue<Moment> | RangeValue<undefined>>(toMomentValue(value, format, updateMount));
 
   const update = (dateStrings: string[]) => {
     onChange(dateStrings);
@@ -47,7 +50,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   };
 
   const resSet = (onChangeRun = true) => {
-    if(onChangeRun){
+    if (onChangeRun) {
       setTime([moment(), moment()]);
       onChange([moment().format(format), moment().format(format)]);
     }
