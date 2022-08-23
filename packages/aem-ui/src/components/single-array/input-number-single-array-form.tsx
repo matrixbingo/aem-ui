@@ -45,7 +45,7 @@ const InputNumberSingleArrayForm = (props: InputNumberSingleArrayFormProps) => {
   };
 
   const resSet = () => {
-    update(defaultValue?.[0]);
+    defaultValue && update(defaultValue?.[0]);
   };
 
   useMount(() => {

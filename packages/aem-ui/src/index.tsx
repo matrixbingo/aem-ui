@@ -79,6 +79,9 @@ import type { SelectSingleProps } from './components/select/select-single';
 export { default as SelectMultiple } from './components/select/select-multiple';
 import type { SelectMultipleProps } from './components/select/select-multiple';
 
+export { default as SelectTags } from './components/select/select-tags';
+import type { SelectTagsProps } from './components/select/select-tags';
+
 // single-array
 export { default as DateSingleArrayForm } from './components/single-array/date-single-array-form';
 import type { DateSingleArrayFormProps } from './components/single-array/date-single-array-form';
@@ -131,7 +134,7 @@ import type { ViewProps } from './components/view/view';
 export { default as ViewContainer } from './components/view/view-container';
 import type { ViewContainerProps } from './components/view/view-container';
 
-export type {CommonStepsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
+export type {SelectTagsProps, CommonStepsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
 
 
 import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsProps, createStart, CreateStartProps } from './util/create-ant';
