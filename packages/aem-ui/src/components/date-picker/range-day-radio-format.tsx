@@ -13,6 +13,7 @@ export interface RangeDayRadioFormatProps {
   radioBefore?: boolean;
   mixDays?: number;
   show?: boolean;
+  allowClear?: boolean;
   defaultChecked?: boolean;
 }
 
@@ -28,11 +29,10 @@ function assertstion(props: RangeDayRadioFormatProps): asserts props is RangeDay
 
 const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (props) => {
   assertstion(props);
-  const { onChange, show, range, radioBefore, mixDays, defaultChecked } = props;
+  const { onChange, show, range, radioBefore, mixDays, defaultChecked, allowClear } = props;
   const defaultValue = defaultChecked ? range[0] : undefined;
-  const [value, setValue, resetValue] = useResetState<string[]>(initDate(defaultValue));
+  const [value, setValue, resetValue] = useResetState<string[] | undefined>(defaultChecked ? initDate(defaultValue) : undefined);
   const [period, setPeriod, resetState] = useResetState<number | undefined>(defaultValue);
-
   useEffect(() => {
     if (isBoolean(show)) {
       if (show) {
@@ -64,13 +64,13 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
         <Radio.Group defaultValue={defaultValue} onChange={onChangeButton} value={period}>
           {createRadioButton(range)}
         </Radio.Group>
-        <RangeDatePickerFormat allowClear={false} value={value} onChange={onChangeRange} mixDays={mixDays} />
+        <RangeDatePickerFormat allowClear={defaultChecked ? allowClear : true} value={value} onChange={onChangeRange} mixDays={mixDays} defaultChecked={defaultChecked} />
       </Space>
     );
   }
   return (
     <Space>
-      <RangeDatePickerFormat allowClear={false} value={value} onChange={onChangeRange} mixDays={mixDays} />
+      <RangeDatePickerFormat allowClear={defaultChecked ? allowClear : true} value={value} onChange={onChangeRange} mixDays={mixDays} defaultChecked={defaultChecked} />
       <Radio.Group defaultValue={defaultValue} onChange={onChangeButton} value={period}>
         {createRadioButton(range)}
       </Radio.Group>
@@ -83,6 +83,7 @@ RangeDayRadioFormat.defaultProps = {
   radioBefore: true,
   mixDays: 15,
   defaultChecked: true,
+  allowClear: false,
 };
 
 export default RangeDayRadioFormat;
