@@ -14,8 +14,8 @@ export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'valu
   format: string;
   value?: string[];
   onChange: (dateString: string[] | undefined) => void;
-  mixDays?: number;       // 最大天数，0为任意
-  defaultChecked?: boolean;  //默认选 首次刷新
+  mixDays?: number;           // 最大天数，0为任意
+  defaultChecked?: boolean;   // 默认选 首次刷新
 }
 
 const toMomentValue = (inputValue: string[] | undefined, format: string, defaultChecked = true): RangeValue<Moment> | undefined => {

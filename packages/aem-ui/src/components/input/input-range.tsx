@@ -29,11 +29,11 @@ const toArrByDataType = (type: dataType, arr: number[] | string[]) => {
   if (type === 'string') {
     return TransformUtil.numberArrToStringArr(arr as number[]);
   }
-  return TransformUtil.stringArrToMumberArr(arr as string[]);
+  return TransformUtil.stringArrToNumberArr(arr as string[]);
 };
 
 const checkValue = (v) => {
-  return !v || !Array.isArray(v) || v.length !== 2;
+  return !v || !Array.isArray(v) || v.length !== 2 || !(Array.isArray(v) && v.length === 2 && TypeUtil.isInt(v?.[0]) && TypeUtil.isInt(v?.[1]));
 };
 
 /**
@@ -64,7 +64,7 @@ const InputRangeForm = (props: InputRangeProps) => {
         if (checkValue(inputValue)) {
           resSet();
         } else {
-          setValue(TransformUtil.stringArrToMumberArr(inputValue as string[]));
+          setValue(TransformUtil.stringArrToNumberArr(inputValue as string[]));
           onChange(toArrByDataType(dataType, inputValue));
         }
       }

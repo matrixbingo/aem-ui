@@ -23,7 +23,7 @@ const toValueByDataType = (type: dataType, v: number) => {
 };
 
 const checkValue = (v) => {
-  return !v || !Array.isArray(v) || v.length !== 1;
+  return !v || !Array.isArray(v) || v.length !== 1 || !(Array.isArray(v) && v.length === 1 && TypeUtil.isInt(v?.[0]));
 };
 
 /**
