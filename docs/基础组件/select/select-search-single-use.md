@@ -14,13 +14,20 @@
 const options = [
   { value: 1, label: 'v1 北京' },
   { value: 2, label: 'v2 上海' },
-  { value: 3, label: 'v3 广州' },
-  { value: 4, label: 'v4 深圳' },
+  { value: '3', label: 'v3 广州' },
+  { value: '4', label: 'v4 深圳' },
 ];
 ```
 
 ```jsx | pure
- <SelectSingle<number> options={options} onChange={onChange} />
+<SelectSearchSingle options={options} onChange={onChange} />
+```
+
+```jsx | pure
+const filterOption = (input, option) => {
+  const { label } = option;
+  return label.toLowerCase().indexOf(input.toLowerCase()) >= 0
+}
 ```
 
 ### Params

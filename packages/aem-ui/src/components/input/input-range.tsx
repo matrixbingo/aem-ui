@@ -33,7 +33,7 @@ const toArrByDataType = (type: dataType, arr: number[] | string[]) => {
 };
 
 const checkValue = (v) => {
-  return !v || !Array.isArray(v) || v.length !== 2 || !(Array.isArray(v) && v.length === 2 && TypeUtil.isInt(v?.[0]) && TypeUtil.isInt(v?.[1]));
+  return !v || !Array.isArray(v) || v.length !== 2 || !(Array.isArray(v) && v.length === 2 && TypeUtil.isFloat(v?.[0]) && TypeUtil.isFloat(v?.[1]));
 };
 
 /**
@@ -72,24 +72,23 @@ const InputRangeForm = (props: InputRangeProps) => {
   );
 
   const onChange0 = (v) => {
-    if (v > value[1]) {
-      update([value[1], v]);
-    } else {
-      update([v, value[1]]);
-    }
+    update([v, value[1]]);
   };
 
   const onChange1 = (v) => {
-    if (value[0] > v) {
-      update([v, value[0]]);
-    } else {
-      update([value[0], v]);
-    }
+    update([value[0], v]);
   };
+
+  const onBlur = () => {
+    const [a, b] = value;
+    if (a > b) {
+      update([b, a]);
+    }
+  }
 
   return (
     <Input.Group compact>
-      <InputNumber value={value[0]} onChange={onChange0} {...rest} />
+      <InputNumber value={value[0]} onChange={onChange0} onBlur={onBlur} {...rest} />
       <Input
         className="site-input-split"
         style={{
@@ -101,7 +100,7 @@ const InputRangeForm = (props: InputRangeProps) => {
         placeholder="~"
         disabled
       />
-      <InputNumber value={value[1]} onChange={onChange1} {...rest} />
+      <InputNumber value={value[1]} onChange={onChange1} onBlur={onBlur} {...rest} />
     </Input.Group>
   );
 };

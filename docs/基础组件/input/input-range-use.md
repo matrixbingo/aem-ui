@@ -1,4 +1,4 @@
-# input-range-use
+# input-range
 
 `区间输入`
 

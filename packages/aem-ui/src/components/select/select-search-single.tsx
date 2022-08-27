@@ -3,27 +3,35 @@ import React from 'react';
 import type { SelectProps } from 'antd';
 import { Select } from 'antd';
 
-export interface SelectSearchSingleProps<T extends string | number> extends Omit<SelectProps, 'value' | 'onChange'> {
-  value?: T;
-  onChange?: (value: T) => void;
+type SortType = 'value' | 'label' | 'none';
+
+interface OptionType {
+  value: number | string;
+  label: any;
 }
 
-const filterOption = (input, option) => {
-  window.console.log('-filterOption--------------->', input, option);
-  return  option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+export interface SelectSearchSingleProps extends Omit<SelectProps, 'value' | 'onChange'> {
+  value?: string | number;
+  onChange?: (value: string | number) => void;
+  sort?: SortType;
+}
+
+const filterSort = (optionA: OptionType, optionB: OptionType, sort: SortType) => {
+  window.console.log('---------------->', optionA?.[sort], optionA, optionB, sort);
+  return String(optionA?.[sort])?.toLowerCase().localeCompare(String(optionB?.[sort]).toLowerCase());
 }
 
 /**
  * 单选，排序搜索
  */
-const SelectSearchSingle = <T extends number|string>(props: SelectSearchSingleProps<T>) => {
-  const {filterOption, ...rest} = props;
+const SelectSearchSingle = (props: SelectSearchSingleProps) => {
+  const {filterOption, filterSort, sort, ...rest} = props;
+  const filterSortFn = sort === 'none' ? undefined : (optionA, optionB) => filterSort(optionA, optionB, sort);
   return (
     <Select
       showSearch
       optionFilterProp="label"
-      filterOption={filterOption}
-      // filterSort={(optionA, optionB) => (optionA!.children as unknown as string)?.toLowerCase().localeCompare((optionB!.children as unknown as string).toLowerCase())}
+      filterSort={filterSortFn}
       {...rest}
     />
   );
@@ -32,9 +40,8 @@ const SelectSearchSingle = <T extends number|string>(props: SelectSearchSinglePr
 SelectSearchSingle.defaultProps = {
   style: { width: '100%' },
   placeholder: '请选择',
-  // dataType: 'string',
-  filterOption,
-  options: [],
+  sort: 'label',
+  filterSort
 };
 
 export default SelectSearchSingle;
