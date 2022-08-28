@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React from 'react';
+import React, {  } from 'react';
 import type { SelectProps } from 'antd';
 import { Select } from 'antd';
+import { isArray } from 'lodash';
 
 type SortType = 'value' | 'label' | 'none';
 
@@ -10,14 +11,13 @@ interface OptionType {
   label: any;
 }
 
-export interface SelectSearchSingleProps extends Omit<SelectProps, 'value' | 'onChange'> {
+export interface SelectSearchSingleProps extends Omit<SelectProps, 'value' | 'onChange' | 'sort'> {
   value?: string | number;
   onChange?: (value: string | number) => void;
   sort?: SortType;
 }
 
 const filterSort = (optionA: OptionType, optionB: OptionType, sort: SortType) => {
-  window.console.log('---------------->', optionA?.[sort], optionA, optionB, sort);
   return String(optionA?.[sort])?.toLowerCase().localeCompare(String(optionB?.[sort]).toLowerCase());
 }
 
@@ -25,11 +25,13 @@ const filterSort = (optionA: OptionType, optionB: OptionType, sort: SortType) =>
  * 单选，排序搜索
  */
 const SelectSearchSingle = (props: SelectSearchSingleProps) => {
-  const {filterOption, filterSort, sort, ...rest} = props;
+  const {filterOption, options, sort, ...rest} = props;
   const filterSortFn = sort === 'none' ? undefined : (optionA, optionB) => filterSort(optionA, optionB, sort);
+
   return (
     <Select
       showSearch
+      options={options}
       optionFilterProp="label"
       filterSort={filterSortFn}
       {...rest}
@@ -40,8 +42,7 @@ const SelectSearchSingle = (props: SelectSearchSingleProps) => {
 SelectSearchSingle.defaultProps = {
   style: { width: '100%' },
   placeholder: '请选择',
-  sort: 'label',
-  filterSort
+  sort: 'none',
 };
 
 export default SelectSearchSingle;

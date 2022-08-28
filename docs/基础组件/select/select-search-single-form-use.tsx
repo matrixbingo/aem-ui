@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectSearchSingle } from 'aem-ui';
+import { SelectSearchSingleForm } from 'aem-ui';
 import { isNumber } from 'lodash';
 import { useToggle } from 'ahooks';
 import { Button } from 'antd';
@@ -46,12 +46,16 @@ const Demo: React.FC = () => {
       <Button onClick={onClick}>toggle options</Button>
       <br />
       <br />
+      <span>默认不排序</span>
+      <SelectSearchSingleForm options={options} onChange={onChange1} defaultFirst={false} />
+      <br />
+      <br />
       <span>value 排序</span>
-      <SelectSearchSingle options={options} onChange={onChange2} sort='value' />
+      <SelectSearchSingleForm options={options} onChange={onChange2} sort='value' />
       <br />
       <br />
       <span>label 排序</span>
-      <SelectSearchSingle options={options} onChange={onChange3} sort='label' />
+      <SelectSearchSingleForm options={options} onChange={onChange3} sort='label' />
     </>
   );
 };
