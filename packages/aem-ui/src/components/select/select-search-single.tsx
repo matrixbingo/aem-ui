@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, {  } from 'react';
+import React from 'react';
 import type { SelectProps } from 'antd';
 import { Select } from 'antd';
-import { isArray } from 'lodash';
 
 type SortType = 'value' | 'label' | 'none';
 
