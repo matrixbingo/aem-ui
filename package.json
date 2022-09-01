@@ -30,6 +30,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
+    "aem-ui": "^2.1.3",
     "react": "^16.8.5 || ^17.0.2"
   },
   "devDependencies": {

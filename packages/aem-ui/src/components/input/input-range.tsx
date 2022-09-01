@@ -6,17 +6,18 @@ import { isArray, isNumber } from 'lodash';
 import { useMount } from 'ahooks';
 import './input-range.css';
 import { dequal as deepEqual } from 'dequal';
+import { assertError } from '../../util/util';
 
 export type dataType = 'string' | 'number';
 
-export interface InputRangeProps extends Omit<InputNumberProps, 'value' | 'onChange' | 'dataType' | 'defaultValue'>{
-    value: number[] | string[];
-    onChange: (value: number[] | string[]) => void;
-    dataType: dataType;
-    defaultValue: number[];
+export interface InputRangeProps extends Omit<InputNumberProps, 'value' | 'onChange' | 'dataType' | 'defaultValue' | 'onBlur'>{
+    value?: number[] | string[];
+    onChange?: (value: number[] | string[]) => void;
+    dataType?: dataType;
+    defaultValue?: number[];
 }
 
-const toNumberValue = (inputValue: string[]|number[], defaultValue: number[]): number[] => {
+const toNumberValue = (inputValue: string[] | number[] | undefined, defaultValue: number[]): number[] => {
   if (isArray(inputValue) && inputValue.length === 2) {
     const initValue0 = TypeUtil.parseValue(inputValue[0]);
     const initValue1 = TypeUtil.parseValue(inputValue[1]);
@@ -36,20 +37,25 @@ const checkValue = (v) => {
   return !v || !Array.isArray(v) || v.length !== 2 || !(Array.isArray(v) && v.length === 2 && TypeUtil.isFloat(v?.[0]) && TypeUtil.isFloat(v?.[1]));
 };
 
+function assertstion(props: InputRangeProps): asserts props is InputRangeProps & Required<Omit<InputRangeProps, 'onChange'>> {
+  assertError(props, ['defaultValue', 'dataType']);
+}
+
 /**
  * 入参是数字string, 或数字，例如'2'或2
  */
 const InputRangeForm = (props: InputRangeProps) => {
+  assertstion(props);
   const { value: inputValue, onChange, dataType, defaultValue, ...rest } = props;
   const [value, setValue] = useState<number[]>(toNumberValue(inputValue, defaultValue));
   const resSet = () => {
     setValue(defaultValue);
-    onChange(toArrByDataType(dataType, defaultValue));
+    onChange && onChange(toArrByDataType(dataType, defaultValue));
   };
 
   const update = (v: number[]) => {
     setValue(v);
-    onChange(toArrByDataType(dataType, v));
+    onChange && onChange(toArrByDataType(dataType, v));
   };
 
   useMount(() => {
@@ -65,7 +71,7 @@ const InputRangeForm = (props: InputRangeProps) => {
           resSet();
         } else {
           setValue(TransformUtil.stringArrToNumberArr(inputValue as string[]));
-          onChange(toArrByDataType(dataType, inputValue));
+          onChange && onChange(toArrByDataType(dataType, inputValue));
         }
       }
     }, [value, inputValue],
@@ -84,7 +90,7 @@ const InputRangeForm = (props: InputRangeProps) => {
     if (a > b) {
       update([b, a]);
     }
-  }
+  };
 
   return (
     <Input.Group compact>
