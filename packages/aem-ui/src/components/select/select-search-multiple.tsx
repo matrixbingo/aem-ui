@@ -1,29 +1,99 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {  } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { ReactNode, useEffect, useMemo } from 'react';
+import { Button, Checkbox, Divider, SelectProps } from 'antd';
 import { Select } from 'antd';
+import { DefaultOptionType } from 'antd/lib/select';
+import { TransformUtil } from 'common-toolkits';
+import { useSelections, useUpdateEffect } from 'ahooks';
+import { isEqual } from 'lodash';
 
-type SelectProps = React.ComponentProps<typeof Select>;
+type SortType = 'value' | 'label' | 'none';
 
-export interface SelectSearchMultipleProps<T extends string | number> extends Omit<SelectProps, 'value' | 'onChange' | 'options'> {
-  value?: T[];
-  onChange?: (value: T[]) => void;
-  defaultOption?: { id: T; name: string } | undefined;
+interface OptionType {
+  value: number | string;
+  label: any;
+}
+
+export interface SelectSearchMultipleProps extends Omit<SelectProps, 'value' | 'onChange' | 'sort'> {
+  value?: (string | number)[];
+  onChange?: (value: (string | number)[]) => void;
+  sort?: SortType;
+}
+
+const filterSort = (optionA: DefaultOptionType, optionB: DefaultOptionType, sort: SortType) => {
+  return String(optionA?.[sort])?.toLowerCase().localeCompare(String(optionB?.[sort]).toLowerCase());
+}
+
+const createDropdownRender = (allSelectValue: ReactNode, noneSelected, allSelected: boolean, unSelectAll, toggleAll, partiallySelected) => {
+  return (
+    <div>
+      <div style={{ padding: '4px 8px 8px 8px', cursor: 'pointer' }}>
+        <Checkbox checked={allSelected} onClick={toggleAll} indeterminate={partiallySelected}>
+          全选
+        </Checkbox>
+        <Button type="text" onClick={unSelectAll}>
+          取消
+        </Button>
+      </div>
+      <Divider style={{ margin: '0' }} />
+      {/* Option 标签值 */}
+      {allSelectValue}
+    </div>
+  )
 }
 
 /**
- * 多选，可搜索
+ * 单选，排序搜索
  */
-const SelectSearchMultiple = <T extends number | string>(props: SelectSearchMultipleProps<T>) => {
+const SelectSearchMultiple = (props: SelectSearchMultipleProps) => {
+  const {filterOption, options, value: initValue, onChange, defaultValue, sort, ...rest} = props;
+  const allIds = useMemo(() => TransformUtil.toArrByPath(options, 'value'), [options]);
+  const { noneSelected, setSelected, selected, unSelectAll, allSelected, toggleAll, partiallySelected } = useSelections(allIds, initValue || defaultValue);
+
+  useEffect(() => {
+    onChange && onChange(selected);
+  }, [selected]);
+
+  useUpdateEffect(() => {
+    if (initValue?.length !== selected?.length || !isEqual(initValue, selected)) {
+      setSelected(initValue || []);
+    }
+  }, [initValue]);
+
+  if(sort === 'none'){
+    return (
+      <Select
+        showSearch
+        value={selected}
+        options={options}
+        onChange={setSelected}
+        optionFilterProp="label"
+        dropdownRender={(originNode) => createDropdownRender(originNode, noneSelected, allSelected, unSelectAll, toggleAll, partiallySelected)}
+        {...rest}
+      />
+    );
+  };
 
   return (
-    <>1</>
+    <Select
+      showSearch
+      value={selected}
+      options={options}
+      onChange={setSelected}
+      optionFilterProp="label"
+      dropdownRender={(originNode) => createDropdownRender(originNode, noneSelected, allSelected, unSelectAll, toggleAll, partiallySelected)}
+      filterSort={(optionA, optionB) => filterSort(optionA, optionB, sort)}
+      {...rest}
+    />
   );
 };
 
 SelectSearchMultiple.defaultProps = {
   style: { width: '100%' },
-  placeholder: '',
-  options: [],
+  placeholder: '请选择',
+  mode: 'multiple',
+  maxTagCount: 'responsive',
+  sort: 'none',
 };
 
 export default SelectSearchMultiple;

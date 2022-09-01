@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectSearchSingle } from 'aem-ui';
+import { SelectSearchMultiple } from 'aem-ui';
 import { isNumber } from 'lodash';
 import { useToggle } from 'ahooks';
 import { Button } from 'antd';
@@ -27,16 +27,17 @@ const Demo: React.FC = () => {
   const [options, { toggle }] = useToggle(options1, options2);
 
   const onChange1 = (v) => {
-    window.console.log('SelectSearchSingleForm 1---------------->', v, ' isNumber: ', isNumber(v));
+    window.console.log('SelectSearchSingleForm 1---------------->', v);
   };
 
   const onChange2 = (v) => {
-    window.console.log('SelectSearchSingleForm 2---------------->', v, ' isNumber: ', isNumber(v));
+    window.console.log('SelectSearchSingleForm 2---------------->', v);
   };
 
   const onChange3 = (v) => {
-    window.console.log('SelectSearchSingleForm 3---------------->', v, ' isNumber: ', isNumber(v));
+    window.console.log('SelectSearchSingleForm 3---------------->', v);
   };
+
   const onClick = () => {
     toggle();
   }
@@ -47,15 +48,15 @@ const Demo: React.FC = () => {
       <br />
       <br />
       <span>默认不排序</span>
-      <SelectSearchSingle options={options} onChange={onChange1} />
+      <SelectSearchMultiple options={options} onChange={onChange1} />
       <br />
       <br />
       <span>value 排序</span>
-      <SelectSearchSingle options={options} onChange={onChange2} sort='value' />
+      <SelectSearchMultiple options={options} onChange={onChange2} sort='value' />
       <br />
       <br />
       <span>label 排序</span>
-      <SelectSearchSingle options={options} onChange={onChange3} sort='label' />
+      <SelectSearchMultiple options={options} onChange={onChange3} sort='label' />
     </>
   );
 };
