@@ -1,16 +1,21 @@
 /* eslint-disable import/order */
-import React, { FC } from 'react';
+import React from 'react';
 
 export type StarLabelProps = { title: string };
 
-const StarLabel: FC<StarLabelProps> = ({ title }) => {
+const StarLabel: React.FC<{ title: string; star?: boolean }> = ({ title, star }) => {
   return (
     <div className="ant-form-item-label">
-      <label className="ant-form-item-required" title={title}>
+      <label className={star ? 'ant-form-item-required' : ''} title={title}>
         {title}
       </label>
     </div>
   );
 };
 
+StarLabel.defaultProps = {
+  star: true,
+};
+
 export default StarLabel;
+

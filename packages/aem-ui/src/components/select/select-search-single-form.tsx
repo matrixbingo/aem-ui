@@ -12,9 +12,6 @@ interface OptionType {
 }
 
 export interface SelectSearchSingleFormProps extends SelectSearchSingleProps{
-  value?: string | number;
-  onChange?: (value: string | number) => void;
-  sort?: SortType;
   defaultFirst?: boolean;
 }
 

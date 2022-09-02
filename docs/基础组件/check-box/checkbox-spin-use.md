@@ -6,11 +6,12 @@
 ## 代码演示
 
 ### 基础用法
+<code src="./checkbox-spin-use.tsx" />
 
 
 ## API
 ```jsx | pure
-<CheckboxSpin key={id} title={title} onChange={(e, setChecked, setLoading) => onChange(e, setChecked, setLoading, id)} checked={checked} />
+<CheckboxSpin key={id} title={title} onChange={onChange} checked={checked} />
 ```
 
 

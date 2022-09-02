@@ -5,6 +5,10 @@ import type { ButtonCopyProps } from './components/button/button-copy';
 export { default as ButtonLoading } from './components/button/button-loading';
 import type { ButtonLoadingProps } from './components/button/button-loading';
 
+// checkbox
+export { default as CheckboxSpin } from './components/check-box/checkbox-spin';
+import type { CheckboxSpinProps } from './components/check-box/checkbox-spin';
+
 // confirm
 export { default as EditableStatus } from './components/confirm/editable-status';
 import type { EditableStatusProps } from './components/confirm/editable-status';
@@ -91,6 +95,9 @@ import type { SelectSearchSingleFormProps } from './components/select/select-sea
 export { default as SelectSearchMultiple } from './components/select/select-search-multiple';
 import type { SelectSearchMultipleProps } from './components/select/select-search-multiple';
 
+export { default as SelectSearchMultipleForm } from './components/select/select-search-multiple-form';
+import type { SelectSearchMultipleFormProps } from './components/select/select-search-multiple-form';
+
 // single-array
 export { default as DateSingleArrayForm } from './components/single-array/date-single-array-form';
 import type { DateSingleArrayFormProps } from './components/single-array/date-single-array-form';
@@ -140,10 +147,11 @@ export { default as TreeSelectSingleInput } from './components/tree-select/tree-
 // view
 export { default as View } from './components/view/view';
 import type { ViewProps } from './components/view/view';
+
 export { default as ViewContainer } from './components/view/view-container';
 import type { ViewContainerProps } from './components/view/view-container';
 
-export type {SelectSearchMultipleProps, SelectSearchSingleFormProps, SelectSearchSingleProps, SelectTagsProps, CommonStepsProps, RadioButtonsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
+export type {CheckboxSpinProps, SelectSearchMultipleFormProps, SelectSearchMultipleProps, SelectSearchSingleFormProps, SelectSearchSingleProps, SelectTagsProps, CommonStepsProps, RadioButtonsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
 
 
 import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsProps, createStart, CreateStartProps } from './util/create-ant';

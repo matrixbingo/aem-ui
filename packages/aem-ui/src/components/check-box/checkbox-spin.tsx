@@ -9,13 +9,13 @@ export interface CheckboxSpinProps {
   id?: string;
   title?: React.ReactNode;
   checked?: boolean;
-  onChange?: (e: CheckboxChangeEvent, setChecked: React.Dispatch<React.SetStateAction<boolean>>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
+  onChange?: (checked: boolean, setChecked: React.Dispatch<React.SetStateAction<boolean>>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
   onChangeCallBack?: (rs: any, setChecked: React.Dispatch<React.SetStateAction<boolean>>) => void;
   checkboxProps?: Omit<CheckboxProps, 'checked' | 'onChange'>;
   setCheckedList?: Record<string, React.Dispatch<React.SetStateAction<boolean>>>;
 }
 
-const CheckboxSpin: FC<PropsWithChildren<CheckboxSpinProps>> = ({ id, setCheckedList, title, checked: inputChecked, onChange: inputOnChange = (e, setChecked) => setChecked(e?.target?.checked), ...rest }) => {
+const CheckboxSpin: FC<PropsWithChildren<CheckboxSpinProps>> = ({ id, setCheckedList, title, checked: inputChecked, onChange: inputOnChange = (checked, setChecked) => setChecked(checked), ...rest }) => {
   const [checked, setChecked] = useSafeState<boolean>(!!inputChecked);
   const [loading, setLoading] = useSafeState<boolean>(false);
 
@@ -26,7 +26,10 @@ const CheckboxSpin: FC<PropsWithChildren<CheckboxSpinProps>> = ({ id, setChecked
   }, [inputChecked]);
 
   const onChange = (e: CheckboxChangeEvent) => {
-    inputOnChange(e, setChecked, setLoading);
+    const checked = e?.target?.checked;
+    inputOnChange(checked, setChecked, setLoading);
+    e?.stopPropagation();
+    e?.preventDefault();
   };
 
   return (

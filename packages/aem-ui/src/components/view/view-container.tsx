@@ -1,15 +1,13 @@
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-export interface ViewContainerProps {
-  [K: string]: any;
-}
+export type ViewContainerProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 /**
  * 默认加滚动
  * @param param
  * @returns
  */
-const ViewContainer: FC<ViewContainerProps> = ({ children, ...rest }) => {
+const ViewContainer: React.FC<PropsWithChildren<ViewContainerProps>> = ({ children, ...rest }) => {
   return <div {...rest}>{children}</div>;
 };
 
