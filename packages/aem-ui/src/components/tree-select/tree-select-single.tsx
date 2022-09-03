@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { TreeNodeProps, TreeSelectProps, TreeSelect } from 'antd';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { isEmpty } from 'lodash';
+import { assertError } from '../../util/util';
 
 // type TreeSelectProps = React.ComponentProps<typeof TreeSelect>;
 
@@ -19,21 +20,16 @@ export type branch = leaf & { children: stem[] };
 
 export type tree = branch[];
 
-export interface TreeSelectSingleProps
-  extends Omit<TreeSelectProps<string>, 'value' | 'onChange' | 'treeData'> {
-  value: string;
-  onChange: (value: string, labelList?: React.ReactNode[]) => void;
-  treeData: tree; // { level: number; value: string, title: string, children: { level: number; value: string, title: string, children: item[] } [] }[];
+export interface TreeSelectSingleProps extends Omit<TreeSelectProps<string>, 'value' | 'onChange' | 'treeData'> {
+  value?: string;
+  onChange?: (value: string, labelList?: React.ReactNode[]) => void;
+  treeData?: tree; // { level: number; value: string, title: string, children: { level: number; value: string, title: string, children: item[] } [] }[];
   createTreeNode?: (treeData: tree) => TreeNodeProps[];
 }
 
 export const isValueInTree = (treeData: tree, value: string): boolean => {
   if (isEmpty(value) || !value) return false;
-  return treeData.some((branch) =>
-    branch.children.some((stem) =>
-      stem.children.some((leaf) => leaf.value === value),
-    ),
-  );
+  return treeData.some((branch) => branch.children.some((stem) => stem.children.some((leaf) => leaf.value === value)));
 };
 
 /**
@@ -50,17 +46,16 @@ export const getDefaultValue = (treeData: tree, value: string): string => {
 
 const defaultSelectedValue = '--请选择--';
 
+function assertstion(props: TreeSelectSingleProps): asserts props is TreeSelectSingleProps & Required<TreeSelectSingleProps> {
+  assertError(props, ['treeData', 'onChange']);
+}
+
 /**
  * 三级目录, 一二级不可选，第三极可选
  */
 const TreeSelectSingle = (props: TreeSelectSingleProps) => {
-  const {
-    value: selectedValue,
-    onChange,
-    treeData,
-    createTreeNode: defaultCreateTreeNode,
-    ...restProps
-  } = props;
+  assertstion(props);
+  const { value: selectedValue, onChange, treeData, createTreeNode: defaultCreateTreeNode, ...restProps } = props;
   const { TreeNode } = TreeSelect;
   const [value, setValue] = useState<string>(
     selectedValue || defaultSelectedValue,
@@ -95,11 +90,11 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
     const treeNodes: any[] = [];
     treeList.forEach((v) => {
       treeNodes.push(
-        <TreeNode key={`${v.value}_${v.title}`} value={v.value} title={v.title} disabled>
+        <TreeNode key={v.value} value={v.value} title={v.title} disabled>
           {v.children.map((c) => (
-            <TreeNode key={`${c.value}_${c.title}`} value={c.value} title={c.title} disabled>
+            <TreeNode key={c.value} value={c.value} title={c.title} disabled>
               {c.children.map((g) => (
-                <TreeNode key={`${g.value}_${g.title}`} value={g.value} title={g.title} />
+                <TreeNode key={g.value} value={g.value} title={g.title} />
               ))}
             </TreeNode>
           ))}
@@ -113,8 +108,6 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
     <TreeSelect
       value={value}
       onChange={onChange}
-      showSearch
-      treeDefaultExpandAll
       {...restProps}
     >
       {createTreeNode(list)}
@@ -128,6 +121,8 @@ TreeSelectSingle.defaultProps = {
   treeNodeFilterProp: 'title',
   onChange: (v) => {},
   style: { width: '100%' },
+  showSearch: true,
+  treeDefaultExpandAll: true,
 };
 
 export default TreeSelectSingle;

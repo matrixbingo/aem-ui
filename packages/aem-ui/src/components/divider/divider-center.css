@@ -1,0 +1,4 @@
+.divider-center::before,
+.divider-center::after {
+  border-top: 1px solid #bfbfbf !important;
+}

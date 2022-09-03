@@ -1,7 +1,7 @@
+import React from 'react';
 import { Descriptions, DescriptionsProps } from 'antd';
 import { DescriptionsItemProps } from 'antd/lib/descriptions/Item';
 import { isArray, isEmpty } from 'lodash';
-import React, { FC } from 'react';
 
 export interface DescriptionsTableProps {
   props?: DescriptionsProps;
@@ -9,11 +9,10 @@ export interface DescriptionsTableProps {
 }
 
 /**
- *
  * @param param0
  * @returns
  */
-const DescriptionsTable: FC<DescriptionsTableProps> = ({ props, list }) => {
+const DescriptionsTable: React.FC<DescriptionsTableProps> = ({ props, list }) => {
   if (!isArray(list) || isEmpty(list)) {
     return null;
   }

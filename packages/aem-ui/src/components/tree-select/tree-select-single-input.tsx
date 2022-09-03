@@ -1,12 +1,13 @@
+/* eslint-disable import/no-duplicates */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useMount, useUpdateEffect } from 'ahooks';
 import { Select } from 'antd';
 import { isEmpty, set } from 'lodash';
-import { useCallback, useState } from 'react';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import TreeSelectSingle, { getDefaultValue, tree, TreeSelectSingleProps } from './tree-select-single';
+import { assertError } from '../../util/util';
 
 const defaultSelectedValue = '--请选择--';
 
@@ -39,10 +40,15 @@ const getLabelByValue = (list: tree, value: string) => {
   return label ?? value;
 };
 
+function assertstion(props: TreeSelectSingleProps): asserts props is TreeSelectSingleProps & Required<TreeSelectSingleProps> {
+  assertError(props, ['treeData', 'onChange']);
+}
+
 /**
   * 三级目录, 一二级不可选，第三极可选
   */
-const TreeSelectSingleInput = (props: TreeSelectSingleProps) => {
+const TreeSelectSingleInput: React.FC<TreeSelectSingleProps> = (props: TreeSelectSingleProps) => {
+  assertstion(props);
   const { value: selectedValue, onChange, treeData, createTreeNode: defaultCreateTreeNode, ...restProps } = props;
   const [value, setValue] = useState<string>(selectedValue || defaultSelectedValue);
   const [list, setList] = useState<tree>(treeData);
@@ -97,7 +103,7 @@ const TreeSelectSingleInput = (props: TreeSelectSingleProps) => {
 
   const label = getLabelByValue(list, value);
   return (
-    <Select value={label} onClick={() => setEditor(true)}>
+    <Select value={label} onClick={() => setEditor(true)} {...restProps }>
       <Option value={label}>{label}</Option>
     </Select>
   );

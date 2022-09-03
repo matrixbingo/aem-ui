@@ -7,7 +7,7 @@ type sizeType = 'small' | 'normal' | 'large';
 
 export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClosable' | 'bodyStyle' | 'size'> {
   size?: sizeType;
-  loading?: boolean;  // 如果未设置则内部维护
+  loading?: boolean;            // 如果未设置则内部维护
   onCancel?: () => void;
   onSubmit?: (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
   customerButton?: (any, loading) => any;
