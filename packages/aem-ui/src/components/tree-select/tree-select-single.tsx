@@ -9,6 +9,7 @@ import { assertError } from '../../util/util';
 
 export interface leaf {
   id?: string;
+  key?: string;
   level: number;
   value: string;
   title: string;
@@ -90,11 +91,11 @@ const TreeSelectSingle = (props: TreeSelectSingleProps) => {
     const treeNodes: any[] = [];
     treeList.forEach((v) => {
       treeNodes.push(
-        <TreeNode key={v.value} value={v.value} title={v.title} disabled>
+        <TreeNode key={v.key ? v.key : v.value} value={v.value} title={v.title} disabled>
           {v.children.map((c) => (
-            <TreeNode key={c.value} value={c.value} title={c.title} disabled>
+            <TreeNode key={c.key ? c.key : c.value} value={c.value} title={c.title} disabled>
               {c.children.map((g) => (
-                <TreeNode key={g.value} value={g.value} title={g.title} />
+                <TreeNode key={g.key ? g.key : g.value} value={g.value} title={g.title} />
               ))}
             </TreeNode>
           ))}

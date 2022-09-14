@@ -1,6 +1,6 @@
 {
   "name": "aem-ui",
-  "version": "2.1.72",
+  "version": "2.1.77",
   "description": "基础组件",
   "author": "Matrix",
   "homepage": "https://github.com/matrixbingo/aem-ui#readme",
@@ -47,5 +47,9 @@
     "lodash": "^4.17.21",
     "react-copy-to-clipboard": "^5.1.0",
     "use-deep-compare-effect": "^1.8.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.18.9",
+    "father-build": "^1.17.2"
   }
 }

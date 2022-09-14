@@ -4,9 +4,9 @@ import { Input, InputProps } from 'antd';
 import { trim } from 'lodash';
 
 export interface InputTrimProps<T extends string | number> extends Omit<InputProps, 'value' | 'onChange' | 'render'> {
-  value: string;
-  onChange: (value: T) => void;
-  input: (value: string) => string;
+  value?: string;
+  onChange?: (value: T) => void;
+  input?: (value: string) => string;
   render?: (value: string) => T;
 }
 

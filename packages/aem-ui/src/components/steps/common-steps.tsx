@@ -7,7 +7,7 @@ import './common-steps.css';
 export interface CommonStepsProps {
   step: number;
   steps: {title: string}[];
-  onSubmit: () => void;
+  onSubmit?: () => void;
   onCancel: () => void;
   goStep: (step: number) => void;
   loading?: boolean;
@@ -48,7 +48,7 @@ const CommonSteps: FC<PropsWithChildren<CommonStepsProps>> = ({ step, steps, onS
               下一步
             </Button>
           )}
-          { step === steps.length - 1 && (
+          { step === steps.length - 1 && onSubmit && (
             <Button type="primary" style={{ marginLeft: 8 }} loading={loading} onClick={onSubmit}>
               确定
             </Button>
