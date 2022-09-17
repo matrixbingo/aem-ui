@@ -18,13 +18,13 @@ export interface SelectSearchSingleProps extends Omit<SelectProps, 'value' | 'on
 
 const filterSort = (optionA: OptionType, optionB: OptionType, sort: SortType) => {
   return String(optionA?.[sort])?.toLowerCase().localeCompare(String(optionB?.[sort]).toLowerCase());
-}
+};
 
 /**
  * 单选，排序搜索
  */
 const SelectSearchSingle = (props: SelectSearchSingleProps) => {
-  const {filterOption, options, sort, ...rest} = props;
+  const { filterOption, options, sort, ...rest } = props;
   const filterSortFn = sort === 'none' ? undefined : (optionA, optionB) => filterSort(optionA, optionB, sort);
 
   return (

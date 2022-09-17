@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SelectProps } from 'antd';
 import SelectSearchMultiple from './select-search-multiple';
 import { isEmpty } from 'lodash';
-import { useDeepCompareEffect, useUpdateEffect } from 'ahooks';
+import { useDeepCompareEffect } from 'ahooks';
 
 type SortType = 'value' | 'label' | 'none';
 
@@ -30,7 +30,7 @@ const SelectSearchMultipleForm = (props: SelectSearchMultipleFormProps) => {
     setValue(v);
   };
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     update([]);
   }, [options]);
 

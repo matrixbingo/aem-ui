@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { ReactNode, useEffect, useMemo } from 'react';
-import { Button, Checkbox, Divider, SelectProps } from 'antd';
-import { Select } from 'antd';
+import React, { ReactNode, useMemo } from 'react';
+import { Button, Checkbox, Divider, SelectProps, Select } from 'antd';
+
 import { DefaultOptionType } from 'antd/lib/select';
 import { TransformUtil } from 'common-toolkits';
 import { useSelections, useUpdateEffect } from 'ahooks';
@@ -22,7 +22,7 @@ export interface SelectSearchMultipleProps extends Omit<SelectProps, 'value' | '
 
 const filterSort = (optionA: DefaultOptionType, optionB: DefaultOptionType, sort: SortType) => {
   return String(optionA?.[sort])?.toLowerCase().localeCompare(String(optionB?.[sort]).toLowerCase());
-}
+};
 
 const createDropdownRender = (allSelectValue: ReactNode, noneSelected, allSelected: boolean, unSelectAll, toggleAll, partiallySelected) => {
   return (
@@ -39,18 +39,18 @@ const createDropdownRender = (allSelectValue: ReactNode, noneSelected, allSelect
       {/* Option 标签值 */}
       {allSelectValue}
     </div>
-  )
-}
+  );
+};
 
 /**
  * 单选，排序搜索
  */
 const SelectSearchMultiple = (props: SelectSearchMultipleProps) => {
-  const {filterOption, options, value: initValue, onChange, defaultValue, sort, ...rest} = props;
+  const { filterOption, options = [], value: initValue, onChange, defaultValue, sort, ...rest } = props;
   const allIds = useMemo(() => TransformUtil.toArrByPath(options, 'value'), [options]);
   const { noneSelected, setSelected, selected, unSelectAll, allSelected, toggleAll, partiallySelected } = useSelections(allIds, initValue || defaultValue);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     onChange && onChange(selected);
   }, [selected]);
 
@@ -60,7 +60,7 @@ const SelectSearchMultiple = (props: SelectSearchMultipleProps) => {
     }
   }, [initValue]);
 
-  if(sort === 'none'){
+  if (sort === 'none') {
     return (
       <Select
         showSearch
@@ -72,7 +72,7 @@ const SelectSearchMultiple = (props: SelectSearchMultipleProps) => {
         {...rest}
       />
     );
-  };
+  }
 
   return (
     <Select

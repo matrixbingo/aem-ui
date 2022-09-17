@@ -1,17 +1,28 @@
+import React, { PropsWithChildren } from 'react';
 import ProTable, { ProTableProps } from '@ant-design/pro-table';
 import { Spin } from 'antd';
-import React, { FC, PropsWithChildren } from 'react';
+import './table-list.less';
 
 export interface TableListProps extends ProTableProps<any, any> {
   loading?: boolean;
+  cardBodyGap?: boolean;
 }
 
 type ParamsType = Record<string, any>;
 
-const TableList: FC<PropsWithChildren<TableListProps>> = <DataType extends Record<string, any>, Params extends ParamsType = ParamsType, ValueType = 'text'>({ loading = false, ...rest }) => {
+const TableList: React.FC<PropsWithChildren<TableListProps>> = <DataType extends Record<string, any>, Params extends ParamsType = ParamsType, ValueType = 'text'>({ loading = false, cardBodyGap = true, ...rest }) => {
+  if (cardBodyGap) {
+    return (
+      <Spin spinning={loading}>
+        <ProTable<DataType, Params, ValueType> {...rest} />
+      </Spin>
+    );
+  }
   return (
     <Spin spinning={loading}>
-      <ProTable<DataType, Params, ValueType> {...rest} />
+      <div className="aem-ui-table-list">
+        <ProTable<DataType, Params, ValueType> {...rest} />
+      </div>
     </Spin>
   );
 };
