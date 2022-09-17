@@ -1,6 +1,6 @@
 /* eslint-disable import/order */
 import React, { FC } from 'react';
-import './label.css';
+import './label.less';
 
 export type LabelProps = { title: string; level?: number };
 
