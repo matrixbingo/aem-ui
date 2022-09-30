@@ -3,21 +3,24 @@ import './side-helper.less';
 
 type SiteType = 'top' | 'bottom' | 'left' | 'right';
 
+type PositionType = 'left' | 'right';
+
 export interface SideHelperProps {
+  position?: PositionType;
   onClick?: (value: SiteType) => void;
   [k: string]: any;
 }
 
-const SideHelper: React.FC<SideHelperProps> = ({ onClick: onClickInput, ...rest }) => {
+const SideHelper: React.FC<SideHelperProps> = ({ onClick: onClickInput, position = 'right', ...rest }) => {
 
   const siteRef = useRef<SiteType>('left');
 
   const onClick = (site: SiteType) => {
     siteRef.current = site;
-    onClickInput(site);
+    onClickInput && onClickInput(site);
   }
 
-  return <div className="_th-container" {...rest}>
+  return <div className="_th-container-right" {...rest}>
     <div className="_th-click-hover" onClick={() => onClick(siteRef.current)}>默认</div>
     <div className="_th-item _item-x2" onClick={() => onClick('top')}>上</div>
     <div className="_th-item _item-x-2" onClick={() => onClick('bottom')}>下</div>

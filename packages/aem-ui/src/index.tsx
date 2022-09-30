@@ -31,8 +31,8 @@ export { default as DescriptionsTable } from './components/descriptions/descript
 import type { DescriptionsTableProps } from './components/descriptions/descriptions-table';
 
 // sideHelper
-export { default as SideHelper } from './components/dev-tools/side-helper';
-import type { SideHelperProps } from './components/dev-tools/side-helper';
+export { default as SideHelper } from './components/side-helper/side-helper';
+import type { SideHelperProps } from './components/side-helper/side-helper';
 
 // divider
 export { default as DividerCenter } from './components/divider/divider-center';
