@@ -20,12 +20,14 @@ const SideHelper: React.FC<SideHelperProps> = ({ onClick: onClickInput, position
     onClickInput && onClickInput(site);
   }
 
-  return <div className="_th-container-right" {...rest}>
-    <div className="_th-click-hover" onClick={() => onClick(siteRef.current)}>默认</div>
-    <div className="_th-item _item-x2" onClick={() => onClick('top')}>上</div>
-    <div className="_th-item _item-x-2" onClick={() => onClick('bottom')}>下</div>
-    <div className="_th-item _item-xx2" onClick={() => onClick('left')}>左</div>
-    <div className="_th-item _item-xx-2" onClick={() => onClick('right')}>右</div>
+  return <div className={ 'aem-ui-side-helper-container-' + position}>
+    <div className={'_th-container-' + position} {...rest}>
+      <div className="_th-click-hover" onClick={() => onClick(siteRef.current)}>默认</div>
+      <div className="_th-item _item-x2" onClick={() => onClick('top')}>上</div>
+      <div className="_th-item _item-x-2" onClick={() => onClick('bottom')}>下</div>
+      <div className="_th-item _item-xx2" onClick={() => onClick('left')}>左</div>
+      <div className="_th-item _item-xx-2" onClick={() => onClick('right')}>右</div>
+    </div>
   </div>
 };
 
