@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SelectProps } from 'antd';
 import SelectSearchMultiple from './select-search-multiple';
 import { isEmpty } from 'lodash';
-import { useDeepCompareEffect } from 'ahooks';
+import useDeepCompareEffect from 'use-deep-compare-effect';
 
 type SortType = 'value' | 'label' | 'none';
 
