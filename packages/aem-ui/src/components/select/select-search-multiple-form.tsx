@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { SelectProps } from 'antd';
 import SelectSearchMultiple from './select-search-multiple';
-import { isEmpty } from 'lodash';
-import useDeepCompareEffect from 'use-deep-compare-effect';
+import { isEqual, isEmpty } from 'lodash';
 
 type SortType = 'value' | 'label' | 'none';
 
@@ -34,8 +33,8 @@ const SelectSearchMultipleForm = (props: SelectSearchMultipleFormProps) => {
     update([]);
   }, [options]);
 
-  useDeepCompareEffect(() => {
-    if(!isEmpty(inputValue)){
+  useEffect(() => {
+    if(!isEmpty(inputValue) && !isEqual(inputValue, value)){
       update(inputValue);
     }
   }, [inputValue, value]);

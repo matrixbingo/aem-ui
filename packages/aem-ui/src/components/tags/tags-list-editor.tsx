@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useCallback, useState } from 'react';
 import { TagProps } from 'antd';
-import { assign, cloneDeep, isEmpty } from 'lodash';
+import { assign, cloneDeep, isEmpty,d } from 'lodash';
 import { TransformUtil } from 'common-toolkits';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { CreateBaseTagProps, createBaseTags } from '../../util/create-ant';
@@ -36,7 +36,7 @@ const TagsListEditor: FC<TagsListEditorProps> = (props) => {
 
   useDeepCompareEffect(() => {
     setTagList(inputList);
-  }, [inputList]);
+  }, [inputList, tagList]);
 
   const onClose = (item) => {
     onChange?.(item);
