@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, PropsWithChildren, useEffect } from 'react';
-import RangeDatePickerFormat from './range-date-picker-format';
+import RangeDatePickerFormat, { RangeDatePickerFormatProps } from './range-date-picker-format';
 import { Radio, Space } from 'antd';
 import { DateUtil, FormatDate, Period } from 'common-toolkits';
 import { useResetState } from 'common-toolkits-hooks';
@@ -15,6 +15,7 @@ export interface RangeDayRadioFormatProps {
   show?: boolean;
   allowClear?: boolean;
   defaultChecked?: boolean;
+  rangeDatePickerFormatProps?: RangeDatePickerFormatProps;
 }
 
 const initDate = (defaultDay: number) => DateUtil.range(Period.day, { format: FormatDate.DAY_FORMAT, rang: [defaultDay, 0] }) as string[];
@@ -29,7 +30,7 @@ function assertstion(props: RangeDayRadioFormatProps): asserts props is RangeDay
 
 const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (props) => {
   assertstion(props);
-  const { onChange, show, range, radioBefore, mixDays, defaultChecked, allowClear } = props;
+  const { onChange, show, range, radioBefore, mixDays, defaultChecked, allowClear, rangeDatePickerFormatProps = {} } = props;
   const defaultValue = defaultChecked ? range[0] : undefined;
   const [value, setValue, resetValue] = useResetState<string[] | undefined>(defaultChecked ? initDate(defaultValue) : undefined);
   const [period, setPeriod, resetState] = useResetState<number | undefined>(defaultValue);
@@ -64,13 +65,13 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
         <Radio.Group defaultValue={defaultValue} onChange={onChangeButton} value={period}>
           {createRadioButton(range)}
         </Radio.Group>
-        <RangeDatePickerFormat allowClear={defaultChecked ? allowClear : true} value={value} onChange={onChangeRange} mixDays={mixDays} defaultChecked={defaultChecked} />
+        <RangeDatePickerFormat allowClear={defaultChecked ? allowClear : true} value={value} onChange={onChangeRange} mixDays={mixDays} defaultChecked={defaultChecked} {...rangeDatePickerFormatProps} />
       </Space>
     );
   }
   return (
     <Space>
-      <RangeDatePickerFormat allowClear={defaultChecked ? allowClear : true} value={value} onChange={onChangeRange} mixDays={mixDays} defaultChecked={defaultChecked} />
+      <RangeDatePickerFormat allowClear={defaultChecked ? allowClear : true} value={value} onChange={onChangeRange} mixDays={mixDays} defaultChecked={defaultChecked} {...rangeDatePickerFormatProps} />
       <Radio.Group defaultValue={defaultValue} onChange={onChangeButton} value={period}>
         {createRadioButton(range)}
       </Radio.Group>
