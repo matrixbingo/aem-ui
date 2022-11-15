@@ -85,6 +85,7 @@ RangeDayRadioFormat.defaultProps = {
   mixDays: 15,
   defaultChecked: true,
   allowClear: false,
+  onChange: (v) => {},
 };
 
 export default RangeDayRadioFormat;

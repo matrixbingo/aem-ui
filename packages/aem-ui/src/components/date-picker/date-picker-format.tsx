@@ -12,7 +12,7 @@ const defaultFormat = 'YYYY-MM-DD';
 export interface DatePickerFormatProps extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
   format?: string;
   value?: string;
-  onChange: (dateString: string) => void;
+  onChange?: (dateString: string) => void;
 }
 
 const checkValue = (v, format) => {

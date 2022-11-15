@@ -8,12 +8,14 @@ import moment, { Moment } from 'moment';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { DateUtil } from 'common-toolkits';
 
+const { RangePicker } = DatePicker;
+
 const defaultFormat = 'YYYY-MM-DD';
 
 export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
   format: string;
   value?: string[];
-  onChange: (dateString: string[] | undefined) => void;
+  onChange?: (dateString: string[] | undefined) => void;
   mixDays?: number;           // 最大天数，0为任意
   defaultChecked?: boolean;   // 默认选 首次刷新
 }
@@ -40,8 +42,8 @@ const getTime = (time: RangeValue<Moment>, index, format) => {
 };
 
 const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
-  const { RangePicker } = DatePicker;
   const { value, onChange, format, mixDays, defaultChecked, allowClear = false, ...restProps } = props;
+  const [dates, setDates] = useState<RangeValue<Moment>>(null);
   const [time, setTime] = useState<RangeValue<Moment> | RangeValue<undefined>>(toMomentValue(value, format, defaultChecked));
 
   const update = (dateStrings: string[]) => {
@@ -88,14 +90,23 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
     }
   };
 
+  const disabledDate = (current: Moment) => {
+    if (!dates) {
+      return false;
+    }
+    const tooLate = dates[0] && current.diff(dates[0], 'days') > mixDays;
+    const tooEarly = dates[1] && dates[1].diff(current, 'days') > mixDays;
+    return !!tooEarly || !!tooLate;
+  };
+
   return (
-    <RangePicker value={time} onChange={onChangeFormat} allowClear={defaultChecked ? allowClear : true} {...restProps as any} />
+    <RangePicker value={time} onCalendarChange={val => setDates(val)} disabledDate={disabledDate} onChange={onChangeFormat} allowClear={defaultChecked ? allowClear : true} {...restProps as any} />
   );
 };
 
 RangeDatePickerFormat.defaultProps = {
   format: defaultFormat,
-  onChange: (v) => window.console.error('DatePickerFormat.onChange : ', v),
+  onChange: (v) => {},
   mixDays: 0,
   defaultChecked: true,
 };
