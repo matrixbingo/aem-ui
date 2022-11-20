@@ -26,5 +26,5 @@
 | popconfirmProps | popconfirm属性 | Omit<PopconfirmProps, \'onConfirm\' \| \'title\' > | -               |
 
 switchProps     https://ant.design/components/switch-cn/#API
-ssss
+
 popconfirmProps https://ant.design/components/popconfirm-cn/#API

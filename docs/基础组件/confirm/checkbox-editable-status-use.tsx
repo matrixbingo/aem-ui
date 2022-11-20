@@ -1,5 +1,7 @@
-import React from 'react';
-import { EditableStatus } from 'aem-ui';
+import React, { useState } from 'react';
+import { message } from 'antd';
+import { CheckboxEditableStatus } from 'aem-ui';
+import { delay } from 'lodash';
 
 export interface CustomerGroupEnableProps {
   status: string;
@@ -11,7 +13,9 @@ const isChecked = (status) => String(status) === 'enable';
 const checkedChildren = { checkedChildren: '启用', unCheckedChildren: '暂停' };
 
 const Demo: React.FC<CustomerGroupEnableProps> = ({ status = 'enable', disabled = false }) => {
-  const state = isChecked(status);
+  const stateInit = isChecked(status);
+  const [state, setState] = useState(stateInit);
+  const [loading, setLoading] = useState(false);
 
   const title = (
     <>
@@ -21,11 +25,16 @@ const Demo: React.FC<CustomerGroupEnableProps> = ({ status = 'enable', disabled 
 
 
   const onConfirm = () => {
+    setLoading(true);
+    delay(() => {
+      setState(!state);
+      setLoading(false);
+    }, 2000);
     window.console.log('onConfirm ---->');
   };
 
   return (
-    <EditableStatus title={title} onConfirm={onConfirm} checked={state} switchProps={{ ...checkedChildren, disabled }} popconfirmProps={{ disabled }} />
+    <CheckboxEditableStatus title={title} onConfirm={onConfirm} checked={stateInit} checkboxProps={{ ...checkedChildren, loading, disabled }} popconfirmProps={{ disabled }} />
   );
 };
 

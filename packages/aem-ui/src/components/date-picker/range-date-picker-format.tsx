@@ -13,7 +13,8 @@ const { RangePicker } = DatePicker;
 const defaultFormat = 'YYYY-MM-DD';
 
 export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'value' | 'onChange' | 'format'> {
-  format: string;
+  format?: string;
+  formatOut?: string;
   value?: string[];
   onChange?: (dateString: string[] | undefined) => void;
   mixDays?: number;           // 最大天数，0为任意
@@ -42,7 +43,7 @@ const getTime = (time: RangeValue<Moment>, index, format) => {
 };
 
 const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
-  const { value, onChange, format, mixDays, defaultChecked, allowClear = false, ...restProps } = props;
+  const { value, onChange, format, formatOut, mixDays, defaultChecked, allowClear = false, ...restProps } = props;
   const [dates, setDates] = useState<RangeValue<Moment>>(null);
   const [time, setTime] = useState<RangeValue<Moment> | RangeValue<undefined>>(toMomentValue(value, format, defaultChecked));
 
@@ -52,13 +53,21 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
     } else {
       setTime(undefined);
     }
-    onChange(dateStrings);
+    if(isEmpty(dateStrings)){
+      onChange(dateStrings);
+    } else {
+      if(format === formatOut){
+        onChange(dateStrings);
+      } else {
+        onChange([moment(dateStrings[0], format).format(formatOut), moment(dateStrings[1], format).format(formatOut)]);
+      }
+    }
   };
 
   const resSet = (onChangeRun = true) => {
     if (onChangeRun) {
       setTime([moment(), moment()]);
-      onChange([moment().format(format), moment().format(format)]);
+      onChange([moment().format(formatOut), moment().format(formatOut)]);
     }
   };
 
@@ -91,7 +100,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   };
 
   const disabledDate = (current: Moment) => {
-    if (!dates) {
+    if (!dates || mixDays === 0) {
       return false;
     }
     const tooLate = dates[0] && current.diff(dates[0], 'days') > mixDays;
@@ -106,6 +115,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
 
 RangeDatePickerFormat.defaultProps = {
   format: defaultFormat,
+  formatOut: defaultFormat,
   onChange: (v) => {},
   mixDays: 0,
   defaultChecked: true,

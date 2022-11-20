@@ -21,6 +21,7 @@
 | value       | 时间内容                            | string\[\]              | -            |
 | onChange    | 输入框内容变化时的回调              | function(v: string\[\]) | -            |
 | format      | 时间格式化                          | string                  | 'YYYY-MM-DD' |
+| formatOut   | 输出时间格式化                      | string                  | 'YYYY-MM-DD' |
 | mixDays     | 最大天数，0为任意                   | number                  | 0            |
 | updateMount | 首次刷新,如果首次属性则调用onChange | boolean                 | true         |
 

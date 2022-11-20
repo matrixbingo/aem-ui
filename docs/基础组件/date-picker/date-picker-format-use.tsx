@@ -13,11 +13,17 @@ const Demo: React.FC = () => {
 
   return (
     <>
+      <Title level={5} style={{margin: '20px 0px 5px 0px'}}>使用value</Title>
+
       <DatePickerFormat onChange={onChange} value={time} />
 
       <Title level={5} style={{margin: '20px 0px 5px 0px'}}>不使用value</Title>
 
       <DatePickerFormat onChange={(v) => window.console.log('DatePickerFormat ---------------->', v)} />
+
+      <Title level={5} style={{margin: '20px 0px 5px 0px'}}>formatOut 输出格式</Title>
+
+      <DatePickerFormat formatOut="YYYYMMDD" onChange={(v) => window.console.log('DatePickerFormat formatOut ---------------->', v)} />
     </>
   );
 };

@@ -29,6 +29,11 @@ const Demo: React.FC = () => {
 
       <RangeDatePickerFormat value={value} defaultChecked={false} mixDays={15} onChange={(v) => window.console.log('RangeDatePickerFormat 默认不选 + 范围限制------>', v)} />
 
+
+      <Title level={5} style={{margin: '20px 0px 5px 0px'}}>formatOut 输出格式</Title>
+
+      <RangeDatePickerFormat formatOut="YYYYMMDD" onChange={(v) => window.console.log('RangeDatePickerFormat formatOut ------>', v)} />
+
     </>
   );
 };

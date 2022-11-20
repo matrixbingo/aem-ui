@@ -16,10 +16,11 @@
 
 
 ### Params
-| 参数     | 说明                   | 类型        | 默认值       |
-| -------- | ---------------------- | ----------- | ------------ |
-| value    | 时间内容               | string      | -            |
-| onChange | 输入框内容变化时的回调 | function(e) | -            |
-| format   | 时间格式化             | string      | 'YYYY-MM-DD' |
+| 参数      | 说明                   | 类型        | 默认值       |
+| --------- | ---------------------- | ----------- | ------------ |
+| value     | 时间内容               | string      | -            |
+| onChange  | 输入框内容变化时的回调 | function(e) | -            |
+| format    | 时间格式化             | string      | 'YYYY-MM-DD' |
+| formatOut | 输出时间格式化         | string      | 'YYYY-MM-DD' |
 
 其他 DatePickerProps https://ant.design/components/date-picker-cn/#DatePicker

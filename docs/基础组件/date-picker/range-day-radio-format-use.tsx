@@ -13,7 +13,8 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <RangeDayRadioFormat onChange={onChange} range={[7, 15, 30]} />
+
+      <RangeDayRadioFormat onChange={onChange} range={[7, 15, 30]} mixDays={0}/>
 
       <Title level={5} style={{margin: '20px 0px 5px 0px'}}>按钮置后</Title>
 
@@ -25,8 +26,11 @@ const Demo: React.FC = () => {
 
       <Title level={5} style={{margin: '20px 0px 5px 0px'}}>范围限制</Title>
 
-      <RangeDayRadioFormat radioBefore={false} defaultChecked={false} mixDays={15} onChange={(v) => window.console.log('RangeDatePickerFormat 默认不选 + 范围限制------>', v)} />
+      <RangeDayRadioFormat radioBefore={false} defaultChecked={false} mixDays={15} onChange={(v) => window.console.log('RangeDayRadioFormat 默认不选 + 范围限制------>', v)} />
 
+      <Title level={5} style={{margin: '20px 0px 5px 0px'}}>formatOut 输出格式</Title>
+
+      <RangeDayRadioFormat formatOut="YYYYMMDD" show={true} range={[7, 14]} mixDays={14} onChange={(v, c) => window.console.log('RangeDayRadioFormat formatOut ------>', v, c)} />
     </>
   );
 };

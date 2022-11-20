@@ -11,6 +11,7 @@ const defaultFormat = 'YYYY-MM-DD';
 
 export interface DatePickerFormatProps extends Omit<DatePickerProps, 'value' | 'onChange' | 'format'> {
   format?: string;
+  formatOut?: string;
   value?: string;
   onChange?: (dateString: string) => void;
 }
@@ -27,17 +28,21 @@ const toMomentValue = (inputValue: string, format: string) => {
 };
 
 const DatePickerFormat = (props: DatePickerFormatProps) => {
-  const { value, onChange, format, ...restProps } = props;
+  const { value, onChange, format, formatOut, ...restProps } = props;
   const [time, setTime] = useState<Moment>(toMomentValue(value, format));
 
   const update = (dateString: string) => {
-    onChange(dateString);
+    if(format === formatOut){
+      onChange(dateString);
+    } else {
+      onChange(moment(dateString, format).format(formatOut));
+    }
     setTime(moment(dateString, format));
   }
 
   const resSet = () => {
     setTime(moment());
-    onChange(moment().format(format));
+    onChange(moment().format(formatOut));
   };
 
   useMount(() => {
@@ -68,6 +73,7 @@ const DatePickerFormat = (props: DatePickerFormatProps) => {
 DatePickerFormat.defaultProps = {
   onChange: (v) => {},
   format: defaultFormat,
+  formatOut: defaultFormat,
 };
 
 export default DatePickerFormat;
