@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Input, InputProps } from 'antd';
 import { split, startsWith, isEmpty } from 'lodash';
 
@@ -20,6 +20,7 @@ export const toValue = (value, addonBeforeValue) => {
  */
 const InputAddonBefore = (props: InputAddonBeforeProps) => {
   const { value: _inputValue, addonBeforeValue: inputAddonBeforeValue, onChange: inputOnChange, ...restProps } = props;
+  const addonBeforeValueRef = useRef('');
   const inputValue = toValue(_inputValue, inputAddonBeforeValue);
   const [fullValue, setFullValue] = useState(_inputValue);
   const [value, setValue] = useState(inputValue);
@@ -30,20 +31,25 @@ const InputAddonBefore = (props: InputAddonBeforeProps) => {
   }, [_inputValue]);
 
   useEffect(() => {
+    const _fullValue = inputAddonBeforeValue + toValue(value, addonBeforeValueRef.current);
+    if (fullValue !== _fullValue) {
+      inputOnChange && inputOnChange(_fullValue);
+    }
+    addonBeforeValueRef.current = inputAddonBeforeValue;
+  }, [inputAddonBeforeValue]);
+
+  useEffect(() => {
     if (value !== inputValue) setValue(inputValue);
     if (addonBeforeValue !== inputAddonBeforeValue) setAddonBeforeValue(inputAddonBeforeValue);
-    if (fullValue !== addonBeforeValue + value) {
-      inputOnChange(addonBeforeValue + value);
-    }
   }, [value, inputValue, addonBeforeValue, inputAddonBeforeValue]);
 
   const onChange = (e) => {
     const { value: _value } = e.target;
     setValue(_value);
-    inputOnChange(addonBeforeValue + toValue(_value, addonBeforeValue));
+    inputOnChange && inputOnChange(addonBeforeValue + _value);
   };
 
-  return <Input {...restProps} value={value} addonBefore={addonBeforeValue} onChange={onChange}  />;
+  return <Input {...restProps} value={value} addonBefore={addonBeforeValue} onChange={onChange} />;
 };
 
 InputAddonBefore.defaultProps = {
