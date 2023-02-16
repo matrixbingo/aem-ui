@@ -1,8 +1,8 @@
 /* eslint-disable import/order */
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import './label.less';
 
-export type LabelProps = { title: string; level?: number };
+export type LabelProps = { title: string | ReactNode; level?: number };
 
 const Label: FC<LabelProps> = ({ title, level }) => {
   return React.createElement(`h${level}`, { className: 'aem-ui-label' }, title);

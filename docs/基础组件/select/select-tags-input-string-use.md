@@ -11,7 +11,7 @@
 ## API
 
 ```jsx | pure
-  <SelectTags onChange={onChange} />
+  <SelectTagsInputString onChange={onChange} value="aa,cc,dd"/>
 ```
 
 ### Params

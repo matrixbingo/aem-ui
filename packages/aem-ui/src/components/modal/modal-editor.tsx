@@ -16,7 +16,7 @@ export interface ModalEditorProps extends Omit<MaskCloseModalProps, 'onSubmit'> 
 const createMaskCloseModal = ({ visible, loading, onCancel, onSubmit, showSubmit, rest, children }) => {
   // const footer = showSubmit ? [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>, <Button key="submit" type="primary" loading={loading} onClick={onSubmit}>确定</Button>] : [<Button key="onCancel" loading={loading} onClick={onCancel}>取消</Button>];
   return (
-    <MaskCloseModal visible={visible} onCancel={onCancel} onSubmit={onSubmit} loading={loading} {...rest}>
+    <MaskCloseModal open={visible} onCancel={onCancel} onSubmit={onSubmit} loading={loading} {...rest}>
       {children}
     </MaskCloseModal>
   );

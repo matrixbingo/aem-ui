@@ -1,22 +1,36 @@
-import { Tooltip } from 'antd';
+import React from 'react';
+import { Tooltip, TooltipProps } from 'antd';
 import { StringUtil } from 'common-toolkits';
-import React, { FC } from 'react';
+import { isArray, isEmpty, isString, split } from 'lodash';
 
-export interface OmitTipLabelProps {
-  title: string;
-  limit: number;
+export interface OmitTipLabelProps extends Omit<TooltipProps, 'title' | 'limit' | 'width' | 'separator'> {
+  title: string | string[];
+  limit?: number;
+  width?: number;
+  separator?: string;
 }
 
 /**
  * 表格列表等缩略显示
  */
-const OmitTipLabel: FC<OmitTipLabelProps> = ({ title = '', limit = 10 }) => {
-  if (title?.length < limit) {
+const OmitTipLabel: React.FC<OmitTipLabelProps> = ({ title = '', limit = 10, separator = undefined, width= 600, ...rest }) => {
+  if (isString(title) && title?.length < limit) {
     return <>{title}</>;
   }
+  let tipTitle = '' as any;
+  let content = title as string;
+  if(isArray(title)){
+    tipTitle = (title as string[]).map((i) => <div>{i}</div>);
+    content = (title as string[]).join(' ')
+  } else{
+    tipTitle = title as string;
+    if(!isEmpty(separator)){
+      tipTitle = split(title, separator).map((i) => <div>{i}</div>);
+    }
+  }
   return (
-    <Tooltip placement="top" title={title}>
-      {StringUtil.truncate(title, limit)}
+    <Tooltip placement="top" title={tipTitle} overlayStyle={{ maxWidth: width }} {...rest}>
+      {StringUtil.truncate(content, limit)}
     </Tooltip>
   );
 };

@@ -64,7 +64,7 @@ const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, 
   }, [inputOnSubmit]);
 
   return (
-    <Modal width={width} visible={visible} onCancel={onCancel} footer={createButton(!!inputOnSubmit, loading, onCancel, onSubmit, customerButton)} {...rest}>
+    <Modal width={width} open={visible} onCancel={onCancel} footer={createButton(!!inputOnSubmit, loading, onCancel, onSubmit, customerButton)} {...rest}>
       <Spin spinning={inputLoading}>
         {children}
       </Spin>
