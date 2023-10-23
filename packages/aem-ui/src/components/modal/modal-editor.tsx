@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useSafeState } from 'ahooks';
 import { Button, ButtonProps } from 'antd';
-import React, { FC, PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import React, { FC, PropsWithChildren, useCallback, useEffect } from 'react';
 import MaskCloseModal, { MaskCloseModalProps } from './mask-close-modal';
 
 export interface ModalEditorProps extends Omit<MaskCloseModalProps, 'onSubmit'> {
@@ -29,8 +30,8 @@ const createMaskCloseModal = ({ visible, loading, onCancel, onSubmit, showSubmit
  */
 const ModalEditor: FC<PropsWithChildren<ModalEditorProps>> = ({ children, button = { children: '' }, visible: inputVisible = false, loading: inputLoading = false, onCancel: inputOnCancel, onOk: inputOnOk, onSubmit: inputOnSubmit, onClick: inputOnClick, ...rest }) => {
   const { children: buttonChildren, ...buttonProps } = button;
-  const [visible, setVisible] = useState(inputVisible);
-  const [loading, setLoading] = useState(inputLoading);
+  const [visible, setVisible] = useSafeState(inputVisible);
+  const [loading, setLoading] = useSafeState(inputLoading);
   const showSubmit = !!inputOnSubmit;
 
   const close = () => {

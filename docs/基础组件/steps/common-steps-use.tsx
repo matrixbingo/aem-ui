@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CommonSteps, View } from 'aem-ui';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 const { Title } = Typography;
 
 const steps = [
@@ -30,9 +30,17 @@ const Demo: React.FC = () => {
     setStep(step + currentStep);
   };
 
+  const customerButton = (buttons: any[], step, loading) => {
+    window.console.log('---------------->', step, buttons);
+    if(step === 2){
+      buttons.splice(2, 0, <Button>TEST</Button>);
+    }
+    return buttons;
+  }
+
   return (
     <>
-      <CommonSteps step={step} steps={steps} onSubmit={onSubmit} onCancel={onCancel} goStep={goStep} loading={false}>
+      <CommonSteps step={step} steps={steps} onSubmit={onSubmit} onCancel={onCancel} goStep={goStep} loading={false} customerButton={customerButton}>
         <View visible={step === 0}>
           step 1
         </View>

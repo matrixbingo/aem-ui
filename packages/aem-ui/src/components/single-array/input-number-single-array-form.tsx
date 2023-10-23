@@ -14,8 +14,11 @@ export interface InputNumberSingleArrayFormProps extends Omit<InputNumberProps, 
 }
 
 const toNumberValue = (inputValue: string | number, defaultValue: number): number => {
+  if (isNumber(inputValue)) {
+    return inputValue as number;
+  }
   const initValue = TypeUtil.parseValue(inputValue || '');
-  return !!initValue && isNumber(initValue) ? initValue as number: Number(defaultValue);
+  return !!initValue && isNumber(initValue) ? initValue as number : Number(defaultValue);
 };
 
 const toValueByDataType = (type: dataType, v: number) => {
@@ -55,7 +58,7 @@ const InputNumberSingleArrayForm = (props: InputNumberSingleArrayFormProps) => {
   });
 
   useUpdateEffect(() => {
-    if(!!inputValue || !!inputValue?.[0] ){
+    if (!!inputValue || !!inputValue?.[0]) {
       if (String(inputValue?.[0]) !== String(value)) {
         update(toNumberValue(inputValue?.[0], Number(defaultValue?.[0])));
       }

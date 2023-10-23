@@ -8,8 +8,8 @@ import { TypeUtil } from 'common-toolkits';
 export type SelectProps = React.ComponentProps<typeof Select>;
 
 export interface SelectTagsProps extends Omit<SelectProps, 'value' | 'onChange' > {
-  value: string[];
-  onChange: (dateString: string[]) => void;
+  value?: string[];
+  onChange?: (dateString: string[]) => void;
 }
 
 const checkValue = (v: any) => {
@@ -31,7 +31,7 @@ const SelectTags = (props: SelectTagsProps) => {
   const [value, setValue] = useState(toValue(inputValue));
   const update = (val: any) => {
     setValue(val);
-    inputOnChange(val);
+    inputOnChange?.(val);
   };
 
   useMount(() => {
@@ -57,6 +57,7 @@ const SelectTags = (props: SelectTagsProps) => {
 SelectTags.defaultProps = {
   style: { width: '100%' },
   placeholder: '多个条件，请使用回车分割',
+  tokenSeparators: [',', '，', '、'],
 };
 
 export default SelectTags;

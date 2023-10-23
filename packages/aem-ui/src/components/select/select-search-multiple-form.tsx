@@ -25,7 +25,7 @@ const SelectSearchMultipleForm = (props: SelectSearchMultipleFormProps) => {
   const [value, setValue] = useState(inputValue);
 
   const update = (v) => {
-    inputOnChange(v);
+    inputOnChange?.(v);
     setValue(v);
   };
 

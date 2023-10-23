@@ -1,0 +1,47 @@
+{
+  "name": "aem-ui-formily",
+  "version": "0.2.5",
+  "description": "表单组件",
+  "author": "matrixbing",
+  "homepage": "https://github.com/matrixbingo/aem-ui#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "sideEffects": [
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matrixbingo/aem-ui.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "father-build"
+  },
+  "bugs": {
+    "url": "https://github.com/matrixbingo/aem-ui/issues"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
+  "peerDependencies": {
+    "@formily/antd": "^2.2.20",
+    "@formily/react": "^2.2.20",
+    "ahooks": "^3.7.0",
+    "antd": "^4.24.8"
+  }
+}

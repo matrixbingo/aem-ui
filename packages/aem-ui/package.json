@@ -1,6 +1,6 @@
 {
   "name": "aem-ui",
-  "version": "2.2.12",
+  "version": "2.3.4",
   "description": "基础组件",
   "author": "Matrix",
   "homepage": "https://github.com/matrixbingo/aem-ui#readme",
@@ -40,7 +40,7 @@
   },
   "peerDependencies": {
     "ahooks": "^3.7.0",
-    "antd": "^4.23.6",
+    "antd": "^4.24.8",
     "common-toolkits": "^2.0.8",
     "common-toolkits-hooks": "^0.0.2",
     "dequal": "^2.0.3",

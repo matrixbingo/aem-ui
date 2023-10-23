@@ -5,7 +5,7 @@ import { Button, Checkbox, Divider, SelectProps, Select } from 'antd';
 import { DefaultOptionType } from 'antd/lib/select';
 import { TransformUtil } from 'common-toolkits';
 import { useSelections, useUpdateEffect } from 'ahooks';
-import { isEqual } from 'lodash';
+import { isArray, isEmpty, isEqual } from 'lodash';
 
 type SortType = 'value' | 'label' | 'none';
 
@@ -19,6 +19,13 @@ export interface SelectSearchMultipleProps extends Omit<SelectProps, 'value' | '
   onChange?: (value: (string | number)[]) => void;
   sort?: SortType;
 }
+
+const toValue = (initValue) => {
+  if (isArray(initValue)) {
+    return initValue.filter((i) => !isEmpty(i));
+  }
+  return [];
+};
 
 const filterSort = (optionA: DefaultOptionType, optionB: DefaultOptionType, sort: SortType) => {
   return String(optionA?.[sort])?.toLowerCase().localeCompare(String(optionB?.[sort]).toLowerCase());
@@ -48,7 +55,7 @@ const createDropdownRender = (allSelectValue: ReactNode, noneSelected, allSelect
 const SelectSearchMultiple = (props: SelectSearchMultipleProps) => {
   const { filterOption, options = [], value: initValue, onChange, defaultValue, sort, ...rest } = props;
   const allIds = useMemo(() => TransformUtil.toArrByPath(options, 'value'), [options]);
-  const { noneSelected, setSelected, selected, unSelectAll, allSelected, toggleAll, partiallySelected } = useSelections(allIds, initValue || defaultValue);
+  const { noneSelected, setSelected, selected, unSelectAll, allSelected, toggleAll, partiallySelected } = useSelections(allIds, toValue(initValue) || defaultValue);
 
   useUpdateEffect(() => {
     onChange && onChange(selected);
@@ -56,7 +63,7 @@ const SelectSearchMultiple = (props: SelectSearchMultipleProps) => {
 
   useUpdateEffect(() => {
     if (initValue?.length !== selected?.length || !isEqual(initValue, selected)) {
-      setSelected(initValue || []);
+      setSelected(toValue(initValue) || []);
     }
   }, [initValue]);
 

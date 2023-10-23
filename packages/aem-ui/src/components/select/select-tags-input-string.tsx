@@ -38,7 +38,7 @@ const SelectTagsInputString = (props: SelectTagsInputStringProps) => {
   const [value, setValue] = useState(toValue(inputValue, separator));
   const update = (val: any) => {
     setValue(val);
-    inputOnChange(val.join(separator));
+    inputOnChange?.(val.join(separator));
   };
 
   useMount(() => {

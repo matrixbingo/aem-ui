@@ -1,16 +1,17 @@
 /* eslint-disable import/order */
-import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
+import React, { FC, PropsWithChildren, useCallback } from 'react';
 import { Button, Modal, ModalProps, Spin } from 'antd';
-import { useUpdateEffect } from 'ahooks';
+import { useSafeState, useUpdateEffect } from 'ahooks';
 
 type sizeType = 'small' | 'normal' | 'large';
 
-export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClosable' | 'bodyStyle' | 'size'> {
+export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClosable' | 'bodyStyle' | 'size' | 'visible'> {
   size?: sizeType;
   loading?: boolean;            // 如果未设置则内部维护
   onCancel?: () => void;
   onSubmit?: (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
   customerButton?: (any, loading) => any;
+  visible?: boolean;
   [K: string]: any;
 }
 
@@ -34,7 +35,7 @@ const createButton = (showSubmit, loading, onCancel, onSubmit, customerButton = 
  * @returns
  */
 const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, visible, loading: inputLoading = false, onCancel: inputOnCancel, onSubmit: inputOnSubmit, size, customerButton, ...rest }) => {
-  const [loading, setLoading] = useState<boolean>(inputLoading);
+  const [loading, setLoading] = useSafeState<boolean>(inputLoading);
   const width = getWidth(size ?? 'large');
 
   const close = () => {

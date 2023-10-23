@@ -23,10 +23,11 @@
 
 
 ### Params
-| 参数     | 说明     | 类型     | 默认值 |
-| -------- | -------- | -------- | ------ |
-| onSubmit | 提交回调 | function | 无     |
-| onCancel | 取消回调 | function | 无     |
-| goStep   | 步骤回调 | function | 无     |
-| loading  | 最大区间 | boolean  | 无     |
+| 参数           | 说明       | 类型                  | 默认值 |
+| -------------- | ---------- | --------------------- | ------ |
+| onSubmit       | 提交回调   | function              | 无     |
+| onCancel       | 取消回调   | function              | 无     |
+| goStep         | 步骤回调   | function              | 无     |
+| loading        | 最大区间   | boolean               | 无     |
+| customerButton | 自定义按钮 | (any, step, loading) => any |        | 否   
 

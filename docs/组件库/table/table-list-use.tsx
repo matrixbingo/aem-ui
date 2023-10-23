@@ -33,6 +33,11 @@ const Demo: React.FC = () => {
         actionRef={actionRef}
         pagination={false}
         dataSource={dataSource}
+        // options={{
+        //   setting: {
+        //     listsHeight: 400,
+        //   },
+        // }}
       />
     </>
   );

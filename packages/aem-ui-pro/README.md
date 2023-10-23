@@ -1,6 +1,6 @@
-# aem-ui 
+# aem-ui-pro
 
-See our [main repo](https://aem-ui.vercel.app) for more information.
+See our [main repo](https://aem-ui.tk) for more information.
 
 # 通用公共组件
 

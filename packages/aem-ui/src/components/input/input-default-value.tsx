@@ -25,7 +25,6 @@ const InputDefaultValue = (props: InputDefaultValueProps) => {
 
   useMount(() => {
     if (isEmpty(value) && !isEmpty(defaultValue)) {
-      // window.console.log('---------------->', value, defaultValue);
       setValue(defaultValue);
       inputOnChange && inputOnChange(defaultValue);
     }
