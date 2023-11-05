@@ -11,7 +11,7 @@ import {
   ArrayItems,
   Space,
   Form,
-} from '@formily/antd';
+} from '@formily/antd-v5';
 import { createSchemaField, ISchema, observer, useField, useForm } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import { assign, cloneDeep, get, isEmpty, split } from 'lodash';

@@ -2,10 +2,10 @@
 import { useMount } from 'ahooks';
 import { DatePicker } from 'antd';
 import { DateUtil } from 'common-toolkits';
-import moment, { Moment } from 'moment';
 import type { DatePickerProps } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { isEmpty } from 'lodash';
+import dayjs, { Dayjs } from 'dayjs';
 
 const defaultFormat = 'YYYY-MM-DD';
 
@@ -22,27 +22,27 @@ const checkValue = (v, format) => {
 
 const toMomentValue = (inputValue: string, format: string) => {
   if (!checkValue(inputValue, format)) {
-    return moment(inputValue, format);
+    return dayjs(inputValue, format);
   }
-  return moment(moment(), format);
+  return dayjs(dayjs(), format);
 };
 
 const DatePickerFormat = (props: DatePickerFormatProps) => {
   const { value, onChange, format, formatOut, ...restProps } = props;
-  const [time, setTime] = useState<Moment>(toMomentValue(value, format));
+  const [time, setTime] = useState<Dayjs>(toMomentValue(value, format));
 
   const update = (dateString: string) => {
     if(format === formatOut){
       onChange(dateString);
     } else {
-      onChange(moment(dateString, format).format(formatOut));
+      onChange(dayjs(dateString, format).format(formatOut));
     }
-    setTime(moment(dateString, format));
+    setTime(dayjs(dateString, format));
   }
 
   const resSet = () => {
-    setTime(moment());
-    onChange(moment().format(formatOut));
+    setTime(dayjs());
+    onChange(dayjs().format(formatOut));
   };
 
   useMount(() => {
@@ -56,7 +56,7 @@ const DatePickerFormat = (props: DatePickerFormatProps) => {
       if (checkValue(value, format)) {
         resSet();
       } else {
-        setTime(moment(value, format));
+        setTime(dayjs(value, format));
       }
     }
   }, [time, value]);

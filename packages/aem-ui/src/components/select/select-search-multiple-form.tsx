@@ -54,7 +54,7 @@ const SelectSearchMultipleForm = (props: SelectSearchMultipleFormProps) => {
 };
 
 SelectSearchMultipleForm.defaultProps = {
-  defaultFirst: true
+
 };
 
 export default SelectSearchMultipleForm;

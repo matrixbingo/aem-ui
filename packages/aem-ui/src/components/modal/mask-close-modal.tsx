@@ -5,7 +5,7 @@ import { useSafeState, useUpdateEffect } from 'ahooks';
 
 type sizeType = 'small' | 'normal' | 'large';
 
-export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClosable' | 'bodyStyle' | 'size' | 'visible'> {
+export interface MaskCloseModalProps extends Omit<ModalProps, 'width' | 'maskClosable' | 'styles' | 'size' | 'visible'> {
   size?: sizeType;
   loading?: boolean;            // 如果未设置则内部维护
   onCancel?: () => void;
@@ -76,7 +76,7 @@ const MaskCloseModal: FC<PropsWithChildren<MaskCloseModalProps>> = ({ children, 
 MaskCloseModal.defaultProps = {
   size: 'large',
   maskClosable: false,
-  bodyStyle: { margin: '10px 30px 0px 30px' },
+  styles: { body: { margin: '10px 30px 0px 30px' } },
   showSubmit: true,
 };
 

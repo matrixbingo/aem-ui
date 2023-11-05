@@ -3,7 +3,7 @@
 import React, { useEffect, useState }  from 'react';
 import { useMount } from 'ahooks';
 import { TimePicker, TimePickerProps } from 'antd';
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import { isArray, isEmpty } from 'lodash';
 
 const defaultFormat = 'HH:mm:ss';
@@ -16,9 +16,9 @@ export interface TimeSingleArrayFormProps extends Omit<TimePickerProps, 'value' 
 
 const toMomentValue = (inputValue: string[], format: string) => {
   if (isArray(inputValue) && inputValue.length === 1 && inputValue[0].length === 8) {
-    return moment(inputValue[0], format);
+    return dayjs(inputValue[0], format);
   }
-  return moment(moment(), format);
+  return dayjs(dayjs(), format);
 };
 
 const checkValue = (v) => {
@@ -27,11 +27,11 @@ const checkValue = (v) => {
 
 const TimeSingleArrayForm = (props: TimeSingleArrayFormProps) => {
   const { value, onChange, format, ...restProps } = props;
-  const [time, setTime] = useState<Moment>(toMomentValue(value, format));
+  const [time, setTime] = useState<Dayjs>(toMomentValue(value, format));
 
   const resSet = () => {
-    setTime(moment(moment(), format));
-    onChange([moment().format(format)]);
+    setTime(dayjs(dayjs(), format));
+    onChange([dayjs().format(format)]);
   };
 
   useMount(() => {
@@ -45,7 +45,7 @@ const TimeSingleArrayForm = (props: TimeSingleArrayFormProps) => {
       if (checkValue(value)) {
         resSet();
       } else {
-        setTime(moment(value?.[0], format));
+        setTime(dayjs(value?.[0], format));
       }
     }
   }, [time, value]);

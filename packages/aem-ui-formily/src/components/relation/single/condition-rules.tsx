@@ -3,7 +3,7 @@ import React from 'react';
 import { createSchemaField, ISchema, observer, useField, useForm } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import { assign, get, isEmpty, isNumber } from 'lodash';
-import { FormItem, Input, Select, FormLayout, Cascader, FormGrid, ArrayItems, Editable, Checkbox, Radio, DatePicker, NumberPicker, Space, Form, Switch } from '@formily/antd';
+import { FormItem, Input, Select, FormLayout, Cascader, FormGrid, ArrayItems, Editable, Checkbox, Radio, DatePicker, NumberPicker, Space, Form, Switch } from '@formily/antd-v5';
 import { InputTrim, SelectSearchSingle, SelectSearchMultiple, InputRenderCustomer, InputStringSingleArrayForm, InputRange, SelectSingleDefaultValue, RangeDatePickerFormat, RangeTimePickerFormat, DateSingleArrayForm, TimeSingleArrayForm, OmitTipLabel, SelectMultiple, SelectTagsInputString, Label, InputNumberSingleArrayForm, InputDefaultValue, LabelDetail, TitleDetail, SelectSingleArrayForm, InputTooltip, SelectTags } from 'aem-ui';
 import { PlusOutlined } from '@ant-design/icons';
 import RemoveButton from './remove-button';

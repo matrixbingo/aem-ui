@@ -7,7 +7,9 @@ import { Select } from 'antd';
 import { isEmpty, set } from 'lodash';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import TreeSelectSingle, { getDefaultValue, tree, TreeSelectSingleProps } from './tree-select-single';
+import copyToClipboard from 'copy-to-clipboard';
 import { assertError } from '../../util/util';
+import CopyButton from './copy-button';
 
 const defaultSelectedValue = '--请选择--';
 
@@ -15,7 +17,7 @@ const leafData = {} as any;
 
 const { Option } = Select;
 
-const getLabelByValue = (list: tree, value: string) => {
+export const getLabelByValue = (list: tree, value: string) => {
   if (!isEmpty(leafData[value])) {
     return leafData[value];
   }
@@ -49,7 +51,7 @@ function assertstion(props: TreeSelectSingleProps): asserts props is TreeSelectS
   */
 const TreeSelectSingleInput: React.FC<TreeSelectSingleProps> = (props: TreeSelectSingleProps) => {
   assertstion(props);
-  const { value: selectedValue, onChange, treeData, createTreeNode: defaultCreateTreeNode, ...restProps } = props;
+  const { value: selectedValue, onChange, treeData, createTreeNode: defaultCreateTreeNode, copy, ...restProps } = props;
   const [value, setValue] = useState<string>(selectedValue || defaultSelectedValue);
   const [list, setList] = useState<tree>(treeData);
   const [editor, setEditor] = useState<boolean>(false);
@@ -92,6 +94,12 @@ const TreeSelectSingleInput: React.FC<TreeSelectSingleProps> = (props: TreeSelec
     }
   }, [selectedValue]);
 
+  const label = getLabelByValue(list, value);
+
+  const onClick = () => {
+    copyToClipboard(label);
+  }
+
   if (editor) {
     return (
       <TreeSelectSingle
@@ -101,18 +109,21 @@ const TreeSelectSingleInput: React.FC<TreeSelectSingleProps> = (props: TreeSelec
     );
   }
 
-  const label = getLabelByValue(list, value);
   return (
-    <Select value={label} onClick={() => setEditor(true)} {...restProps }>
-      <Option value={label}>{label}</Option>
-    </Select>
+    <CopyButton copy={copy} onClick={onClick}>
+      <Select value={label} onClick={() => setEditor(true)} {...restProps }>
+        <Option value={label}>{label}</Option>
+      </Select>
+    </CopyButton>
   );
 };
 
 TreeSelectSingleInput.defaultProps = {
   value: '',
   treeData: [],
-  treeNodeFilterProp: 'title',
+  style: { width: '100%' },
+  copy: true,
+  // treeNodeFilterProp: 'title',
   onChange: (v) => {},
 };
 

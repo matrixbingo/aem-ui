@@ -119,7 +119,7 @@ const TreeSingle: React.FC<PropsWithChildren<TreeSingleProps>> = (props) => {
           {afterStr}
         </span>
       ) : (
-        <span>{isTitleObject ? strTitle : item.title}</span>
+        <span>{isTitleObject ? strTitle : item.title as any}</span>
       );
       if (item.children) {
         const { title: titleBack, key, ...resp } = item;
@@ -140,7 +140,7 @@ const TreeSingle: React.FC<PropsWithChildren<TreeSingleProps>> = (props) => {
   const closeAll = () => setExpandedKeys(defaultExpandedKeys);
 
   return (
-    <div>
+    <div style={{ minWidth: 170 }}>
       <Search style={{ marginBottom: 8 }} onChange={onChange} {...searchProps} />
       <View destroy={!showButton}>
         <Row>

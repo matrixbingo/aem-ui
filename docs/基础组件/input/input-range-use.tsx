@@ -11,7 +11,7 @@ const Demo: React.FC = () => {
 
   return (
     <>
-      <InputRange value={value} onChange={onChange} />
+      <InputRange value={value} onChange={onChange} style={{ width: '100%'}} />
     </>
   );
 };

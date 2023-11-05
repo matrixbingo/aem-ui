@@ -1,24 +1,23 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { get, isArray, isBoolean, isEmpty, set } from 'lodash';
+import { ObjectUtil } from 'common-toolkits';
+import { cloneDeep, get, isArray, isBoolean, isEmpty, set } from 'lodash';
 
 const selectList = ['Select', 'SelectMultiple', 'SelectSearchMultiple', 'SelectSearchSingle', 'SelectSingleArrayForm', 'SelectSingleDefaultValue', 'SelectTagsInputString', 'Cascader', 'DatePicker', 'DateSingleArrayForm'];
 
-export interface configType { form?: { disabled?: boolean; exclude?: string[] }; item?: { disabled: string[] } }
+export interface configType { form?: { disabled?: boolean; exclude?: string[] }; item?: { disabled: string[] }; typeExclude?: string[] }
 
-export const defaultConfig = { form: { disabled: false, exclude: [] }, item: { disabled: [] } };
+export const defaultConfig = { form: { disabled: false, exclude: [] }, item: { disabled: [] }, typeExclude: ['void', 'object', 'array'] };
 
 export const customizerTransformItem = (value: any) => {
   if (selectList.includes(value?.['x-component'])) {
     const props = get(value, 'x-component-props') ?? {};
-    if(isEmpty(props.getPopupContainer)){
-      set(props, 'getPopupContainer', (triggerNode: any) => {
-        if (!isEmpty(props.triggerNodeId)) {
-          return document.getElementById(props.triggerNodeId);
-        }
-        return triggerNode?.parentNode.parentNode.parentNode.parentNode;
-      });
-    }
+    set(props, 'getPopupContainer', (triggerNode: any) => {
+      if (!isEmpty(props.triggernodeid)) {
+        return document.getElementById(props.triggernodeid);
+      }
+      return triggerNode?.parentNode.parentNode.parentNode.parentNode;
+    });
     set(value, 'x-component-props', props);
   }
 };
@@ -27,7 +26,7 @@ export const transformItem = (key: any, value: any, config: configType = default
   if (isEmpty(value?.type)) {
     set(value, 'type', 'string');
   }
-  if (value?.type !== 'void' && isEmpty(value?.['x-decorator'])) {
+  if (!config?.typeExclude?.includes(value?.type) && isEmpty(value?.['x-decorator'])) {
     set(value, 'x-decorator', 'FormItem');
   }
   if (isBoolean(config?.form?.disabled) && config?.form?.disabled) {
@@ -56,7 +55,7 @@ export const transformProperties = (properties: Record<any, any>, config: config
 const assembleItem = (value: any, triggerNodeId: string) => {
   if (selectList.includes(value?.['x-component'])) {
     const props = get(value, 'x-component-props') ?? {};
-    set(value, 'x-component-props', set(props, 'triggerNodeId', triggerNodeId));
+    set(value, 'x-component-props', set(props, 'triggernodeid', triggerNodeId));
   }
 };
 
@@ -68,4 +67,22 @@ export const assembleProperties = (properties: Record<any, any>, config: { trigg
     });
   }
   return properties;
+};
+
+export const conditionDoubleToParam = (rootPath: string, endPath: string, target: string, data: any, customizer: (item: any) => any = (i) => i) => {
+  data?.[rootPath]?.forEach((item, index) => {
+    const path = `${rootPath}_${index}_${endPath}`;
+    ObjectUtil.pushAsObject(item, target, customizer(cloneDeep(data?.[path])));
+    delete data?.[path];
+  });
+  return data;
+};
+
+export const conditionDoubleToFormData = (rootPath: string, endPath: string, target: string, data: any) => {
+  data?.[rootPath]?.forEach((item, index) => {
+    const path = `${rootPath}_${index}_${endPath}`;
+    set(data, path, cloneDeep(item?.[target]));
+    delete item?.[target];
+  });
+  return data;
 };

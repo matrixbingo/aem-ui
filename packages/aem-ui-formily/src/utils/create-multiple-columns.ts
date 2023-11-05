@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { assign } from 'lodash';
 import { configType, defaultConfig, transformProperties } from './common';
 
 export interface MultipleRowProps{
@@ -15,7 +16,8 @@ export interface MultipleRowProps{
 }
 
 export const createMultipleRow = (properties: any, props: MultipleRowProps) => {
-  const { formLayoutProps = {}, before = {}, after = {}, columns = 2, key = 'layout', gridProps = {}, itemConfig = defaultConfig, xComponentResp = {} } = props;
+  const { formLayoutProps = {}, before = {}, after = {}, columns = 2, key = 'layout', gridProps = {}, itemConfig = {}, xComponentResp = {} } = props;
+  const _itemConfig = assign(defaultConfig, itemConfig);
   const rs = {
     ...before,
     [key]: {
@@ -35,7 +37,7 @@ export const createMultipleRow = (properties: any, props: MultipleRowProps) => {
             maxColumns: columns,
             ...gridProps,
           },
-          properties: transformProperties(properties, itemConfig),
+          properties: transformProperties(properties, _itemConfig),
           ...xComponentResp,
         },
       },
@@ -51,3 +53,4 @@ export const createMultipleSchema = (properties: any, props: MultipleRowProps = 
     properties: createMultipleRow(properties, { formLayoutProps: { labelCol: 6, wrapperCol: 18 }, ...props }),
   };
 };
+

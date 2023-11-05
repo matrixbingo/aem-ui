@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Input, InputNumber, InputNumberProps } from 'antd';
+import { Input, InputNumber, InputNumberProps, Space } from 'antd';
 import { TypeUtil, TransformUtil } from 'common-toolkits';
 import { isArray, isNumber } from 'lodash';
 import { useMount } from 'ahooks';
-import './input-range.css';
 import { dequal as deepEqual } from 'dequal';
 import { assertError } from '../../util/util';
+import './input-range.css';
 
 export type dataType = 'string' | 'number';
 
@@ -93,21 +93,23 @@ const InputRangeForm = (props: InputRangeProps) => {
   };
 
   return (
-    <Input.Group compact>
-      <InputNumber value={value[0]} onChange={onChange0} onBlur={onBlur} {...rest} />
-      <Input
-        className="site-input-split"
-        style={{
-          width: 30,
-          borderLeft: 0,
-          borderRight: 0,
-          pointerEvents: 'none',
-        }}
-        placeholder="~"
-        disabled
-      />
-      <InputNumber value={value[1]} onChange={onChange1} onBlur={onBlur} {...rest} />
-    </Input.Group>
+    <Space direction="vertical" size={0} style={{ width: '100%' }} >
+      <Space.Compact block>
+        <InputNumber value={value[0]} onChange={onChange0} onBlur={onBlur} {...rest} />
+        <Input
+          className="site-input-split"
+          style={{
+            width: 30,
+            borderLeft: 0,
+            borderRight: 0,
+            pointerEvents: 'none',
+          }}
+          placeholder="~"
+          disabled
+        />
+        <InputNumber value={value[1]} onChange={onChange1} onBlur={onBlur} {...rest} />
+      </Space.Compact>
+    </Space>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Space } from 'antd';
 import { PlusCircleFilled } from '@ant-design/icons';
-import { ArrayItems } from '@formily/antd';
+import { ArrayItems } from '@formily/antd-v5';
 import { observer } from '@formily/react';
 
 export interface ArrayItemsAdditionProps {

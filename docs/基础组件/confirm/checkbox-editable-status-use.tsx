@@ -33,8 +33,10 @@ const Demo: React.FC<CustomerGroupEnableProps> = ({ status = 'enable', disabled 
     window.console.log('onConfirm ---->');
   };
 
+  window.console.log('state ------>', state);
+
   return (
-    <CheckboxEditableStatus title={title} onConfirm={onConfirm} checked={stateInit} checkboxProps={{ ...checkedChildren, loading, disabled }} popconfirmProps={{ disabled }} />
+    <CheckboxEditableStatus title={title} onConfirm={onConfirm} checked={state} checkboxProps={{ loading, disabled }} popconfirmProps={{ disabled }} />
   );
 };
 

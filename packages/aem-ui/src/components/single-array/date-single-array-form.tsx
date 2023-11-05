@@ -1,8 +1,10 @@
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/require-default-props */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useMount } from 'ahooks';
 import { DatePicker, DatePickerProps } from 'antd';
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import { isArray, isEmpty } from 'lodash';
 
 const defaultFormat = 'YYYY-MM-DD';
@@ -14,23 +16,23 @@ export interface DateSingleArrayFormProps extends Omit<DatePickerProps, 'value' 
 }
 
 const checkValue = (v) => {
-  return !v || !Array.isArray(v) || v.length !== 1 || v[0].length !== 10;
+  return !v || !Array.isArray(v) || v?.length !== 1 || v?.[0]?.length !== 10;
 };
 
 const toMomentValue = (inputValue: string[], format: string) => {
-  if (isArray(inputValue) && inputValue.length === 1 && inputValue[0].length === 10) {
-    return moment(inputValue[0], format);
+  if (isArray(inputValue) && inputValue?.length === 1 && inputValue?.[0]?.length === 10) {
+    return dayjs(inputValue[0], format);
   }
-  return moment(moment(), format);
+  return dayjs(dayjs(), format);
 };
 
 const DateSingleArrayForm = (props: DateSingleArrayFormProps) => {
   const { value, onChange, format, ...restProps } = props;
-  const [time, setTime] = useState<Moment>(toMomentValue(value, format));
+  const [time, setTime] = useState<Dayjs>(toMomentValue(value, format));
 
   const resSet = () => {
-    setTime(moment(moment(), format));
-    onChange([moment().format(format)]);
+    setTime(dayjs(dayjs(), format));
+    onChange([dayjs().format(format)]);
   };
 
   useMount(() => {
@@ -44,7 +46,7 @@ const DateSingleArrayForm = (props: DateSingleArrayFormProps) => {
       if (checkValue(value)) {
         resSet();
       } else {
-        setTime(moment(value?.[0], format));
+        setTime(dayjs(value?.[0], format));
       }
     }
   }, [time, value]);

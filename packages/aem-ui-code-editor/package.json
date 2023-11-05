@@ -1,49 +1,49 @@
 {
-  "name": "aem-ui-code-editor",
-  "version": "0.0.01",
-  "description": "code-editor",
-  "author": "matrixbing",
-  "homepage": "https://github.com/matrixbingo/aem-ui#readme",
-  "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "typings": "lib/index.d.ts",
-  "files": [
-    "lib",
-    "es"
-  ],
-  "sideEffects": [
-    "dist/*",
-    "es/**/style/*",
-    "lib/**/style/*",
-    "*.less"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matrixbingo/aem-ui.git"
-  },
+	"name": "aem-ui-code-editor",
+	"version": "3.0.1",
+	"description": "code-editor",
+	"author": "matrixbing",
+	"homepage": "https://github.com/matrixbingo/aem-ui#readme",
+	"license": "MIT",
+	"main": "lib/index.js",
+	"module": "es/index.js",
+	"typings": "lib/index.d.ts",
+	"files": [
+		"lib",
+		"es"
+	],
+	"sideEffects": [
+		"dist/*",
+		"es/**/style/*",
+		"lib/**/style/*",
+		"*.less"
+	],
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/matrixbingo/aem-ui.git"
+	},
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "father-build"
   },
-  "bugs": {
-    "url": "https://github.com/matrixbingo/aem-ui/issues"
-  },
-  "devDependencies": {
-    "@types/classnames": "^2.2.11",
-    "@types/react": "^16.14.2",
-    "@types/react-dom": "^16.9.9"
-  },
-  "peerDependencies": {
-    "@ant-design/icons": "^4.7.0",
-    "antd": "^4.22.3",
-    "common-toolkits": "^2.0.6",
-    "immutable": "^4.1.0",
-    "react-ace": "^10.1.0",
-    "react-copy-to-clipboard": "^5.1.0"
-  }
+	"bugs": {
+		"url": "https://github.com/matrixbingo/aem-ui/issues"
+	},
+	"devDependencies": {
+		"@types/classnames": "^2.2.11",
+		"@types/react": "^18.2.21",
+		"@types/react-dom": "^18.2.7"
+	},
+	"peerDependencies": {
+		"@ant-design/icons": "^5.2.6",
+		"antd": "^5.10.2",
+		"common-toolkits": "^2.0.6",
+		"immutable": "^4.1.0",
+		"react-ace": "^10.1.0",
+		"react-copy-to-clipboard": "^5.1.0"
+	}
 }

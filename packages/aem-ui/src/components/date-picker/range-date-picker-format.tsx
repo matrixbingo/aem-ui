@@ -4,9 +4,9 @@ import { useMount } from 'ahooks';
 import { DatePicker } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
 import { isArray, isEmpty } from 'lodash';
-import moment, { Moment } from 'moment';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { DateUtil } from 'common-toolkits';
+import dayjs, { Dayjs } from 'dayjs';
 
 const { RangePicker } = DatePicker;
 
@@ -21,12 +21,12 @@ export interface RangeDatePickerFormatProps extends Omit<RangePickerProps, 'valu
   defaultChecked?: boolean;   // 默认选 首次刷新
 }
 
-const toMomentValue = (inputValue: string[] | undefined, format: string, defaultChecked = true): RangeValue<Moment> | undefined => {
+const toMomentValue = (inputValue: string[] | undefined, format: string, defaultChecked = true): RangeValue<Dayjs> | undefined => {
   if (defaultChecked) {
     if (isArray(inputValue) && inputValue.length === 2 && DateUtil.dateIsValid(inputValue[0], format) && DateUtil.dateIsValid(inputValue[1], format)) {
-      return [moment(inputValue[0], format), moment(inputValue[1], format)];
+      return [dayjs(inputValue[0], format), dayjs(inputValue[1], format)];
     }
-    return [moment(), moment()];
+    return [dayjs(), dayjs()];
   }
   return undefined;
 };
@@ -35,21 +35,21 @@ const checkValue = (v, format) => {
   return !v || !Array.isArray(v) || v.length !== 2 || !DateUtil.dateIsValid(v[0], format) || !DateUtil.dateIsValid(v[1], format);
 };
 
-const getTime = (time: RangeValue<Moment>, index, format) => {
+const getTime = (time: RangeValue<Dayjs>, index, format) => {
   if (time && time[index]) {
-    return (time[index] as Moment).format(format);
+    return (time[index] as Dayjs).format(format);
   }
-  return moment().format(format);
+  return dayjs().format(format);
 };
 
 const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
   const { value, onChange, format, formatOut, mixDays, defaultChecked, allowClear = false, ...restProps } = props;
-  const [dates, setDates] = useState<RangeValue<Moment>>(null);
-  const [time, setTime] = useState<RangeValue<Moment> | RangeValue<undefined>>(toMomentValue(value, format, defaultChecked));
+  const [dates, setDates] = useState<RangeValue<Dayjs>>(null);
+  const [time, setTime] = useState<RangeValue<Dayjs> | RangeValue<undefined>>(toMomentValue(value, format, defaultChecked));
 
   const update = (dateStrings: string[]) => {
     if(!!dateStrings){
-      setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
+      setTime([dayjs(dateStrings[0], format), dayjs(dateStrings[1], format)]);
     } else {
       setTime(undefined);
     }
@@ -59,15 +59,15 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
       if(format === formatOut){
         onChange(dateStrings);
       } else {
-        onChange([moment(dateStrings[0], format).format(formatOut), moment(dateStrings[1], format).format(formatOut)]);
+        onChange([dayjs(dateStrings[0], format).format(formatOut), dayjs(dateStrings[1], format).format(formatOut)]);
       }
     }
   };
 
   const resSet = (onChangeRun = true) => {
     if (onChangeRun) {
-      setTime([moment(), moment()]);
-      onChange([moment().format(formatOut), moment().format(formatOut)]);
+      setTime([dayjs(), dayjs()]);
+      onChange([dayjs().format(formatOut), dayjs().format(formatOut)]);
     }
   };
 
@@ -86,7 +86,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
       if (checkValue(value, format)) {
         resSet();
       } else {
-        setTime([moment(value?.[0], format), moment(value?.[1], format)]);
+        setTime([dayjs(value?.[0], format), dayjs(value?.[1], format)]);
       }
     }
   }, [value?.[0], value?.[1]]);
@@ -99,7 +99,7 @@ const RangeDatePickerFormat = (props: RangeDatePickerFormatProps) => {
     }
   };
 
-  const disabledDate = (current: Moment) => {
+  const disabledDate = (current: Dayjs) => {
     if (!dates || mixDays === 0) {
       return false;
     }

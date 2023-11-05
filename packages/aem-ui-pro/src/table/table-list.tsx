@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import ProTable, { ProTableProps } from '@ant-design/pro-table';
+import { ProTable, ProTableProps } from '@ant-design/pro-components';
 import { Spin } from 'antd';
 import { isBoolean } from 'lodash';
 import './table-list.less';

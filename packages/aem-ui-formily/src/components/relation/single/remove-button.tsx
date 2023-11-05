@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import { toJS } from '@formily/reactive';
-import { ArrayItems } from '@formily/antd';
+import { ArrayItems } from '@formily/antd-v5';
 import { observer, useForm } from '@formily/react';
 import { DeleteOutlined } from '@ant-design/icons';
 import { cloneDeep, delay, get, isEmpty } from 'lodash';

@@ -6,11 +6,11 @@ const Demo: React.FC = () => {
   const list = ["import { OmitTipLabel } from 'aem-ui';", "import { OmitTipLabel } from 'aem-ui';"]
   return (
     <>
-      <OmitTipLabel title="import { OmitTipLabel } from 'aem-ui'" limit={30} />
+      <OmitTipLabel key="a1" title="import { OmitTipLabel } from 'aem-ui'" limit={30} />
       <br />
-      <OmitTipLabel title={title} separator="," limit={30} />
+      <OmitTipLabel key="a2" title={title} separator="," limit={30} />
       <br />
-      <OmitTipLabel title={list} limit={30} />
+      <OmitTipLabel key="a3" title={list} limit={30} />
     </>
   );
 };

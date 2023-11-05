@@ -1,7 +1,9 @@
+import { assign } from 'lodash';
 import { configType, defaultConfig, transformProperties } from './common';
 
 export const createSingleRow = (properties, props: { formLayoutProps?: any; key?: string; itemConfig?: configType } = { formLayoutProps: {}, key: 'layout', itemConfig: defaultConfig }) => {
-  const { formLayoutProps = {}, key = 'layout', itemConfig = defaultConfig } = props;
+  const { formLayoutProps = {}, key = 'layout', itemConfig = {} } = props;
+  const _itemConfig = assign(defaultConfig, itemConfig);
   return {
     type: 'object',
     properties: {
@@ -14,7 +16,7 @@ export const createSingleRow = (properties, props: { formLayoutProps?: any; key?
           ...formLayoutProps,
         },
         properties: {
-          ...transformProperties(properties, itemConfig),
+          ...transformProperties(properties, _itemConfig),
         },
       },
     },

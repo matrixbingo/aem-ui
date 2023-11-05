@@ -10,11 +10,11 @@ export interface CheckboxEditableStatusProps {
 }
 
 const CheckboxEditableStatus: FC<CheckboxEditableStatusProps> = ({ checked = false, title = '', onConfirm, checkboxProps = { loading: false }, popconfirmProps = { placement: 'topLeft' } }) => {
-  const { loading } = checkboxProps;
+  const { loading, ...restCheckboxProps } = checkboxProps;
   return (
     <Popconfirm title={title} onConfirm={onConfirm} {...popconfirmProps}>
       <Spin spinning={loading}>
-        <Checkbox checked={checked} {...checkboxProps} />
+        <Checkbox checked={checked} {...restCheckboxProps} />
       </Spin>
     </Popconfirm>
   );

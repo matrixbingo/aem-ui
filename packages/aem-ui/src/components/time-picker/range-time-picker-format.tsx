@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useMount } from 'ahooks';
 import { TimePicker } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { isArray, isEmpty } from 'lodash';
 
@@ -16,18 +16,18 @@ export interface RangeTimePickerFormatProps extends Omit<RangePickerProps, 'valu
   mixDays: number;  // 最大天数，0为任意
 }
 
-const toMomentValue = (inputValue: string[], format: string): RangeValue<Moment> => {
+const toMomentValue = (inputValue: string[], format: string): RangeValue<Dayjs> => {
   if (isArray(inputValue) && inputValue.length === 2 && inputValue[0].length === 8 && inputValue[1].length === 8) {
-    return [moment(inputValue[0], format), moment(inputValue[1], format)];
+    return [dayjs(inputValue[0], format), dayjs(inputValue[1], format)];
   }
-  return [moment(), moment()];
+  return [dayjs(), dayjs()];
 };
 
-const getTime = (time: RangeValue<Moment>, index, format) => {
+const getTime = (time: RangeValue<Dayjs>, index, format) => {
   if (time && time[index]) {
-    return (time[index] as Moment).format(format);
+    return (time[index] as Dayjs).format(format);
   }
-  return moment().format(format);
+  return dayjs().format(format);
 };
 
 const checkValue = (v) => {
@@ -36,16 +36,16 @@ const checkValue = (v) => {
 
 const RangeTimePickerFormat = (props: RangeTimePickerFormatProps) => {
   const { value, onChange, format, mixDays, ...restProps } = props;
-  const [time, setTime] = useState<RangeValue<Moment>>(toMomentValue(value, format));
+  const [time, setTime] = useState<RangeValue<Dayjs>>(toMomentValue(value, format));
 
   const update = (dateStrings: string[]) => {
     onChange(dateStrings);
-    setTime([moment(dateStrings[0], format), moment(dateStrings[1], format)]);
+    setTime([dayjs(dateStrings[0], format), dayjs(dateStrings[1], format)]);
   }
 
   const resSet = () => {
-    setTime([moment(), moment()]);
-    onChange([moment().format(format), moment().format(format)]);
+    setTime([dayjs(), dayjs()]);
+    onChange([dayjs().format(format), dayjs().format(format)]);
   };
 
   useMount(() => {
@@ -63,7 +63,7 @@ const RangeTimePickerFormat = (props: RangeTimePickerFormatProps) => {
       if (checkValue(value)) {
         resSet();
       } else {
-        setTime([moment(value[0], format), moment(value[1], format)]);
+        setTime([dayjs(value[0], format), dayjs(value[1], format)]);
       }
     }
   }, [value?.[0], value?.[1]]);

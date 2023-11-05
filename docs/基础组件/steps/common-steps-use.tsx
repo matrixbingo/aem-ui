@@ -33,7 +33,7 @@ const Demo: React.FC = () => {
   const customerButton = (buttons: any[], step, loading) => {
     window.console.log('---------------->', step, buttons);
     if(step === 2){
-      buttons.splice(2, 0, <Button>TEST</Button>);
+      buttons.splice(2, 0, <Button key="test-button">TEST</Button>);
     }
     return buttons;
   }

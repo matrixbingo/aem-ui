@@ -87,10 +87,11 @@ export const createArrayItems = (
 ) => {
   config = assign({ addition: true, additionTitle: '添加条目', additionFormily: false, remove: true, moveDown: false, moveUp: false, width: 80, operate: true, isStringArray: false, buttonProps: { style: buttonStyle }, itemConfig: defaultConfig }, config);
   const { addition, additionTitle, additionFormily, spaceProps, isStringArray, buttonProps, operate, itemConfig } = config;
+  const _itemConfig = assign(defaultConfig, itemConfig);
   const _isStringArray = size(arrayTableColumnProps) === 1 && isStringArray;
   arrayItemsProps = { ...defaultArrayItemsConfig, ...arrayItemsProps };
   arrayItemsProps = addition ? { ...arrayItemsProps, ...defaultAdditionConfig(additionTitle, additionFormily) } : arrayItemsProps;
-  const items = createProperties(arrayTableColumnProps, spaceProps, _isStringArray, itemConfig);
+  const items = createProperties(arrayTableColumnProps, spaceProps, _isStringArray, _itemConfig);
   set(arrayItemsProps, 'items', items);
   operate && createOperations(arrayItemsProps, config, _isStringArray, buttonProps);
   return arrayItemsProps;

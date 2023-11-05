@@ -20,12 +20,12 @@ const OmitTipLabel: React.FC<OmitTipLabelProps> = ({ title = '', limit = 10, sep
   let tipTitle = '' as any;
   let content = title as string;
   if(isArray(title)){
-    tipTitle = (title as string[]).map((i) => <div>{i}</div>);
+    tipTitle = (title as string[]).map((i, index) => <div key={`content${index}`}>{i}</div>);
     content = (title as string[]).join(' ')
   } else{
     tipTitle = title as string;
     if(!isEmpty(separator)){
-      tipTitle = split(title, separator).map((i) => <div>{i}</div>);
+      tipTitle = split(title, separator).map((i, index) => <div key={`title${index}`}>{i}</div>);
     }
   }
   return (

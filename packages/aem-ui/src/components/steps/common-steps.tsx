@@ -16,30 +16,11 @@ export interface CommonStepsProps {
   stepsProps?:  Omit<StepsProps, 'current'>
 }
 
-const { Step } = Steps;
-
 const createButton = (steps, step, goStep, loading, onCancel, onSubmit, customerButton = (any, step, _loading) => any) => {
-  const buttons1 = <Button onClick={onCancel} loading={false}>取消</Button>
-    {step > 0 && (
-      <Button style={{ marginLeft: 8 }} onClick={() => goStep(-1)}>
-        上一步
-      </Button>
-    )}
-    {step < steps.length - 1 && (
-      <Button style={{ marginLeft: 8 }} type="primary" onClick={() => goStep(1)}>
-        下一步
-      </Button>
-    )}
-    { step === steps.length - 1 && onSubmit && (
-      <Button type="primary" style={{ marginLeft: 8 }} loading={loading} onClick={onSubmit}>
-        确定
-      </Button>
-    )};
-
-  const cancelButton = <Button onClick={onCancel} loading={false}>取消</Button>;
-  const prevButton = <Button style={{ marginLeft: 8 }} onClick={() => goStep(-1)}>上一步</Button>;
-  const nextButton = <Button style={{ marginLeft: 8 }} type="primary" onClick={() => goStep(1)}>下一步</Button>;
-  const submitButton = <Button type="primary" style={{ marginLeft: 8 }} loading={loading} onClick={onSubmit}>确定</Button>;
+  const cancelButton = <Button key="cancel-button" onClick={onCancel} loading={false}>取消</Button>;
+  const prevButton = <Button key="prev-button" style={{ marginLeft: 8 }} onClick={() => goStep(-1)}>上一步</Button>;
+  const nextButton = <Button key="next-button" style={{ marginLeft: 8 }} type="primary" onClick={() => goStep(1)}>下一步</Button>;
+  const submitButton = <Button key="submit-button" type="primary" style={{ marginLeft: 8 }} loading={loading} onClick={onSubmit}>确定</Button>;
   const buttons = [cancelButton] as any;
 
   if(step > 0){
@@ -57,17 +38,17 @@ const createButton = (steps, step, goStep, loading, onCancel, onSubmit, customer
 const CommonSteps: FC<PropsWithChildren<CommonStepsProps>> = ({ step, steps, onSubmit, onCancel, goStep, loading, colProps = { span: 20, offset: 2 }, customerButton = (any, step, _loading) => any, children, stepsProps = {} }) => {
   return (
     <>
-      <Row style={{ marginBottom: 50 }}>
+      <Row key="steps-row" style={{ marginBottom: 50 }}>
         <Col span={12} offset={6}>
           <Steps current={step} items={steps} {...stepsProps} />
         </Col>
       </Row>
-      <Row className="steps-content">
+      <Row key="children-row" className="steps-content">
         <Col {...colProps}>
           {children as any}
         </Col>
       </Row>
-      <Row>
+      <Row key="button-row">
         <Col {...colProps} style={{ textAlign: 'end' }}>
           {createButton(steps, step, goStep, loading, onCancel, onSubmit, customerButton)}
         </Col>

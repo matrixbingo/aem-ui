@@ -12,7 +12,7 @@ import {
   Submit,
   Space,
   useFormLayout,
-} from '@formily/antd';
+} from '@formily/antd-v5';
 import { createForm, Form } from '@formily/core';
 import { FormProvider, createSchemaField, observer } from '@formily/react';
 import { delay } from 'lodash';

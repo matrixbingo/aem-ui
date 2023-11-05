@@ -1,7 +1,7 @@
 import React from 'react';
 import { createForm } from '@formily/core';
 import { createSchemaField, FormConsumer, FormProvider } from '@formily/react';
-import { FormItem, Input, NumberPicker, ArrayTabs, FormButtonGroup, Submit } from '@formily/antd';
+import { FormItem, Input, NumberPicker, ArrayTabs, FormButtonGroup, Submit } from '@formily/antd-v5';
 import { FormilyUtil } from 'aem-ui-formily';
 import { Label } from 'aem-ui';
 import { Button } from 'antd';

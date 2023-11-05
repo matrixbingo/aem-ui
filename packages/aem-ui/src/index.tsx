@@ -5,13 +5,6 @@ import type { ButtonCopyProps } from './components/button/button-copy';
 export { default as ButtonLoading } from './components/button/button-loading';
 import type { ButtonLoadingProps } from './components/button/button-loading';
 
-// card
-export { default as CollapsibleCard } from './components/card/collapsible-card';
-import type { CollapsibleCardProps } from './components/card/collapsible-card';
-
-export { default as SmallDescription } from './components/card/small-description';
-import type { SmallDescriptionProps } from './components/card/small-description';
-
 // checkbox
 export { default as CheckboxSpin } from './components/check-box/checkbox-spin';
 import type { CheckboxSpinProps } from './components/check-box/checkbox-spin';
@@ -212,7 +205,7 @@ import type { ViewProps } from './components/view/view';
 export { default as ViewContainer } from './components/view/view-container';
 import type { ViewContainerProps } from './components/view/view-container';
 
-export type { SmallDescriptionProps, CollapsibleCardProps, ScriptEditorProps, DebounceSelectProps, SelectTagsInputNumberProps, TooltipQuestionProps, TitleDetailProps, LabelDetailProps, InputTooltipProps, TreeSingleProps, SelectSingleArrayFormProps, SelectTagsInputStringProps, SelectSingleDefaultValueProps, CheckboxEditableStatusProps, SideHelperProps, LabelProps, DividerCenterProps, ButtonConfirmProps, CheckboxSpinProps, SelectSearchMultipleFormProps, SelectSearchMultipleProps, SelectSearchSingleFormProps, SelectSearchSingleProps, SelectTagsProps, CommonStepsProps, RadioButtonsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
+export type { ScriptEditorProps, DebounceSelectProps, SelectTagsInputNumberProps, TooltipQuestionProps, TitleDetailProps, LabelDetailProps, InputTooltipProps, TreeSingleProps, SelectSingleArrayFormProps, SelectTagsInputStringProps, SelectSingleDefaultValueProps, CheckboxEditableStatusProps, SideHelperProps, LabelProps, DividerCenterProps, ButtonConfirmProps, CheckboxSpinProps, SelectSearchMultipleFormProps, SelectSearchMultipleProps, SelectSearchSingleFormProps, SelectSearchSingleProps, SelectTagsProps, CommonStepsProps, RadioButtonsProps, RangeDayRadioFormatProps, TimePickerFormatProps, RangeTimePickerFormatProps, ViewContainerProps, ViewProps, TreeSelectSingleProps, TextAreaJsonProps, GeneralSelect, TagsListEditorProps, BaseTabsProps, TimeSingleArrayFormProps, InputStringSingleArrayFormProps, InputNumberSingleArrayFormProps, DateSingleArrayFormProps, InputRangeProps, SelectMultipleProps, SelectSingleProps, ModalEditorProps, MaskCloseModalProps, StarLabelProps, OmitTipLabelProps, DescriptionsLabelProps, InputTrimProps, InputDefaultValueProps, InputSelectValueProps, InputRenderCustomerProps, InputSearchProps, InputStringNumberProps, InputDefaultClearProps, InputAddonBeforeProps, ButtonCopyProps, ButtonLoadingProps, EditableStatusProps, DatePickerFormatProps, RangeDatePickerFormatProps, DescriptionsTableProps };
 
 
 import { createBaseButtons, CreateButtonsProps, createBaseTabs, CreateBaseTabsProps, createStart, CreateStartProps } from './util/create-ant';

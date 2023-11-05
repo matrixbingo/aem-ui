@@ -89,6 +89,7 @@ export const createArrayTable = (
 ) => {
   config = assign({ addition: true, additionTitle: '添加条目', additionFormily: false, remove: true, moveDown: false, moveUp: false, width: 80, operate: true, itemConfig: defaultConfig }, config);
   const { addition, additionTitle, additionFormily, operate, triggerNodeId, itemConfig } = config;
+  const _itemConfig = assign(defaultConfig, itemConfig);
   arrayTableProps = { ...defaultArrayTableConfig, ...arrayTableProps };
   arrayTableProps = addition ? { ...arrayTableProps, ...defaultAdditionConfig(additionTitle, additionFormily) } : arrayTableProps;
   const items = { type: 'object', properties: {} };
@@ -97,7 +98,7 @@ export const createArrayTable = (
       type: 'void',
       'x-component': 'ArrayTable.Column',
       'x-component-props': { ...columnProps },
-      properties: { ...transformProperties(assembleProperties(columnProperties, { triggerNodeId }), itemConfig), ...xComponentResp },
+      properties: { ...transformProperties(assembleProperties(columnProperties, { triggerNodeId }), _itemConfig), ...xComponentResp },
     });
   });
   set(arrayTableProps, 'items', items);

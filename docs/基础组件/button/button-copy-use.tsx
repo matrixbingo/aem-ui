@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ButtonCopy, InputDefaultClear } from 'aem-ui';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 const Demo: React.FC = () => {
   const [value, setValue] = useState('')

@@ -1,6 +1,6 @@
 {
   "name": "commom-aem-ui",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "scripts": {
     "bootstrap": "yarn clean && lerna bootstrap",
     "clean": "lerna clean -y",
@@ -31,21 +31,23 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "aem-ui": "^2.3.2",
-    "react": "^16.8.5 || ^17.0.2"
+    "aem-ui": "^3.0.0",
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@ant-design/pro-table": "^2.78.3",
-    "@formily/antd": "^2.2.22",
-    "@formily/core": "^2.2.22",
-    "@formily/react": "^2.2.22",
+    "@ant-design/pro-components": "^2.6.35",
+    "@formily/antd-v5": "^1.1.7",
+    "@formily/core": "^2.3.0",
+    "@formily/react": "^2.3.0",
+    "@types/react": "^18.2.31",
     "@umijs/test": "^3.0.5",
     "ace-builds": "^1.8.1",
     "ahooks": "^3.7.0",
-    "antd": "^4.24.8",
+    "antd": "^5.10.2",
     "babel-plugin-import": "^1.13.3",
     "common-toolkits": "^2.0.8",
     "common-toolkits-hooks": "^0.0.2",
+    "dayjs": "^1.11.10",
     "dequal": "^2.0.3",
     "dumi": "^1.1.47",
     "father-build": "^1.17.2",
@@ -53,9 +55,11 @@
     "immutable": "^4.1.0",
     "lerna": "^3.22.1",
     "lint-staged": "^10.0.7",
+    "moment": "^2.29.4",
     "prettier": "^1.19.1",
     "react-ace": "^10.1.0",
     "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
     "use-deep-compare-effect": "^1.8.1",
     "yorkie": "^2.0.0"
   }

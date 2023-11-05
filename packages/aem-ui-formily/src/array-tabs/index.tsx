@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
-import { Tabs, Badge } from 'antd';
 import { ArrayField } from '@formily/core';
-import { useField, observer, useFieldSchema, RecursionField, ReactFC } from '@formily/react';
-import { TabPaneProps, TabsProps } from 'antd/lib/tabs';
+import {
+  observer,
+  ReactFC,
+  RecursionField,
+  useField,
+  useFieldSchema,
+} from '@formily/react';
+import { Badge, TabPaneProps, Tabs, TabsProps } from 'antd';
+import React, { useState } from 'react';
 
 interface IFeedbackBadgeProps {
   index: number;
 }
 
-const FeedbackBadge: ReactFC<IFeedbackBadgeProps> = observer(
-  (props) => {
-    const field = useField<ArrayField>();
-    const tab = `${field.title || 'Untitled'} ${props.index + 1}`;
-    const errors = field.errors.filter((error) => error?.address?.includes(`${field.address}.${props.index}`));
-    if (errors.length) {
-      return (
-        <Badge size="small" className="errors-badge" count={errors.length}>
-          {tab}
-        </Badge>
-      );
-    }
-    return <>{tab}</>;
-  },
-  {
-    scheduler(request) {
-      requestAnimationFrame(request);
-    },
-  },
-);
+const FeedbackBadge: ReactFC<IFeedbackBadgeProps> = observer((props) => {
+  const field = useField<ArrayField>();
+  const tab = `${field.title || 'Untitled'} ${props.index + 1}`;
+  const errors = field.errors.filter((error) => error.address?.includes(`${field.address}.${props.index}`));
+  if (errors.length) {
+    return (
+      <Badge size="small" className="errors-badge" count={errors.length}>
+        {tab}
+      </Badge>
+    );
+  }
+  return <>{tab}</>;
+});
 
 export interface ArrayTabsProps extends Omit<TabsProps, 'tabPaneProps' | 'onEdit'> {
   tabPaneProps?: TabPaneProps;
@@ -61,6 +59,7 @@ export const ArrayTabs: React.FC<React.PropsWithChildren<ArrayTabsProps>> = obse
         field.remove(index);
       }
     };
+
     return (
       <Tabs
         {...rest}
@@ -70,31 +69,26 @@ export const ArrayTabs: React.FC<React.PropsWithChildren<ArrayTabsProps>> = obse
         }}
         type="editable-card"
         onEdit={onEdit}
-      >
-        {dataSource?.map((item, index) => {
+        items={dataSource?.map((item, index) => {
           const items = Array.isArray(schema.items)
             ? schema.items[index]
             : schema.items;
           const key = `tab-${index}`;
-          return (
-            <Tabs.TabPane
-              key={key}
-              forceRender
-              closable={index !== 0}
-              tab={<FeedbackBadge index={index} />}
-              {...tabPaneProps}
-            >
-              <RecursionField schema={items as any} name={index} />
-            </Tabs.TabPane>
-          );
+          return {
+            key,
+            label: <FeedbackBadge index={index} />,
+            forceRender: true,
+            closable: index !== 0,
+            children: items
+              ? (
+                <RecursionField schema={items} name={index} />
+              )
+              : null,
+            ...tabPaneProps,
+          };
         })}
-      </Tabs>
+      />
     );
-  },
-  {
-    scheduler(request) {
-      requestAnimationFrame(request);
-    },
   },
 );
 

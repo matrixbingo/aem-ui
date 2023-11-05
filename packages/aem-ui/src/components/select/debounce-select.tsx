@@ -51,7 +51,7 @@ const DebounceSelect: React.FC<PropsWithChildren<DebounceSelectProps>> = <ValueT
 
   const debounceFetcher = debounce(loadOptions, debounceTimeout);
 
-  const onDropdownVisibleChange = useCallback(() => delay(() => inputRef?.current?.focus?.(), 300), []);
+  const onDropdownVisibleChange = useCallback((open) => open && delay(() => inputRef?.current?.focus?.(), 300), []);
 
   return (
     <Select

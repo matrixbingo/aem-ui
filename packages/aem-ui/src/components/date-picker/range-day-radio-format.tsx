@@ -5,8 +5,8 @@ import { Radio, Space } from 'antd';
 import { DateUtil, FormatDate, Period } from 'common-toolkits';
 import { useResetState } from 'common-toolkits-hooks';
 import { isBoolean, isEmpty } from 'lodash';
+import dayjs from 'dayjs';
 import { assertError } from '../../util/util';
-import moment from 'moment';
 
 const defaultFormat = 'YYYY-MM-DD';
 
@@ -46,7 +46,7 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
         if(format === formatOut){
           onChange?.(value, period);
         } else {
-          onChange([moment(value[0], format).format(formatOut), moment(value[1], format).format(formatOut)], period);
+          onChange([dayjs(value[0], format).format(formatOut), dayjs(value[1], format).format(formatOut)], period);
         }
       } else {
         resetValue();
@@ -63,7 +63,7 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
     if(format === formatOut){
       onChange?.(rangeValue, checkedValue);
     } else {
-      onChange([moment(rangeValue[0], format).format(formatOut), moment(rangeValue[1], format).format(formatOut)], checkedValue);
+      onChange([dayjs(rangeValue[0], format).format(formatOut), dayjs(rangeValue[1], format).format(formatOut)], checkedValue);
     }
   };
 
@@ -78,7 +78,7 @@ const RangeDayRadioFormat: FC<PropsWithChildren<RangeDayRadioFormatProps>> = (pr
         setPeriod(undefined);
         onChange?.(rangeDate, period);
       } else {
-        const rang = [moment(rangeDate[0], formatOut).format(format), moment(rangeDate[1], formatOut).format(format)]
+        const rang = [dayjs(rangeDate[0], formatOut).format(format), dayjs(rangeDate[1], formatOut).format(format)]
         setValue(rang);
         setPeriod(undefined);
         onChange?.(rangeDate, period);
